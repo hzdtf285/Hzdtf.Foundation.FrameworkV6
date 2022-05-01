@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text;
+
+namespace |NamespacePfx|.Model
+{
+    /// <summary>
+    /// |Description|
+    /// @ 网狐
+    /// </summary>
+    public enum |Name| : byte
+    {
+|Item|
+    }
+}

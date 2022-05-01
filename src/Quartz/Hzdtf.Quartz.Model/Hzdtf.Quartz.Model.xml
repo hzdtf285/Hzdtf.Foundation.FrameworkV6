@@ -1,0 +1,200 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.Quartz.Model</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.Quartz.Model.JobExceptionInfo">
+            <summary>
+            作业异常信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobExceptionInfo.TransId">
+            <summary>
+            事务ID
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobExceptionInfo.JobGroup">
+            <summary>
+            作业组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobExceptionInfo.JobName">
+            <summary>
+            作业名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobExceptionInfo.ServiceName">
+            <summary>
+            服务名
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobExceptionInfo.ExMsg">
+            <summary>
+            异常消息
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobExceptionInfo.ExStackTrace">
+            <summary>
+            异常堆栈
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobExceptionInfo.JobFullClass">
+            <summary>
+            作业全路径
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobExceptionInfo.ServerIp">
+            <summary>
+            服务IP
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobExceptionInfo.Time">
+            <summary>
+            时间
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobExceptionInfo.Ex">
+            <summary>
+            异常
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Quartz.Model.JobTaskFilterInfo">
+            <summary>
+            作业任务过滤信息
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskFilterInfo.Ids">
+            <summary>
+            ID数组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskFilterInfo.JtNames">
+            <summary>
+            名称数组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskFilterInfo.JtGroups">
+            <summary>
+            分组数组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskFilterInfo.JobFullClasses">
+            <summary>
+            作业全路径数组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskFilterInfo.TriggerCrons">
+            <summary>
+            触发器表达式数组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskFilterInfo.SuccessedRemove">
+            <summary>
+            成功后移除
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Quartz.Model.JobTaskInfo">
+            <summary>
+            作业任务信息
+            由作业明细和触发器组成
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.JtName">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.JtGroup">
+            <summary>
+            分组
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.JtDesc">
+            <summary>
+            描述
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.JobFullClass">
+            <summary>
+            作业全路径类
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.JobParams">
+            <summary>
+            作业参数字典
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.JobParamsJsonString">
+            <summary>
+            作业参数JSON字符串
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.TriggerCron">
+            <summary>
+            触发器表达式
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.TriggerParams">
+            <summary>
+            触发器参数字典
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.TriggerParamsJsonString">
+            <summary>
+            触发器参数JSON字符串
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Quartz.Model.JobTaskInfo.SuccessedRemove">
+            <summary>
+            执行成功后移除任务
+            默认为否
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Model.JobTaskInfo.EqualFilter(Hzdtf.Quartz.Model.JobTaskFilterInfo,System.String[])">
+            <summary>
+            是否匹配过滤器
+            </summary>
+            <param name="filter">过滤器，如果为null，则返回true</param>
+            <param name="ignoreFilterPropNames">忽略过滤器的属性</param>
+            <returns>是否匹配过滤器</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.Model.JobTaskInfo.IsNeedFilter(System.String[],System.String)">
+            <summary>
+            是否需要过滤
+            </summary>
+            <param name="ignoreFilterPropNames">忽略过滤器的属性</param>
+            <param name="prop">属性名</param>
+            <returns>是否需要过滤</returns>
+        </member>
+        <member name="M:Hzdtf.Quartz.Model.JobTaskInfo.InitCreateTime">
+            <summary>
+            初始化创建时间，如果创建时间不是最小时间，则忽略
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Quartz.Model.JobTaskInfo.InitModifyTime">
+            <summary>
+            初始化修改时间，如果修改时间不是最小时间，则忽略
+            </summary>
+        </member>
+        <member name="T:Hzdtf.Quartz.Model.QuartzCodeDefine">
+            <summary>
+            时钟编码定义
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Quartz.Model.QuartzCodeDefine.JobTaskIdKey">
+            <summary>
+            作业任务ID键
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Quartz.Model.QuartzCodeDefine.JobTaskSuccessedRemoveKey">
+            <summary>
+            作业任务执行成功后移除键
+            </summary>
+        </member>
+    </members>
+</doc>

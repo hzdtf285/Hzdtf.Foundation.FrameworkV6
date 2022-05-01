@@ -1,0 +1,449 @@
+{
+  "Config": [
+    {
+      "Controller": "Attachment",
+      "Code": "Attachment",
+      "Disabled": false,
+      "Actions": [
+        {
+          "Action": "Get",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Count",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Exists",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "PageData",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Page",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Post",
+          "Codes": [ "Add" ],
+          "Disabled": false
+        },
+        {
+          "Action": "BatchAdd",
+          "Codes": [ "Add" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Put",
+          "Codes": [ "Edit" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Delete",
+          "Codes": [ "Remove" ],
+          "Disabled": false
+        },
+        {
+          "Action": "BatchRemove",
+          "Codes": [ "Remove" ],
+          "Disabled": false
+        }
+
+      ]
+    },
+    {
+      "Controller": "DataDictionaryItem",
+      "Code": "DataDictionary",
+      "Disabled": false,
+      "Actions": [
+        {
+          "Action": "Get",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Count",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Exists",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "PageData",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Page",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Post",
+          "Codes": [ "Add" ],
+          "Disabled": false
+        },
+        {
+          "Action": "BatchAdd",
+          "Codes": [ "Add" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Put",
+          "Codes": [ "Edit" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Delete",
+          "Codes": [ "Remove" ],
+          "Disabled": false
+        },
+        {
+          "Action": "BatchRemove",
+          "Codes": [ "Remove" ],
+          "Disabled": false
+        }
+
+      ]
+    },
+    {
+      "Controller": "Role",
+      "Code": "Role",
+      "Disabled": false,
+      "Actions": [
+        {
+          "Action": "Get",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Count",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Exists",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "PageData",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Page",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Post",
+          "Codes": [ "Add" ],
+          "Disabled": false
+        },
+        {
+          "Action": "BatchAdd",
+          "Code": "Add",
+          "Disabled": false
+        },
+        {
+          "Action": "Put",
+          "Codes": [ "Edit" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Delete",
+          "Codes": [ "Remove" ],
+          "Disabled": false
+        },
+        {
+          "Action": "BatchRemove",
+          "Codes": [ "Remove" ],
+          "Disabled": false
+        }
+
+      ]
+    },
+    {
+      "Controller": "User",
+      "Code": "User",
+      "Disabled": false,
+      "Actions": [
+        {
+          "Action": "Get",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Count",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Exists",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "PageData",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Page",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Post",
+          "Codes": [ "Add" ],
+          "Disabled": false
+        },
+        {
+          "Action": "BatchAdd",
+          "Codes": [ "Add" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Put",
+          "Codes": [ "Edit" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Delete",
+          "Codes": [ "Remove" ],
+          "Disabled": false
+        },
+        {
+          "Action": "BatchRemove",
+          "Codes": [ "Remove" ],
+          "Disabled": false
+        }
+
+      ]
+    },
+    {
+      "Controller": "RolePermission",
+      "Code": "RolePermission",
+      "Disabled": false,
+      "Actions": [
+        {
+          "Action": "Get",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Count",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Exists",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "PageData",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Page",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Post",
+          "Codes": [ "Add" ],
+          "Disabled": false
+        },
+        {
+          "Action": "BatchAdd",
+          "Codes": [ "Add" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Put",
+          "Codes": [ "Edit" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Delete",
+          "Codes": [ "Remove" ],
+          "Disabled": false
+        },
+        {
+          "Action": "BatchRemove",
+          "Codes": [ "Remove" ],
+          "Disabled": false
+        },
+        {
+          "Action": "MenuTrees",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "HaveMenuFunctions",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "SavePermission",
+          "Codes": [ "Save" ],
+          "Disabled": false
+        }
+
+      ]
+    },
+    {
+      "Controller": "MyApplyFlow",
+      "Code": "MyApplyFlow",
+      "Disabled": false,
+      "Actions": [
+        {
+          "Action": "PageData",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Page",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "GetFlowDetail",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        }
+      ]
+    },
+    {
+      "Controller": "MyWaitFlow",
+      "Code": "MyWaitFlow",
+      "Disabled": false,
+      "Actions": [
+        {
+          "Action": "PageData",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Page",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "GetFlowDetail",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "ModifyReadedByHandleId",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "GetAuditDetail",
+          "Codes": [ "Audit" ],
+          "Disabled": false
+        }
+      ]
+    },
+    {
+      "Controller": "MyAuditedFlow",
+      "Code": "MyAuditedFlow",
+      "Disabled": false,
+      "Actions": [
+        {
+          "Action": "PageData",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Page",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "GetFlowDetail",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        }
+      ]
+    },
+    {
+      "Controller": "TestForm",
+      "Code": "TestForm",
+      "Disabled": false,
+      "Actions": [
+        {
+          "Action": "Get",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Count",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Exists",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "PageData",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Page",
+          "Codes": [ "Query" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Post",
+          "Codes": [ "Add" ],
+          "Disabled": false
+        },
+        {
+          "Action": "BatchAdd",
+          "Codes": [ "Add" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Put",
+          "Codes": [ "Edit" ],
+          "Disabled": false
+        },
+        {
+          "Action": "Delete",
+          "Codes": [ "Remove" ],
+          "Disabled": false
+        },
+        {
+          "Action": "BatchRemove",
+          "Codes": [ "Remove" ],
+          "Disabled": false
+        },
+        {
+          "Action": "BatchRemove",
+          "Codes": [ "Remove" ],
+          "Disabled": false
+        }
+
+      ]
+    }
+
+  ]
+}

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.SqlServer</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.SqlServer.SqlServerDapperBase`2">
+            <summary>
+            SqlServer Dapper基类
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+        </member>
+        <member name="P:Hzdtf.SqlServer.SqlServerDapperBase`2.PfxEscapeChar">
+            <summary>
+            转义符前辍
+            </summary>
+        </member>
+        <member name="P:Hzdtf.SqlServer.SqlServerDapperBase`2.SufxEscapeChar">
+            <summary>
+            转义符后辍
+            </summary>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.CreateDbConnection(System.String)">
+            <summary>
+            创建数据库连接
+            </summary>
+            <param name="connectionString">连接字符串</param>
+            <returns>数据库连接</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.GetPartPageSql(System.Int32,System.Int32)">
+            <summary>
+            获取部分的分页SQL语句
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <returns>部分的分页SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.GetLastInsertIdSql">
+            <summary>
+            获取最后插入ID SQL语句
+            </summary>
+            <returns>最后插入ID SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.IsExceptionPkRepeat(System.Exception)">
+            <summary>
+            判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.StrictnessIsExceptionPkRepeat(System.Exception)">
+            <summary>
+            严格判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.IsCommonExceptionPkRepeat(System.Exception)">
+            <summary>
+            判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.OtherIsPkRepeat(Microsoft.Data.SqlClient.SqlException)">
+            <summary>
+            其他判断主键重复，此方法目的是为了异常可能包含其他非主键重复的
+            如果子类没重写，默认为是
+            </summary>
+            <param name="ex">异常</param>
+            <returns>其他判断主键重复</returns>
+        </member>
+    </members>
+</doc>

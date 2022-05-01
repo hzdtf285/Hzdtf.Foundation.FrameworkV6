@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.EntityFrameworkCore.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.EntityFrameworkCore.DbContextExtensions">
+            <summary>
+            数据库上下文扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.UpdateProps``2(``0,``1[],System.String[])">
+            <summary>
+            更新指定的属性实体数组
+            </summary>
+            <typeparam name="DbContextT">数据库上下文类型</typeparam>
+            <param name="context">数据库上下文</param>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entitys">实体数组</param>
+            <param name="updatePropNames">更新属性名称</param>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.UpdateProps``2(``0,``1,System.String[])">
+            <summary>
+            更新指定的属性实体
+            </summary>
+            <typeparam name="DbContextT">数据库上下文类型</typeparam>
+            <param name="context">数据库上下文</param>
+            <typeparam name="T">实体类型</typeparam>
+            <param name="entity">实体</param>
+            <param name="updatePropNames">更新属性名称</param>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.ExecuteScalar``1(``0,System.String,System.Boolean,System.Data.Common.DbParameter[])">
+            <summary>
+            执行SQL并返回第1行第1列的值
+            </summary>
+            <typeparam name="DbContextT">数据库上下文类型</typeparam>
+            <param name="context">数据库上下文</param>
+            <param name="sql">SQL语句</param>
+            <param name="isCloseConn">是否关闭连接</param>
+            <param name="param">参数</param>
+            <returns>第1行第1列的值</returns>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.ExecuteNonQuery``1(``0,System.String,System.Boolean,System.Data.Common.DbParameter[])">
+            <summary>
+            执行SQL并返回影响行数
+            </summary>
+            <typeparam name="DbContextT">数据库上下文类型</typeparam>
+            <param name="context">数据库上下文</param>
+            <param name="sql">SQL语句</param>
+            <param name="isCloseConn">是否关闭连接</param>
+            <param name="param">参数</param>
+            <returns>第1行第1列的值</returns>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.ExecuteReader``1(``0,System.String,System.Action{System.Data.Common.DbDataReader},System.Boolean,System.Data.Common.DbParameter[])">
+            <summary>
+            执行SQL并返回影响行数
+            </summary>
+            <typeparam name="DbContextT">数据库上下文类型</typeparam>
+            <param name="context">数据库上下文</param>
+            <param name="sql">SQL语句</param>
+            <param name="callback">回调</param>
+            <param name="isCloseConn">是否关闭连接</param>
+            <param name="param">参数</param>
+        </member>
+        <member name="M:Microsoft.EntityFrameworkCore.DbContextExtensions.ExecCommand``2(``0,System.String,System.Func{System.Data.Common.DbCommand,``1},System.Boolean,System.Data.Common.DbParameter[])">
+            <summary>
+            执行SQL并返回第1行第1列的值
+            </summary>
+            <typeparam name="DbContextT"></typeparam>
+            <typeparam name="ReturnT">返回类型</typeparam>
+            <param name="context">数据库上下文</param>
+            <param name="sql">SQL语句</param>
+            <param name="func">回调</param>
+            <param name="isCloseConn">是否关闭连接</param>
+            <param name="param">参数</param>
+            <returns>第1行第1列的值</returns>
+        </member>
+        <member name="T:Microsoft.EntityFrameworkCore.ScalarModel`1">
+            <summary>
+            首位数据模型
+            @ 黄振东
+            </summary>
+            <typeparam name="T">数据类型</typeparam>
+        </member>
+        <member name="P:Microsoft.EntityFrameworkCore.ScalarModel`1.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+    </members>
+</doc>
