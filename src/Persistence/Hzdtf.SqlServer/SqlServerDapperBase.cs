@@ -27,8 +27,7 @@ namespace Hzdtf.SqlServer
         /// <summary>
         /// 转义符后辍
         /// </summary>
-        protected override string SufxEscapeChar { get => "]"; }
-        
+        protected override string SufxEscapeChar { get => "]"; }        
 
         #endregion
 
