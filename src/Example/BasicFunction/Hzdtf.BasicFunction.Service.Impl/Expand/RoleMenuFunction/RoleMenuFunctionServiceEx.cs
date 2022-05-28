@@ -79,7 +79,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
         /// <param name="connectionId">连接ID</param>
         /// <param name="comData">通用数据</param>
         [Transaction(ConnectionIdIndex = 4)]
-        protected virtual void ExecSaveRoleMenuFunctions(ReturnInfo<bool> returnInfo, int roleId, IList<RoleMenuFunctionInfo> rmfs, CommonUseData comData = null, string connectionId = null)
+        protected virtual void ExecSaveRoleMenuFunctions(ReturnInfo<bool> returnInfo, int roleId, IList<RoleMenuFunctionInfo> rmfs, CommonUseData comData = null, string connectionId = null, object inPa = null)
         {
             Persistence.DeleteByRoleId(roleId, connectionId);
             if (rmfs.IsNullOrCount0())

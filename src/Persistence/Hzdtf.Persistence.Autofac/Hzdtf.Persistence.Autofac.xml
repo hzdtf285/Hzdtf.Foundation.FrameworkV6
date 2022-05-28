@@ -4,6 +4,34 @@
         <name>Hzdtf.Persistence.Autofac</name>
     </assembly>
     <members>
+        <member name="T:Hzdtf.Persistence.Autofac.TransactionBeforeMethodCache">
+            <summary>
+            事务执行前方法缓存
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Persistence.Autofac.TransactionBeforeMethodCache.dicCache">
+            <summary>
+            字典缓存
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Persistence.Autofac.TransactionBeforeMethodCache.syncDicCache">
+            <summary>
+            同步字典缓存
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Persistence.Autofac.TransactionBeforeMethodCache.GetCache">
+            <summary>
+            获取缓存
+            </summary>
+            <returns>缓存</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Autofac.TransactionBeforeMethodCache.GetSyncCache">
+            <summary>
+            获取同步的缓存对象，是为了线程安全
+            </summary>
+            <returns>同步的缓存对象</returns>
+        </member>
         <member name="T:Hzdtf.Persistence.Autofac.TransactionInterceptor">
             <summary>
             事务拦截器
@@ -12,6 +40,11 @@
             开启了新事务后，会执行业务方法会把新创建的connectionId传入到业务方法对应参数里
             如果业务方法里有抛出异常或返回值为ReturnInfo.Code失败，则会回滚
             @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Persistence.Autofac.TransactionInterceptor.beforeMethodCache">
+            <summary>
+            事务执行前方法缓存
             </summary>
         </member>
         <member name="M:Hzdtf.Persistence.Autofac.TransactionInterceptor.Intercept(Hzdtf.Utility.Model.Return.BasicReturnInfo,Castle.DynamicProxy.IInvocation,Hzdtf.Utility.Attr.TransactionAttribute,System.Boolean@)">
@@ -35,6 +68,14 @@
             执行成功后的回调
             </summary>
             <param name="comData">通用数据</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Autofac.TransactionInterceptor.ExecBeforeTransaction(Castle.DynamicProxy.IInvocation,Hzdtf.Utility.Attr.TransactionAttribute)">
+            <summary>
+            执行开启事务前
+            执行前必须先设置好连接ID
+            </summary>
+            <param name="invocation">拦截参数</param>
+            <param name="attr">特性</param>
         </member>
     </members>
 </doc>

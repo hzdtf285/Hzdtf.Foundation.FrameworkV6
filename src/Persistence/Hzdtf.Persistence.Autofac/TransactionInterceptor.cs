@@ -25,6 +25,11 @@ namespace Hzdtf.Persistence.Autofac
     public class TransactionInterceptor : AttrInterceptorBase<TransactionAttribute>
     {
         /// <summary>
+        /// 事务执行前方法缓存
+        /// </summary>
+        private readonly static TransactionBeforeMethodCache beforeMethodCache = new TransactionBeforeMethodCache();
+
+        /// <summary>
         /// 拦截
         /// </summary>
         /// <param name="basicReturn">基本返回</param>
@@ -36,7 +41,7 @@ namespace Hzdtf.Persistence.Autofac
             isExecProceeded = true;
             BasicReturnInfo returnInfo = new BasicReturnInfo();
             object connId = null;
-            if (attr.ConnectionIdIndex == -1)
+            if (attr.ConnectionIdIndex != -1)
             {
                 connId = invocation.GetArgumentValue(attr.ConnectionIdIndex);
             }
@@ -55,6 +60,7 @@ namespace Hzdtf.Persistence.Autofac
                 string connIdStr = connId.ToString();
                 if (perConn.GetDbTransaction(connIdStr) != null)
                 {
+                    ExecBeforeTransaction(invocation, attr);
                     invocation.Proceed();
                     return;
                 }
@@ -88,11 +94,13 @@ namespace Hzdtf.Persistence.Autofac
 
             IDbTransaction dbTransaction = null;
             var isNotTransFinish = true; // 事务是否未完成
+            invocation.SetArgumentValue(attr.ConnectionIdIndex, connectionId);
             try
             {
-                dbTransaction = perConn.BeginTransaction(connectionId, attr);                
-                invocation.SetArgumentValue(attr.ConnectionIdIndex, connectionId);
+                // 开启事务前先执行动作
+                ExecBeforeTransaction(invocation, attr);
 
+                dbTransaction = perConn.BeginTransaction(connectionId, attr);            
                 invocation.Proceed();
 
                 var re = GetExecedReturn(invocation);
@@ -156,6 +164,40 @@ namespace Hzdtf.Persistence.Autofac
             }
 
             comData.ClearCallback();
+        }
+
+        /// <summary>
+        /// 执行开启事务前
+        /// 执行前必须先设置好连接ID
+        /// </summary>
+        /// <param name="invocation">拦截参数</param>
+        /// <param name="attr">特性</param>
+        private void ExecBeforeTransaction(IInvocation invocation, TransactionAttribute attr)
+        {
+            if (string.IsNullOrWhiteSpace(attr.BeforeMethod))
+            {
+                return;
+            }
+
+            var key = $"{invocation.TargetType.FullName}.{attr.BeforeMethod}";
+            var method = beforeMethodCache.Get(key);
+            if (method == null)
+            {
+                method = invocation.TargetType.GetMethod(attr.BeforeMethod);
+                if (method == null)
+                {
+                    return;
+                }
+                beforeMethodCache.Add(key, method);
+            }
+
+            var result = method.Invoke(invocation.InvocationTarget, invocation.Arguments);
+            if (attr.BeforeMethodReturnValueInIndex == -1 || result == null)
+            {
+                return;
+            }
+
+            invocation.SetArgumentValue(attr.BeforeMethodReturnValueInIndex, result);
         }
     }
 }

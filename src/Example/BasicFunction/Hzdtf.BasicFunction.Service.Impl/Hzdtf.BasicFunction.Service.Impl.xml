@@ -472,7 +472,7 @@
             <param name="comData">通用数据</param>
             <returns>返回信息</returns>
         </member>
-        <member name="M:Hzdtf.BasicFunction.Service.Impl.RoleMenuFunctionService.ExecSaveRoleMenuFunctions(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Int32,System.Collections.Generic.IList{Hzdtf.BasicFunction.Model.RoleMenuFunctionInfo},Hzdtf.Utility.Model.CommonUseData,System.String)">
+        <member name="M:Hzdtf.BasicFunction.Service.Impl.RoleMenuFunctionService.ExecSaveRoleMenuFunctions(Hzdtf.Utility.Model.Return.ReturnInfo{System.Boolean},System.Int32,System.Collections.Generic.IList{Hzdtf.BasicFunction.Model.RoleMenuFunctionInfo},Hzdtf.Utility.Model.CommonUseData,System.String,System.Object)">
             <summary>
             执行保存保存角色拥有的菜单功能信息列表
             </summary>
