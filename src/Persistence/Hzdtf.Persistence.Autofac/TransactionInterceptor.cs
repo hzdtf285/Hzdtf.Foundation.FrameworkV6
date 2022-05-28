@@ -205,7 +205,6 @@ namespace Hzdtf.Persistence.Autofac
             if (attr.BeforeMethodReturnValueInIndex == -1)
             {
                 method.Invoke(invocation.InvocationTarget, invocation.Arguments);
-                return;
             }
             else
             {
