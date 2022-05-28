@@ -11,6 +11,7 @@ using Hzdtf.Utility.Model.Return;
 using Hzdtf.Autofac.Extensions.Intercepteds;
 using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Utils;
+using System.Reflection;
 
 namespace Hzdtf.Persistence.Autofac
 {
@@ -179,16 +180,25 @@ namespace Hzdtf.Persistence.Autofac
                 return;
             }
 
-            var key = $"{invocation.TargetType.FullName}.{attr.BeforeMethod}";
-            var method = beforeMethodCache.Get(key);
-            if (method == null)
+            MethodInfo method = null;
+            // 如果使用缓存，则先从缓存里获取映射方法
+            if (attr.BeforeMethodUseCache)
             {
-                method = invocation.TargetType.GetMethod(attr.BeforeMethod);
+                var key = $"{invocation.TargetType.FullName}.{attr.BeforeMethod}";
+                method = beforeMethodCache.Get(key);
                 if (method == null)
                 {
-                    return;
+                    method = invocation.TargetType.GetMethod(attr.BeforeMethod);
+                    if (method == null)
+                    {
+                        return;
+                    }
+                    beforeMethodCache.Add(key, method);
                 }
-                beforeMethodCache.Add(key, method);
+            }
+            else
+            {
+                method = invocation.TargetType.GetMethod(attr.BeforeMethod);
             }
 
             var result = method.Invoke(invocation.InvocationTarget, invocation.Arguments);
