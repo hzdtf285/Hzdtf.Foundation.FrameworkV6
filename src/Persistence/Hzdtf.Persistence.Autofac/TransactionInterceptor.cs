@@ -201,13 +201,17 @@ namespace Hzdtf.Persistence.Autofac
                 method = invocation.TargetType.GetMethod(attr.BeforeMethod);
             }
 
-            var result = method.Invoke(invocation.InvocationTarget, invocation.Arguments);
-            if (attr.BeforeMethodReturnValueInIndex == -1 || result == null)
+            // 不需要返回值
+            if (attr.BeforeMethodReturnValueInIndex == -1)
             {
+                method.Invoke(invocation.InvocationTarget, invocation.Arguments);
                 return;
             }
-
-            invocation.SetArgumentValue(attr.BeforeMethodReturnValueInIndex, result);
+            else
+            {
+                var result = method.Invoke(invocation.InvocationTarget, invocation.Arguments);
+                invocation.SetArgumentValue(attr.BeforeMethodReturnValueInIndex, result);
+            }
         }
     }
 }
