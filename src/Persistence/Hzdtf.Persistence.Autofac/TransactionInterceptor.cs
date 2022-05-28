@@ -185,14 +185,13 @@ namespace Hzdtf.Persistence.Autofac
             if (attr.BeforeMethodUseCache)
             {
                 var key = $"{invocation.TargetType.FullName}.{attr.BeforeMethod}";
-                method = beforeMethodCache.Get(key);
-                if (method == null)
+                if (beforeMethodCache.Exists(key))
+                {
+                    method = beforeMethodCache.Get(key);
+                }
+                else
                 {
                     method = invocation.TargetType.GetMethod(attr.BeforeMethod);
-                    if (method == null)
-                    {
-                        return;
-                    }
                     beforeMethodCache.Add(key, method);
                 }
             }
