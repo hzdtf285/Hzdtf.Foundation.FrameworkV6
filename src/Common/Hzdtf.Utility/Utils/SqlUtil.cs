@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hzdtf.Utility.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -73,6 +74,30 @@ namespace Hzdtf.Utility.Utils
         public static string GetMaskSql(int code, string field, bool isEqual = true)
         {
             return string.Format("{0}&{1}{2}0", code, field, isEqual ? ">" : "=");
+        }
+
+        /// <summary>
+        /// 获取Like SQL语句
+        /// </summary>
+        /// <param name="value">值</param>
+        /// <param name="mode">模式</param>
+        /// <returns>Like SQL语句</returns>
+        public static string GetLikeSql(this string value, LikeMode mode)
+        {
+            switch (mode)
+            {
+                case LikeMode.LEFT_EQUAL:
+                    return string.Format(" LIKE '{0}%'", value.FillSqlValue());
+
+                case LikeMode.RIGHT:
+                    return string.Format(" LIKE '%{0}'", value.FillSqlValue());
+
+                case LikeMode.FULL_BLUR:
+                    return string.Format(" LIKE '%{0}%'", value.FillSqlValue());
+
+                default:
+                    return null;
+            }
         }
     }
 }

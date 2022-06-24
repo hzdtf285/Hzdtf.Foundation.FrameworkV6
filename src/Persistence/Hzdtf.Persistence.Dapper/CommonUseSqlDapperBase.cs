@@ -46,6 +46,11 @@ namespace Hzdtf.Persistence.Dapper
             get => $"{PfxEscapeChar}Id{SufxEscapeChar}=@Id";
         }
 
+        /// <summary>
+        /// 包装加上前后辍表
+        /// </summary>
+        protected string WrapPfxSufxTable { get => $"{PfxEscapeChar}{Table}{SufxEscapeChar}"; }
+
         #endregion
 
         #region 重写父类的方法
@@ -71,7 +76,7 @@ namespace Hzdtf.Persistence.Dapper
             string basicSelectSql = null;
             if (!string.IsNullOrWhiteSpace(fieldPermissionSql) && propertyNames.IsNullOrLength0())
             {
-                basicSelectSql = $"SELECT {fieldPermissionSql} FROM {PfxEscapeChar}{Table}{SufxEscapeChar} {Table}";
+                basicSelectSql = $"SELECT {fieldPermissionSql} FROM {GetSelectTableName(alias: Table)}";
             }
             else
             {
@@ -102,7 +107,7 @@ namespace Hzdtf.Persistence.Dapper
             string basicSelectSql = null;
             if (!string.IsNullOrWhiteSpace(fieldPermissionSql) && propertyNames.IsNullOrLength0())
             {
-                basicSelectSql = $"SELECT {fieldPermissionSql} FROM {PfxEscapeChar}{Table}{SufxEscapeChar} {Table}";
+                basicSelectSql = $"SELECT {fieldPermissionSql} FROM {GetSelectTableName(alias: Table)}";
             }
             else
             {
@@ -169,7 +174,7 @@ namespace Hzdtf.Persistence.Dapper
         {
             string tbAlias = string.IsNullOrWhiteSpace(pfx) ? null : pfx.Replace(".", null);
 
-            return $"SELECT COUNT(*) FROM {PfxEscapeChar}{Table}{SufxEscapeChar} {tbAlias}";
+            return $"SELECT COUNT(*) FROM {GetSelectTableName(alias: tbAlias)}";
         }
 
         /// <summary>
@@ -187,7 +192,7 @@ namespace Hzdtf.Persistence.Dapper
             string tbAlias = null;
             if (string.IsNullOrWhiteSpace(pfx))
             {
-                pfx = $"{PfxEscapeChar}{Table}{SufxEscapeChar}.";
+                pfx = $"{WrapPfxSufxTable}.";
             }
             else
             {
@@ -210,7 +215,7 @@ namespace Hzdtf.Persistence.Dapper
             string basicSelectSql = null;
             if (!string.IsNullOrWhiteSpace(fieldPermissionSql) && propertyNames.IsNullOrLength0())
             {
-                basicSelectSql = $"SELECT {fieldPermissionSql} FROM {PfxEscapeChar}{Table}{SufxEscapeChar} {Table}";
+                basicSelectSql = $"SELECT {fieldPermissionSql} FROM {GetSelectTableName(alias: tbAlias)}";
             }
             else
             {
@@ -233,14 +238,14 @@ namespace Hzdtf.Persistence.Dapper
             string tbAlias = null;
             if (string.IsNullOrWhiteSpace(pfx))
             {
-                pfx = $"{PfxEscapeChar}{Table}{SufxEscapeChar}.";
+                pfx = $"{WrapPfxSufxTable}.";
             }
             else
             {
                 tbAlias = pfx.Replace(".", null);
             }
 
-            return $"SELECT {JoinSelectPropMapFields(propertyNames, pfx: pfx)}{appendFieldSqls} FROM {PfxEscapeChar}{Table}{SufxEscapeChar} {tbAlias}";
+            return $"SELECT {JoinSelectPropMapFields(propertyNames, pfx: pfx)}{appendFieldSqls} FROM {GetSelectTableName(alias: tbAlias)}";
         }
 
         /// <summary>
@@ -281,7 +286,7 @@ namespace Hzdtf.Persistence.Dapper
             string basicSelectSql = null;
             if (!string.IsNullOrWhiteSpace(fieldPermissionSql) && propertyNames.IsNullOrLength0())
             {
-                basicSelectSql = $"SELECT {fieldPermissionSql} FROM {PfxEscapeChar}{Table}{SufxEscapeChar} {Table}";
+                basicSelectSql = $"SELECT {fieldPermissionSql} FROM {GetSelectTableName(alias: Table)}";
             }
             else
             {
@@ -375,7 +380,7 @@ namespace Hzdtf.Persistence.Dapper
                 foreach (var f in keywordFields)
                 {
                     string pfx = f.Contains(".") ? null : Table + ".";
-                    whereSql.AppendFormat("{0}{1} LIKE '%{2}%' OR ", pfx, f, keywordFilter.Keyword.FillSqlValue());
+                    whereSql.AppendFormat("{0}{1} {2} OR ", pfx, f, keywordFilter.Keyword.GetLikeSql(GetLikeMode()));
                 }
                 whereSql.Remove(whereSql.Length - 4, 4);
                 whereSql.Append(")");
@@ -510,7 +515,7 @@ namespace Hzdtf.Persistence.Dapper
             var modifyTimeField = $"{PfxEscapeChar}{ GetFieldByProp("ModifyTime") }{SufxEscapeChar}";
             var idField = $"{PfxEscapeChar}{ GetFieldByProp("Id")}{SufxEscapeChar}";
             return $"SELECT {idField} Id,{PfxEscapeChar}{GetFieldByProp("ModifierId")}{SufxEscapeChar} ModifierId,{PfxEscapeChar}{GetFieldByProp("Modifier")}{SufxEscapeChar} Modifier,{modifyTimeField} ModifyTime"
-                + $" FROM {PfxEscapeChar}{Table}{SufxEscapeChar} WHERE  {merchantIdFilterSql} {idField}=@Id AND {modifyTimeField}>@ModifyTime";
+                + $" FROM {GetSelectTableName(alias: Table)} WHERE  {merchantIdFilterSql} {idField}=@Id AND {modifyTimeField}>@ModifyTime";
         }
 
         /// <summary>
@@ -552,7 +557,7 @@ namespace Hzdtf.Persistence.Dapper
             whereSql.Append(")");
 
             return $"SELECT {idField} Id,{PfxEscapeChar}{GetFieldByProp("ModifierId")}{SufxEscapeChar} ModifierId,{PfxEscapeChar}{GetFieldByProp("Modifier")}{SufxEscapeChar} Modifier,{modifyTimeField} ModifyTime"
-                + $" FROM {PfxEscapeChar}{Table}{SufxEscapeChar} {whereSql.ToString()}";
+                + $" FROM {GetSelectTableName(alias: Table)} {whereSql.ToString()}";
         }
 
         #endregion
@@ -570,7 +575,7 @@ namespace Hzdtf.Persistence.Dapper
         protected override string InsertSql(ModelT model, string[] propertyNames = null, bool isGetAutoId = false, CommonUseData comData = null)
         {
             string[] partSql = CombineInsertSqlByFieldNames(WrapInsertFieldNames(model.Id, propertyNames));
-            string sql = $"INSERT INTO {PfxEscapeChar}{Table}{SufxEscapeChar}({partSql[0]}) VALUES({partSql[1]})";
+            string sql = $"INSERT INTO {WrapPfxSufxTable}({partSql[0]}) VALUES({partSql[1]})";
 
             return isGetAutoId ? $"{sql};{GetLastInsertIdSql()}" : sql;
         }
@@ -586,7 +591,7 @@ namespace Hzdtf.Persistence.Dapper
         protected override string InsertSql(IList<ModelT> models, out DynamicParameters para, string[] propertyNames = null, CommonUseData comData = null)
         {
             string[] partSql = CombineBatchInsertSqlByFieldNames(WrapInsertFieldNames(models[0].Id, propertyNames), models, out para);
-            return $"INSERT INTO {PfxEscapeChar}{Table}{SufxEscapeChar}({partSql[0]}) VALUES{partSql[1]}";
+            return $"INSERT INTO {WrapPfxSufxTable}({partSql[0]}) VALUES{partSql[1]}";
         }
 
         /// <summary>
@@ -596,7 +601,7 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="propertyNames">属性名称集合</param>
         /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected override string UpdateByIdSql(ModelT model, string[] propertyNames = null, CommonUseData comData = null) => $"UPDATE {PfxEscapeChar}{Table}{SufxEscapeChar} SET {GetUpdateFieldsSql(propertyNames)} WHERE {GetMerchantIdFilterSql2(isAfterAppAnd: true, comData: comData)} {ID_EQUAL_PARAM_SQL}";
+        protected override string UpdateByIdSql(ModelT model, string[] propertyNames = null, CommonUseData comData = null) => $"UPDATE {WrapPfxSufxTable} SET {GetUpdateFieldsSql(propertyNames)} WHERE {GetMerchantIdFilterSql2(isAfterAppAnd: true, comData: comData)} {ID_EQUAL_PARAM_SQL}";
 
         /// <summary>
         /// 根据ID删除模型SQL语句
@@ -620,14 +625,14 @@ namespace Hzdtf.Persistence.Dapper
         /// </summary>
         /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected override string DeleteSql(CommonUseData comData = null) => $"DELETE FROM {PfxEscapeChar}{Table}{SufxEscapeChar} {GetMerchantIdFilterSql(isBeforeAppWhere: true, comData: comData)}";
+        protected override string DeleteSql(CommonUseData comData = null) => $"DELETE FROM {WrapPfxSufxTable} {GetMerchantIdFilterSql(isBeforeAppWhere: true, comData: comData)}";
 
         /// <summary>
         /// 基本删除所有模型SQL语句
         /// </summary>
         /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected string BasicDeleteSql(CommonUseData comData = null) => $"DELETE FROM {PfxEscapeChar}{Table}{SufxEscapeChar}";
+        protected string BasicDeleteSql(CommonUseData comData = null) => $"DELETE FROM {WrapPfxSufxTable}";
 
         /// <summary>
         /// 模型是否包含商户ID
@@ -659,7 +664,7 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="table">表名</param>
         /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected override string DeleteByTableSql(string table, CommonUseData comData = null) => $"DELETE FROM {PfxEscapeChar}{table}{SufxEscapeChar} WHERE {EqualWhereSql()} {GetMerchantIdFilterSql(isBeforeAppAnd: true, comData: comData)}";
+        protected override string DeleteByTableSql(string table, CommonUseData comData = null) => $"DELETE FROM {WrapPfxSufxTable} WHERE {EqualWhereSql()} {GetMerchantIdFilterSql(isBeforeAppAnd: true, comData: comData)}";
 
         /// <summary>
         /// 基本根据表名删除所有模型SQL语句
@@ -667,7 +672,7 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="table">表名</param>
         /// <param name="comData">通用数据</param>
         /// <returns>SQL语句</returns>
-        protected string BasicDeleteByTableSql(string table, CommonUseData comData = null) => $"DELETE FROM {PfxEscapeChar}{table}{SufxEscapeChar}";
+        protected string BasicDeleteByTableSql(string table, CommonUseData comData = null) => $"DELETE FROM {WrapPfxSufxTable}";
 
         /// <summary>
         /// 根据表名、外键字段和外键值删除模型SQL语句
@@ -1044,6 +1049,32 @@ namespace Hzdtf.Persistence.Dapper
         {
             var andStr = isAppendAnd ? " AND " : null;
             return new StringBuilder($" WHERE {EqualWhereSql()} {andStr}");
+        }
+
+        /// <summary>
+        /// 获取Like模式，默认为左匹配
+        /// </summary>
+        /// <returns>Like模式</returns>
+        protected virtual LikeMode GetLikeMode() => LikeMode.LEFT_EQUAL;
+
+        /// <summary>
+        /// 获取查询表名
+        /// </summary>
+        /// <param name="table">表名，为空则默认等于WrapPfxSufxTable</param>
+        /// <param name="alias">别名</param>
+        /// <returns>查询表名</returns>
+        protected virtual string GetSelectTableName(string table = null, string alias = null)
+        {
+            if (string.IsNullOrWhiteSpace(table))
+            {
+                table = WrapPfxSufxTable;
+            }
+            if (IsEnableSelectNolockTable())
+            {
+                return $"{GetNoLockTableSql(table, alias)}";
+            }
+
+            return $"{table} {alias}";
         }
 
         #endregion

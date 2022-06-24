@@ -32,6 +32,11 @@
             带ID等于参数的条件SQL（不包含前面的WHERE）
             </summary>
         </member>
+        <member name="P:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.WrapPfxSufxTable">
+            <summary>
+            包装加上前后辍表
+            </summary>
+        </member>
         <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.SelectSql(`0,System.String,System.String,System.String[],Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             根据ID查询模型SQL语句
@@ -473,6 +478,20 @@
             </summary>
             <param name="isAppendAnd">是否在尾加加and</param>
             <returns>where语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetLikeMode">
+            <summary>
+            获取Like模式，默认为左匹配
+            </summary>
+            <returns>Like模式</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetSelectTableName(System.String,System.String)">
+            <summary>
+            获取查询表名
+            </summary>
+            <param name="table">表名，为空则默认等于WrapPfxSufxTable</param>
+            <param name="alias">别名</param>
+            <returns>查询表名</returns>
         </member>
         <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.CombineInsertSqlByFieldNames(System.String[])">
             <summary>
@@ -931,6 +950,21 @@
             </summary>
             <param name="ex">异常</param>
             <returns>异常是否主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.IsEnableSelectNolockTable">
+            <summary>
+            是否开启查询不锁表
+            在配置里ConnectionStrings:EnableSelectNolockTable定义布尔值，如果没配置，默认为否。如果需要个性化，请在子类里重写此方法
+            </summary>
+            <returns>是否开启查询不锁表</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.GetNoLockTableSql(System.String,System.String)">
+            <summary>
+            获取不锁表的SQL
+            </summary>
+            <param name="table">表名</param>
+            <param name="alias">别名</param>
+            <returns>不锁表的SQL</returns>
         </member>
         <member name="T:Hzdtf.Persistence.Dapper.DapperUtil">
             <summary>

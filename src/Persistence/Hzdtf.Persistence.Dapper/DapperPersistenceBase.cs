@@ -17,7 +17,7 @@ namespace Hzdtf.Persistence.Dapper
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
     /// <typeparam name="ModelT">模型类型</typeparam>
-    public abstract partial class DapperPersistenceBase<IdT, ModelT> : PersistenceBase<IdT, ModelT> 
+    public abstract partial class DapperPersistenceBase<IdT, ModelT> : PersistenceBase<IdT, ModelT>
         where ModelT : SimpleInfo<IdT>
     {
         #region 属性与字段
@@ -64,19 +64,6 @@ namespace Hzdtf.Persistence.Dapper
                 return dbConnection.QueryFirstOrDefault<ModelT>(sql, dataParameter, dbTransaction);
             }, comData: comData, "Select");
         }
-
-        /// <summary>
-        /// 根据ID查询模型
-        /// </summary>
-        /// <param name="sqlProp">SQL属性</param>
-        /// <param name="dbConnection">数据库连接</param>
-        /// <param name="dbTransaction">数据库事务</param>
-        /// <param name="comData">通用数据</param>
-        /// <returns>模型</returns>
-        //protected override ModelT SelectFristBy(SqlPropInfo sqlProp, IDbConnection dbConnection, IDbTransaction dbTransaction = null, CommonUseData comData = null)
-        //{
-
-        //}
 
         /// <summary>
         /// 根据ID集合查询模型
@@ -815,6 +802,28 @@ namespace Hzdtf.Persistence.Dapper
         /// <param name="ex">异常</param>
         /// <returns>异常是否主键重复</returns>
         protected virtual bool IsExceptionPkRepeat(Exception ex) => false;
+
+        /// <summary>
+        /// 是否开启查询不锁表
+        /// 在配置里ConnectionStrings:EnableSelectNolockTable定义布尔值，如果没配置，默认为否。如果需要个性化，请在子类里重写此方法
+        /// </summary>
+        /// <returns>是否开启查询不锁表</returns>
+        protected virtual bool IsEnableSelectNolockTable()
+        {
+            if (string.IsNullOrWhiteSpace(Config["ConnectionStrings:EnableSelectNolockTable"]))
+            {
+                return false;
+            }
+            return Convert.ToBoolean(Config["ConnectionStrings:EnableSelectNolockTable"]);
+        }
+
+        /// <summary>
+        /// 获取不锁表的SQL
+        /// </summary>
+        /// <param name="table">表名</param>
+        /// <param name="alias">别名</param>
+        /// <returns>不锁表的SQL</returns>
+        protected virtual string GetNoLockTableSql(string table, string alias = null) => $"{table} {alias}";
 
         #endregion
     }

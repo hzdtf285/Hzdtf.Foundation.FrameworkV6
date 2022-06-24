@@ -27,7 +27,7 @@ namespace Hzdtf.SqlServer
         /// <summary>
         /// 转义符后辍
         /// </summary>
-        protected override string SufxEscapeChar { get => "]"; }        
+        protected override string SufxEscapeChar { get => "]"; }
 
         #endregion
 
@@ -123,6 +123,14 @@ namespace Hzdtf.SqlServer
         /// <param name="ex">异常</param>
         /// <returns>其他判断主键重复</returns>
         protected virtual bool OtherIsPkRepeat(SqlException ex) => true;
+
+        /// <summary>
+        /// 获取不锁表的SQL
+        /// </summary>
+        /// <param name="table">表名</param>
+        /// <param name="alias">别名</param>
+        /// <returns>不锁表的SQL</returns>
+        protected override string GetNoLockTableSql(string table, string alias = null) => $"{table} {alias} WITH(NOLOCK)";
 
         #endregion
     }
