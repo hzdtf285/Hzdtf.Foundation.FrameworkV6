@@ -52,6 +52,8 @@ namespace Hzdtf.Utility.AspNet.Extensions.TheReuestOperation
                 theOperation.EventId = context.Request.GetEventId();
             }
 
+            context.Response.Headers.Add("EventId", theOperation.EventId);
+
             await next(context);
         }
     }

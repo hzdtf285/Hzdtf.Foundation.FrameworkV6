@@ -168,14 +168,20 @@ namespace Grpc.Net.Client
         /// 设置轮询负载均衡策略和静态解析
         /// </summary>
         /// <param name="options">GRpc工厂选项配置</param>
+        /// <param name="callbackChannelOptions">回调GRpc渠道选项配置</param>
         /// <param name="service">服务</param>
-        public static void SetRobinBalancingAndStaticResolver(this GrpcClientFactoryOptions options, string service)
+        public static void SetRobinBalancingAndStaticResolver(this GrpcClientFactoryOptions options, string service, Action<GrpcChannelOptions> callbackChannelOptions = null)
         {
             options.Address = new Uri($"static:{service}");
             options.ChannelOptionsActions.Add(op =>
             {
                 op.Credentials = ChannelCredentials.Insecure;
                 op.ServiceConfig = new ServiceConfig { LoadBalancingConfigs = { new RoundRobinConfig() } };
+
+                if (callbackChannelOptions != null)
+                {
+                    callbackChannelOptions(op);
+                }
             });
         }
 

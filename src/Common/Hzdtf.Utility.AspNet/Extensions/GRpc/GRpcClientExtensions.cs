@@ -5,6 +5,7 @@ using Grpc.Net.Client.Balancer;
 using Grpc.Net.Client.Configuration;
 using Grpc.Net.ClientFactory;
 using System;
+using Grpc.Net.Client;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -41,8 +42,9 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">服务收藏</param>
         /// <param name="options">配置回调</param>
         /// <param name="clientName">客户端名称。如果存在多个grpc客户端类名相同，则需要指定不能的客户端名称区分</param>
+        /// <param name="callbackChannelOptions">回调GRpc渠道选项配置</param>
         /// <returns>服务收藏</returns>
-        public static IServiceCollection AddGrpcClientAndDefaultBalancing<GRpcClientT>(this IServiceCollection services, string serviceName, Action<GrpcClientFactoryOptions> options = null, string clientName = null)
+        public static IServiceCollection AddGrpcClientAndDefaultBalancing<GRpcClientT>(this IServiceCollection services, string serviceName, Action<GrpcClientFactoryOptions> options = null, string clientName = null, Action<GrpcChannelOptions> callbackChannelOptions = null)
            where GRpcClientT : ClientBase<GRpcClientT>
         {
             if (string.IsNullOrWhiteSpace(serviceName))
@@ -52,12 +54,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             var fun = (GrpcClientFactoryOptions o) =>
             {
-                o.Address = new Uri($"static:{serviceName}");
-                o.ChannelOptionsActions.Add(op =>
-                {
-                    op.Credentials = ChannelCredentials.Insecure;
-                    op.ServiceConfig = new ServiceConfig { LoadBalancingConfigs = { new RoundRobinConfig() } };
-                });
+                o.SetRobinBalancingAndStaticResolver(serviceName, callbackChannelOptions);
                 if (options != null)
                 {
                     options(o);
