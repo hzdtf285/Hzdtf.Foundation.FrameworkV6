@@ -65,7 +65,6 @@ namespace Hzdtf.SqlServer
 
                 return insertFieldMapTypes;
             }
-
         }
 
         #endregion
@@ -91,7 +90,6 @@ namespace Hzdtf.SqlServer
                     {
                         return ExecSqlBulkCopy(models, dbConnection, propertyNames, dbTransaction);
                     }
-
                     catch (Exception ex)
                     {
                         // 如果主键重复，则忽略异常，实现幂等
@@ -99,7 +97,6 @@ namespace Hzdtf.SqlServer
                         {
                             var ids = models.Select(p => p.Id).ToArray();
                             Log.InfoAsync($"批量插入.发生主键重复异常,幂等操作忽略该异常.主键:{ids.ToMergeString(",")}", ex, this.GetType().Name, comData.GetEventId(), "Insert", "SqlBulkCopy");
-
                             return models.Count;
                         }
 
@@ -158,9 +155,69 @@ namespace Hzdtf.SqlServer
             return IsCommonExceptionPkRepeat(ex);
         }
 
+        /// <summary>
+        /// 获取不锁表的SQL
+        /// </summary>
+        /// <param name="table">表名</param>
+        /// <param name="alias">别名</param>
+        /// <returns>不锁表的SQL</returns>
+        protected override string GetNoLockTableSql(string table, string alias = null) => $"{table} {alias} WITH(NOLOCK)";
+
         #endregion
 
         #region 受保护方法
+
+        /// <summary>
+        /// 执行批量插入
+        /// 会拿模型第1条数据作为Id作为默认值
+        /// </summary>
+        /// <param name="models">模型列表</param>
+        /// <param name="dbConnection">数据库连接</param>
+        /// <param name="propertyNames">属性名称数组</param>
+        /// <param name="dbTransaction">数据库事务</param>
+        /// <returns>影响行数</returns>
+        protected int ExecSqlBulkCopy(IList<ModelT> models, IDbConnection dbConnection, string[] propertyNames = null, IDbTransaction dbTransaction = null)
+        {
+            var defaultId = models[0].Id;
+            // 需要插入的字段数组
+            var insertFields = WrapInsertFieldNames(defaultId, propertyNames);
+
+            var table = new DataTable(Table);
+
+            // 循环需要插入的数组，并添加到对应的内存表里
+            foreach (var field in insertFields)
+            {
+                table.Columns.Add(field);
+            }
+            var entityType = typeof(ModelT);
+            // 循环模型列表，添加内存行并设置单元格数据
+            foreach (var item in models)
+            {
+                var row = table.NewRow();
+                foreach (var field in insertFields)
+                {
+                    var value = entityType.GetProperty(GetPropByField(field)).GetValue(item);
+                    if (value == null)
+                    {
+                        continue;
+                    }
+                    var propType = InsertFieldMapTypes[field];
+                    if (propType.IsEnum)
+                    {
+                        value = (byte)value;
+                    }
+                    row[field] = value;
+                }
+
+                table.Rows.Add(row);
+            }
+
+            return table.ExecSqlBulkCopy(dbConnection, dbTransaction, SetSqlBulkCopy);
+        }
+
+        #endregion
+
+        #region 虚方法
 
         /// <summary>
         /// 判断异常是否主键重复
@@ -197,91 +254,21 @@ namespace Hzdtf.SqlServer
         }
 
         /// <summary>
-        /// 执行批量插入
-        /// 会拿模型第1条数据作为Id作为默认值
-        /// </summary>
-        /// <param name="models">模型列表</param>
-        /// <param name="dbConnection">数据库连接</param>
-        /// <param name="propertyNames">属性名称数组</param>
-        /// <param name="dbTransaction">数据库事务</param>
-        /// <returns>影响行数</returns>
-        protected int ExecSqlBulkCopy(IList<ModelT> models, IDbConnection dbConnection, string[] propertyNames = null, IDbTransaction dbTransaction = null)
-        {
-            var defaultId = models[0].Id;
-            var trans = dbTransaction == null ? null : dbTransaction as SqlTransaction;
-            var entityType = typeof(ModelT);
-            using (var bulkCopy = new SqlBulkCopy(dbConnection as SqlConnection, SqlBulkCopyOptions.TableLock, trans))
-            {
-                bulkCopy.BatchSize = 100000;
-                bulkCopy.BulkCopyTimeout = 120;
-                bulkCopy.DestinationTableName = Table;
-
-                SetSqlBulkCopy(bulkCopy);
-
-                // 需要插入的字段数组
-                var insertFields = WrapInsertFieldNames(defaultId, propertyNames);
-                var table = new DataTable();
-
-                // 循环需要插入的数组，并添加到对应的内存表里
-                foreach (var field in insertFields)
-                {
-                    var fieldType = InsertFieldMapTypes[field]; // 字段类型
-
-                    bulkCopy.ColumnMappings.Add(field, field);
-                    table.Columns.Add(field, fieldType);
-                }
-
-                // 循环模型列表，添加内存行并设置单元格数据
-                foreach (var item in models)
-                {
-                    var row = table.NewRow();
-                    foreach (var field in insertFields)
-                    {
-                        row[field] = entityType.GetProperty(GetPropByField(field)).GetValue(item);
-                    }
-
-                    table.Rows.Add(row);
-                }
-
-                bulkCopy.WriteToServer(table);
-            }
-
-            return models.Count;
-        }
-
-        /// <summary>
-        /// 获取不锁表的SQL
-        /// </summary>
-        /// <param name="table">表名</param>
-        /// <param name="alias">别名</param>
-        /// <returns>不锁表的SQL</returns>
-        protected override string GetNoLockTableSql(string table, string alias = null) => $"{table} {alias} WITH(NOLOCK)";
-
-        #endregion
-
-        #region 私有方法
-
-
-        #endregion
-
-        #region 虚方法
-
-        /// <summary>
-        /// 设置SQL Bulk Copy
-        /// 默认每次批量插入10万条，超时2分钟。如果要设置不同，请在此方法里设置
-        /// </summary>
-        /// <param name="bulk">SQL Bulk Copy</param>
-        protected virtual void SetSqlBulkCopy(SqlBulkCopy bulk)
-        {
-        }
-
-        /// <summary>
         /// 其他判断主键重复，此方法目的是为了异常可能包含其他非主键重复的
         /// 如果子类没重写，默认为是
         /// </summary>
         /// <param name="ex">异常</param>
         /// <returns>其他判断主键重复</returns>
         protected virtual bool OtherIsPkRepeat(SqlException ex) => true;
+
+
+        /// <summary>
+        /// 设置SQL Bulk Copy
+        /// </summary>
+        /// <param name="bulk">SQL Bulk Copy</param>
+        protected virtual void SetSqlBulkCopy(SqlBulkCopy bulk)
+        {
+        }
 
         #endregion
     }

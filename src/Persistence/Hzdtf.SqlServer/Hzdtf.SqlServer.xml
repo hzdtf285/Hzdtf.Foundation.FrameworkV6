@@ -4,6 +4,34 @@
         <name>Hzdtf.SqlServer</name>
     </assembly>
     <members>
+        <member name="T:Microsoft.Data.SqlClient.SqlBulkCopyExtensions">
+            <summary>
+            SqlBulkCopy扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Microsoft.Data.SqlClient.SqlBulkCopyExtensions.ExecSqlBulkCopy``1(System.Collections.Generic.IList{``0},System.String,System.Data.IDbConnection,System.Data.IDbTransaction,System.Action{Microsoft.Data.SqlClient.SqlBulkCopy},System.Func{System.Reflection.PropertyInfo,System.Boolean})">
+            <summary>
+            执行批量插入
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="tableName">表名</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="callbackBulkCopy">回调BulkCopy</param>
+            <param name="eachPropertyFunc">循环属性函数</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Microsoft.Data.SqlClient.SqlBulkCopyExtensions.ExecSqlBulkCopy(System.Data.DataTable,System.Data.IDbConnection,System.Data.IDbTransaction,System.Action{Microsoft.Data.SqlClient.SqlBulkCopy})">
+            <summary>
+            执行批量插入
+            </summary>
+            <param name="table">表</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="callbackBulkCopy">回调BulkCopy</param>
+            <returns>影响行数</returns>
+        </member>
         <member name="T:Hzdtf.SqlServer.SqlServerDapperBase`2">
             <summary>
             SqlServer Dapper基类
@@ -83,12 +111,13 @@
             <param name="ex">异常</param>
             <returns>异常是否主键重复</returns>
         </member>
-        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.IsCommonExceptionPkRepeat(System.Exception)">
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.GetNoLockTableSql(System.String,System.String)">
             <summary>
-            判断异常是否主键重复
+            获取不锁表的SQL
             </summary>
-            <param name="ex">异常</param>
-            <returns>异常是否主键重复</returns>
+            <param name="table">表名</param>
+            <param name="alias">别名</param>
+            <returns>不锁表的SQL</returns>
         </member>
         <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.ExecSqlBulkCopy(System.Collections.Generic.IList{`1},System.Data.IDbConnection,System.String[],System.Data.IDbTransaction)">
             <summary>
@@ -101,20 +130,12 @@
             <param name="dbTransaction">数据库事务</param>
             <returns>影响行数</returns>
         </member>
-        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.GetNoLockTableSql(System.String,System.String)">
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.IsCommonExceptionPkRepeat(System.Exception)">
             <summary>
-            获取不锁表的SQL
+            判断异常是否主键重复
             </summary>
-            <param name="table">表名</param>
-            <param name="alias">别名</param>
-            <returns>不锁表的SQL</returns>
-        </member>
-        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.SetSqlBulkCopy(Microsoft.Data.SqlClient.SqlBulkCopy)">
-            <summary>
-            设置SQL Bulk Copy
-            默认每次批量插入10万条，超时2分钟。如果要设置不同，请在此方法里设置
-            </summary>
-            <param name="bulk">SQL Bulk Copy</param>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
         </member>
         <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.OtherIsPkRepeat(Microsoft.Data.SqlClient.SqlException)">
             <summary>
@@ -123,6 +144,12 @@
             </summary>
             <param name="ex">异常</param>
             <returns>其他判断主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.SetSqlBulkCopy(Microsoft.Data.SqlClient.SqlBulkCopy)">
+            <summary>
+            设置SQL Bulk Copy
+            </summary>
+            <param name="bulk">SQL Bulk Copy</param>
         </member>
         <member name="T:Hzdtf.SqlServer.SqlServerDefault">
             <summary>
