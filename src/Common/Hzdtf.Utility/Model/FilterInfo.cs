@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Hzdtf.Utility.Utils;
 
 namespace Hzdtf.Utility.Model
 {
@@ -48,14 +49,38 @@ namespace Hzdtf.Utility.Model
         }
 
         /// <summary>
+        /// 排名名称
+        /// </summary>
+        private string sortName;
+
+        /// <summary>
         /// 排序名称
         /// </summary>
         [JsonProperty("sortName")]
         [MessagePack.Key("sortName")]
         public string SortName
         {
+            get => sortName;
+            set
+            {
+                if (string.IsNullOrWhiteSpace(value) || LimitSortNames == null || LimitSortNames.Contains(value, true))
+                {
+                    sortName = value;
+                }
+                else
+                {
+                    throw new NotSupportedException($"不支持排序名称[{value}]");
+                }
+            }
+        }
+
+        /// <summary>
+        /// 限定排序名称数组。不区分大小写。如果有限定范围，请重写此属性
+        /// </summary>
+        [IgnoreMember, JsonIgnore]
+        protected virtual string[] LimitSortNames
+        {
             get;
-            set;
         }
     }
 }
