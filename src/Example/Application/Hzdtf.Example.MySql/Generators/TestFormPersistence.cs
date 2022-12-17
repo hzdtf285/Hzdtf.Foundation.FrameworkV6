@@ -119,22 +119,22 @@ namespace Hzdtf.Example.MySql
                     return model.WorkflowId;
 
 ﻿                case "creater_id":
-                    return model.CreaterID;
+                    return model.CreaterId;
 
 ﻿                case "creater":
                     return model.Creater;
 
 ﻿                case "modifier_id":
-                    return model.ModifierID;
+                    return model.ModifierId;
 
 ﻿                case "modifier":
                     return model.Modifier;
 
 ﻿                case "create_time":
-                    return model.CreateDateTime;
+                    return model.CreateTime;
 
 ﻿                case "modify_time":
-                    return model.ModifyDateTime;
+                    return model.ModifyTime;
 
                 default:
                     return null;

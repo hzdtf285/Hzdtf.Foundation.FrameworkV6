@@ -157,11 +157,11 @@ namespace Hzdtf.Quartz.File
             }
             if (filter.StartCreateTime != null)
             {
-                query = query.Where(p => p.CreateDateTime >= filter.StartCreateTime);
+                query = query.Where(p => p.CreateTime >= filter.StartCreateTime);
             }
             if (filter.EndCreateTime != null)
             {
-                query = query.Where(p => p.CreateDateTime <= filter.EndCreateTime);
+                query = query.Where(p => p.CreateTime <= filter.EndCreateTime);
             }
             if (!string.IsNullOrWhiteSpace(filter.SortName))
             {

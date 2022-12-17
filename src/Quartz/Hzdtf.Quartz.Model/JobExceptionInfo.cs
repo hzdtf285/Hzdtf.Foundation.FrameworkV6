@@ -113,7 +113,7 @@ namespace Hzdtf.Quartz.Model
         {
             get;
             set;
-        } = DateTimeExtensions.CstNow();
+        } = DateTimeExtensions.Now;
 
         /// <summary>
         /// 异常

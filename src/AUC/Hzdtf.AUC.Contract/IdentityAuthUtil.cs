@@ -71,8 +71,8 @@ namespace Hzdtf.AUC.Contract
             claims.Add(ClaimTypes.Name, user.Name);
             claims.Add("code", user.Code);
             claims.Add("loginId", user.LoginId);
-            claims.Add("loginTime", DateTimeExtensions.CstNow().ToFullFixedDateTime());
-            claims.Add("merchantId", user.MerchantID.ToString());
+            claims.Add("loginTime", DateTimeExtensions.Now.ToFullFixedDateTime());
+            claims.Add("teantId", user.TeantId.ToString());
 
             authUserData.SetExtraToClaimsData(claims, user);
 
@@ -101,7 +101,7 @@ namespace Hzdtf.AUC.Contract
             user.Name = claims.Get(ClaimTypes.Name);
             user.Code = claims.Get("code");
             user.LoginId = claims.Get("loginId");
-            user.MerchantID = identity.ConvertTo(claims.Get("merchantId"));
+            user.TeantId = identity.ConvertTo(claims.Get("teantId"));
 
             var loginTimeStr = claims.Get("loginTime");
             if (!string.IsNullOrWhiteSpace(loginTimeStr))
@@ -109,7 +109,7 @@ namespace Hzdtf.AUC.Contract
                 DateTime loginTime;
                 if (DateTime.TryParse(loginTimeStr, out loginTime))
                 {
-                    user.LogonDateTime = loginTime;
+                    user.LoginTime = loginTime;
                 }
             }
 

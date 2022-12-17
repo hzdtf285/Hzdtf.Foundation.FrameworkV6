@@ -103,6 +103,6 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         /// <param name="comData">通用数据</param>
         /// <returns>申请单号</returns>
         protected virtual string BuilderApplyNo<FormT>(FlowInitInfo<FormT> flowInit, ReturnInfo<WorkflowBasicInfo> returnInfo, CommonUseData comData = null)
-            where FormT : PersonTimeInfo<int> => DateTimeExtensions.CstNow().ToLongDateTimeNumString();
+            where FormT : PersonTimeInfo<int> => DateTimeExtensions.Now.ToLongDateTimeNumString();
     }
 }

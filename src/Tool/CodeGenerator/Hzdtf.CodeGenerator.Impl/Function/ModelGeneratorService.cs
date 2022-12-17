@@ -72,7 +72,7 @@ namespace Hzdtf.CodeGenerator.Impl.Function
         /// </summary>
         private static readonly string[] IGNORE_PROP_NAMES = new string[]
         {
-            "Id", "MerchantID", "CreateDateTime", "ModifyDateTime", "CreaterID", "Creater", "ModifierID", "Modifier"
+            "Id", "TeantId", "CreateTime", "ModifyTime", "CreaterId", "Creater", "ModifierId", "Modifier"
         };
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Hzdtf.CodeGenerator.Impl.Function
         /// </summary>
         private static readonly string[] USER_IGNORE_PROP_NAMES = new string[]
         {
-            "LoginID", "MerchantID", "LogonPass", "LogonDateTime", "LogonClientIP", "Logins", "LogoutTime", "Code", "Name", "Enabled", "SystemInlay"
+            "LoginId", "TeantId", "Password", "LoginTime", "LoginClientIP", "Logins", "LogoutTime", "Code", "Name", "Enabled", "SystemInlay"
         };
 
         /// <summary>
@@ -102,9 +102,9 @@ namespace Hzdtf.CodeGenerator.Impl.Function
                 ;
             }
             string parentClass = null;
-            if (codeParam.IsMerchant)
+            if (codeParam.IsTeant)
             {
-                parentClass = "UserInfo".Equals(name) ? "BasicUserInfo" : "PersonTimeMerchantInfo";
+                parentClass = "UserInfo".Equals(name) ? "BasicUserInfo" : "PersonTimeTeantInfo";
             }
             else
             {

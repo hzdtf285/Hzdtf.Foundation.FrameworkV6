@@ -18,15 +18,15 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 创建人ID_名称
         /// </summary>
-        public const string CreaterID_Name = "CreaterID";
+        public const string CreaterId_Name = "CreaterId";
 
         /// <summary>
         /// 创建人ID
         /// </summary>
-        [JsonProperty("createrID")]
+        [JsonProperty("createrId")]
         [Display(AutoGenerateField = false)]
-        [MessagePack.Key("createrID")]
-        public IdT CreaterID
+        [MessagePack.Key("createrId")]
+        public IdT CreaterId
         {
             get;
             set;
@@ -35,17 +35,17 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 创建人ID字符串_名称
         /// </summary>
-        public const string CreaterIDString_Name = "CreaterIDString";
+        public const string CreaterIdString_Name = "CreaterIdString";
 
         /// <summary>
         /// 创建人ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
         /// </summary>
-        [JsonProperty("createrIDString")]
+        [JsonProperty("createrIdString")]
         [Display(AutoGenerateField = false)]
-        [MessagePack.Key("createrIDString")]
-        public string CreaterIDString
+        [MessagePack.Key("createrIdString")]
+        public string CreaterIdString
         {
-            get => CreaterID.ToString();
+            get => CreaterId.ToString();
         }
 
         /// <summary>
@@ -68,15 +68,15 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 修改人ID_名称
         /// </summary>
-        public const string ModifierId_Name = "ModifierID";
+        public const string ModifierId_Name = "ModifierId";
 
         /// <summary>
         /// 修改人ID
         /// </summary>
-        [JsonProperty("modifierID")]
+        [JsonProperty("modifierId")]
         [Display(AutoGenerateField = false)]
-        [MessagePack.Key("modifierID")]
-        public IdT ModifierID
+        [MessagePack.Key("modifierId")]
+        public IdT ModifierId
         {
             get;
             set;
@@ -85,17 +85,17 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 修改人ID字符串_名称
         /// </summary>
-        public const string ModifierIDString_Name = "ModifierIDString";
+        public const string ModifierIdString_Name = "ModifierIdString";
 
         /// <summary>
         /// 修改人ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
         /// </summary>
-        [JsonProperty("modifierIDString")]
+        [JsonProperty("modifierIdString")]
         [Display(AutoGenerateField = false)]
-        [MessagePack.Key("modifierIDString")]
-        public string ModifierIDString
+        [MessagePack.Key("modifierIdString")]
+        public string ModifierIdString
         {
-            get => ModifierID.ToString();
+            get => ModifierId.ToString();
         }
 
         /// <summary>
@@ -126,42 +126,42 @@ namespace Hzdtf.Utility.Model
     }
 
     /// <summary>
-    /// 带有人时间商户信息
+    /// 带有人时间租赁信息
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
-    public class PersonTimeMerchantInfo<IdT> : PersonTimeInfo<IdT>
+    public class PersonTimeTeantInfo<IdT> : PersonTimeInfo<IdT>
     {
         /// <summary>
-        /// 商户ID_名称
+        /// 租赁ID_名称
         /// </summary>
-        public const string MerchantID_Name = "MerchantID";
+        public const string TeantId_Name = "TeantId";
 
         /// <summary>
-        /// 商户ID
+        /// 租赁ID
         /// </summary>
-        [JsonProperty("merchantID")]
-        [Display(Name = "商户ID", Order = 10, AutoGenerateField = false)]
-        [MessagePack.Key("merchantID")]
-        public IdT MerchantID
+        [JsonProperty("teantId")]
+        [Display(Name = "租赁ID", Order = 10, AutoGenerateField = false)]
+        [MessagePack.Key("teantId")]
+        public IdT TeantId
         {
             get;
             set;
         }
 
         /// <summary>
-        /// 商户ID字符串_名称
+        /// 租赁ID字符串_名称
         /// </summary>
-        public const string MerchantIDString_Name = "MerchantIDString";
+        public const string TeantIdString_Name = "TeantIdString";
 
         /// <summary>
-        /// 商户ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
+        /// 租赁ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
         /// </summary>
-        [JsonProperty("merchantIDString")]
+        [JsonProperty("teantIdString")]
         [Display(AutoGenerateField = false)]
-        [MessagePack.Key("merchantIDString")]
-        public string MerchantIdString
+        [MessagePack.Key("teantIdString")]
+        public string TeantIdString
         {
-            get => MerchantID.ToString();
+            get => TeantId.ToString();
         }
     }
 
@@ -185,9 +185,9 @@ namespace Hzdtf.Utility.Model
                 return;
             }
 
-            model.CreaterID = model.ModifierID = user.Id;
+            model.CreaterId = model.ModifierId = user.Id;
             model.Creater = model.Modifier = user.Name;
-            model.CreateDateTime = model.ModifyDateTime = DateTimeExtensions.CstNow();
+            model.CreateTime = model.ModifyTime = DateTimeExtensions.Now;
         }
 
         /// <summary>
@@ -204,9 +204,9 @@ namespace Hzdtf.Utility.Model
                 return;
             }
 
-            model.ModifierID = user.Id;
+            model.ModifierId = user.Id;
             model.Modifier = user.Name;
-            model.ModifyDateTime = DateTimeExtensions.CstNow();
+            model.ModifyTime = DateTimeExtensions.Now;
         }
     }
 }

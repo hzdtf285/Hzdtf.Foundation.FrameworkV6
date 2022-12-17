@@ -202,7 +202,7 @@ namespace System
         /// 获取本月第1天日期
         /// </summary>
         /// <returns>本月第1天日期</returns>
-        public static DateTime ThisMonthFristDay() => DateTimeExtensions.CstNow().MonthFristDay();
+        public static DateTime ThisMonthFristDay() => DateTimeExtensions.Now.MonthFristDay();
 
         /// <summary>
         /// 获取指定日期的月份第1天日期
@@ -217,7 +217,7 @@ namespace System
         /// 获取本月最后1天日期
         /// </summary>
         /// <returns>本月最后1天日期</returns>
-        public static DateTime ThisMonthLastDay() => DateTimeExtensions.CstNow().MonthLastDay();
+        public static DateTime ThisMonthLastDay() => DateTimeExtensions.Now.MonthLastDay();
 
         /// <summary>
         /// 获取指定日期的月份最后1天日期
@@ -246,7 +246,7 @@ namespace System
         /// 获取指定日期的当前季度最后1天日期
         /// </summary>
         /// <returns>当前日期的季度最后1天日期</returns>
-        public static DateTime CurrQuarterLastDay() => DateTimeExtensions.CstNow().QuarterLastDay();
+        public static DateTime CurrQuarterLastDay() => DateTimeExtensions.Now.QuarterLastDay();
 
         /// <summary>
         /// 获取指定日期的季度最后1天日期
@@ -275,7 +275,7 @@ namespace System
         /// 获取当前日期的季度第1天日期
         /// </summary>
         /// <returns>当前日期的季度第1天日期</returns>
-        public static DateTime QuarterFirstDay() => DateTimeExtensions.CstNow().QuarterFirstDay();
+        public static DateTime QuarterFirstDay() => DateTimeExtensions.Now.QuarterFirstDay();
 
         /// <summary>
         /// 获取指定日期的季度第1天日期
@@ -304,7 +304,7 @@ namespace System
         /// 获取当前季度，从0开始
         /// </summary>
         /// <returns>当前季度</returns>
-        public static byte GetCurrQuarter() => DateTimeExtensions.CstNow().GetQuarter();
+        public static byte GetCurrQuarter() => DateTimeExtensions.Now.GetQuarter();
 
         /// <summary>
         /// 获取季度，从0开始
@@ -336,7 +336,7 @@ namespace System
         /// 普通闰年：能被4整除但不能被100整除
         /// </summary>
         /// <returns>当前日期是否为普通闰年</returns>
-        public static bool IsOrdinaryLeapYear() => DateTimeExtensions.CstNow().Year.IsOrdinaryLeapYear();
+        public static bool IsOrdinaryLeapYear() => DateTimeExtensions.Now.Year.IsOrdinaryLeapYear();
 
         /// <summary>
         /// 判断日期是否为普通闰年
@@ -363,7 +363,7 @@ namespace System
         /// 世纪闰年：能被400整除
         /// </summary>
         /// <returns>当前日期是否为世纪闰年</returns>
-        public static bool IsCenturyLeapYear() => DateTimeExtensions.CstNow().Year.IsCenturyLeapYear();
+        public static bool IsCenturyLeapYear() => DateTimeExtensions.Now.Year.IsCenturyLeapYear();
 
         /// <summary>
         /// 判断日期是否为世纪闰年
@@ -390,7 +390,7 @@ namespace System
         /// 闰年：能被4整除但不能被100整除或能被400整除
         /// </summary>
         /// <returns>当前日期是否为闰年</returns>
-        public static bool IsLeapYear() => DateTimeExtensions.CstNow().Year.IsLeapYear();
+        public static bool IsLeapYear() => DateTimeExtensions.Now.Year.IsLeapYear();
 
         /// <summary>
         /// 判断日期是否为闰年
@@ -414,7 +414,7 @@ namespace System
         /// 获取当前日期的所在的月份的天数
         /// </summary>
         /// <returns>当前日期的所在的月份的天数</returns>
-        public static int PlaceMonthOfDay() => DateTimeExtensions.CstNow().PlaceMonthOfDay();
+        public static int PlaceMonthOfDay() => DateTimeExtensions.Now.PlaceMonthOfDay();
 
         /// <summary>
         /// 获取日期的所在的月份的天数
@@ -496,7 +496,7 @@ namespace System
         /// 当前年的第一天
         /// </summary>
         /// <returns>当前年的第一天</returns>
-        public static DateTime FristDay() => DateTimeExtensions.CstNow().FristDay();
+        public static DateTime FristDay() => DateTimeExtensions.Now.FristDay();
 
         /// <summary>
         /// 指定日期的年的第一天
@@ -504,14 +504,14 @@ namespace System
         /// <returns>年的第一天</returns>
         public static DateTime FristDay(this DateTime dateTime)
         {
-            return new DateTime(DateTimeExtensions.CstNow().Year, 1, 1, 0, 0, 0, DateTimeKind.Local);
+            return new DateTime(DateTimeExtensions.Now.Year, 1, 1, 0, 0, 0, DateTimeKind.Local);
         }
 
         /// <summary>
         /// 当前年的最后一天
         /// </summary>
         /// <returns>当前年的最后一天</returns>
-        public static DateTime LastDay() => DateTimeExtensions.CstNow().LastDay();
+        public static DateTime LastDay() => DateTimeExtensions.Now.LastDay();
 
         /// <summary>
         /// 指定日期的年的最后一天
@@ -527,7 +527,7 @@ namespace System
         /// 将当前日期时间转换为长数字字符串
         /// </summary>
         /// <returns>长数字字符串</returns>
-        public static string ToLongDateTimeNumString() => DateTimeExtensions.CstNow().ToLongDateTimeNumString();
+        public static string ToLongDateTimeNumString() => DateTimeExtensions.Now.ToLongDateTimeNumString();
 
         /// <summary>
         /// 将日期时间转换为长数字字符串
@@ -785,13 +785,16 @@ namespace System
         /// 获取CST当前日期时间（统一的日期时间，默认为上海时区）
         /// </summary>
         /// <returns>CST当前日期时间</returns>
-        public static DateTime CstNow()
+        public static DateTime Now
         {
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            get
             {
-                return DateTime.Now;
+                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {
+                    return DateTime.Now;
+                }
+                return SystemClock.Instance.GetCurrentInstant().GetCstDateTime();
             }
-            return SystemClock.Instance.GetCurrentInstant().GetCstDateTime();
         }
 
         /// <summary>

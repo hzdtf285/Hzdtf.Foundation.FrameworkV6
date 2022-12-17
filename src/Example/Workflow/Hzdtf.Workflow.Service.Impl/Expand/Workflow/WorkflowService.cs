@@ -299,7 +299,7 @@ namespace Hzdtf.Workflow.Service.Impl
             }
 
             var user = UserTool<int>.GetCurrUser(comData);
-            if (returnInfo.Data.CreaterID != user.Id)
+            if (returnInfo.Data.CreaterId != user.Id)
             {
                 returnInfo.SetFailureMsg("此工作流不是您申请的，无权限查看");
 

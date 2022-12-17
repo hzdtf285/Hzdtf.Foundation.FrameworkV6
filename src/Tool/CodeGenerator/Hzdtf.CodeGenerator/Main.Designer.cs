@@ -383,7 +383,7 @@ namespace Hzdtf.CodeGenerator
             this.cbxTenant.Name = "cbxTenant";
             this.cbxTenant.Size = new System.Drawing.Size(75, 21);
             this.cbxTenant.TabIndex = 23;
-            this.cbxTenant.Text = "是否商户";
+            this.cbxTenant.Text = "是否租赁";
             this.cbxTenant.UseVisualStyleBackColor = true;
             // 
             // cbxPkType

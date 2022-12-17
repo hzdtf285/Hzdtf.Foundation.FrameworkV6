@@ -16,6 +16,6 @@ namespace Hzdtf.Utility.SystemV2
         /// <summary>
         /// UTC当前时间
         /// </summary>
-        public DateTimeOffset UtcNow => DateTimeExtensions.CstNow();
+        public DateTimeOffset UtcNow => DateTimeExtensions.Now;
     }
 }

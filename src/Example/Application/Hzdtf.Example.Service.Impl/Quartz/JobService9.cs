@@ -21,7 +21,7 @@ namespace Hzdtf.Example.Service.Impl.Quartz
         /// <param name="transId">事务ID</param>
         public override void ExecBusinessHandle(IJobExecutionContext context, long transId)
         {
-            Console.WriteLine($"{DateTimeExtensions.CstNow().ToFullFixedDateTime()}.JobService9");
+            Console.WriteLine($"{DateTimeExtensions.Now.ToFullFixedDateTime()}.JobService9");
         }
     }
 }

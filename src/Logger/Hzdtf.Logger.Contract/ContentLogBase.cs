@@ -76,7 +76,7 @@ namespace Hzdtf.Logger.Contract
             }
 
             return string.Format("时间:{0}{1}级别:{2}{1}来源:{6}{1}消息:{3}{4}{5}{7}",
-                DateTimeExtensions.CstNow().ToString("yyyy-MM-dd HH:mm:ss.fff"),
+                DateTimeExtensions.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"),
                 SectionPartitionSymbol(),
                 level,
                 msg,

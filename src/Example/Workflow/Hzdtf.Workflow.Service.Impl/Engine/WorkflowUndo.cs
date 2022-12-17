@@ -25,7 +25,7 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
         protected override void Vali(ReturnInfo<bool> returnInfo, WorkflowInfo workflow, CommonUseData comData = null)
         {
             var user = UserTool<int>.GetCurrUser(comData);
-            if (workflow.CreaterID != user.Id)
+            if (workflow.CreaterId != user.Id)
             {
                 returnInfo.SetFailureMsg("Sorry，您不是此流程的发起者，故不能撤消");
 

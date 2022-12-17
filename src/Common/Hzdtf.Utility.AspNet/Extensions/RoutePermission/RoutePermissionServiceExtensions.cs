@@ -1,7 +1,7 @@
 ﻿using Hzdtf.Utility.AspNet.Extensions.RoutePermission;
 using Hzdtf.Utility.RoutePermission;
 using Hzdtf.Utility.UserPermission;
-using Hzdtf.Utility.UserPermission.Merchant;
+using Hzdtf.Utility.UserPermission.Teant;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -65,20 +65,20 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         /// <summary>
-        /// 添加商户用户路由权限服务
+        /// 添加租赁用户路由权限服务
         /// </summary>
         /// <typeparam name="IdT">ID类型</typeparam>
-        /// <typeparam name="MerchantUserPermissionImplT">商户用户权限实现类型</typeparam>
+        /// <typeparam name="TeantUserPermissionImplT">租赁用户权限实现类型</typeparam>
         /// <param name="services">服务收藏</param>
         /// <param name="options">路由权限选项配置</param>
         /// <returns>服务收藏</returns>
-        public static IServiceCollection AddMerchantUserRoutePermission<IdT, MerchantUserPermissionImplT>(this IServiceCollection services, Action<RoutePermissionOptions> options = null)
-            where MerchantUserPermissionImplT : class, IMerchantUserMenuReader<IdT>
+        public static IServiceCollection AddTeantUserRoutePermission<IdT, TeantUserPermissionImplT>(this IServiceCollection services, Action<RoutePermissionOptions> options = null)
+            where TeantUserPermissionImplT : class, ITeantUserMenuReader<IdT>
         {
             services.AddRoutePermission(options);
 
-            services.AddSingleton<IMerchantUserMenuPermission<IdT>, MerchantUserMenuLocalCache<IdT>>();
-            services.AddSingleton<IMerchantUserMenuReader<IdT>, MerchantUserPermissionImplT>();
+            services.AddSingleton<ITeantUserMenuPermission<IdT>, TeantUserMenuLocalCache<IdT>>();
+            services.AddSingleton<ITeantUserMenuReader<IdT>, TeantUserPermissionImplT>();
 
             return services;
         }

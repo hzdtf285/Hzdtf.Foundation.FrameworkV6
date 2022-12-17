@@ -304,14 +304,14 @@ namespace Hzdtf.Workflow.Service.Impl.Engine.Diversion
                         Idea = idea,
                         IsReaded = true,
                         HandleType = HandleTypeEnum.APPLY,
-                        HandleTime = DateTimeExtensions.CstNow()
+                        HandleTime = DateTimeExtensions.Now
                     }
                 },
                 FlowCensorship = applyFlowCensors
             };
             if (findFlowCensorshipIn.ActionType == ActionType.SEND)
             {
-                applyConsors.WorkflowHandles[0].HandleTime = DateTimeExtensions.CstNow();
+                applyConsors.WorkflowHandles[0].HandleTime = DateTimeExtensions.Now;
             }
 
             applyConsors.WorkflowHandles[0].SetCreateInfo(currUser);
@@ -348,7 +348,7 @@ namespace Hzdtf.Workflow.Service.Impl.Engine.Diversion
                 return;
             }
 
-            findFlowCensorshipIn.CurrWorkflowHandle.HandleTime = DateTimeExtensions.CstNow();
+            findFlowCensorshipIn.CurrWorkflowHandle.HandleTime = DateTimeExtensions.Now;
 
             returnInfo.Data.CurrConcreteCensorship = new ConcreteCensorshipInfo()
             {
@@ -415,7 +415,7 @@ namespace Hzdtf.Workflow.Service.Impl.Engine.Diversion
                                     ConcreteConcreteId = applyStandCensors.Id,
                                     FlowCensorshipId = applyFlowCensors.Id,
                                     Handler = findFlowCensorshipIn.Workflow.Creater,
-                                    HandlerId = findFlowCensorshipIn.Workflow.CreaterID,
+                                    HandlerId = findFlowCensorshipIn.Workflow.CreaterId,
                                     HandleStatus = HandleStatusEnum.UN_HANDLE,
                                     HandleType = HandleTypeEnum.NOTIFY
                                 }
@@ -495,7 +495,7 @@ namespace Hzdtf.Workflow.Service.Impl.Engine.Diversion
                                     ConcreteConcreteId = applyStandCensors.Id,
                                     FlowCensorshipId = applyFlowCensors.Id,
                                     Handler = findFlowCensorshipIn.Workflow.Creater,
-                                    HandlerId = findFlowCensorshipIn.Workflow.CreaterID,
+                                    HandlerId = findFlowCensorshipIn.Workflow.CreaterId,
                                     HandleStatus = HandleStatusEnum.UN_HANDLE,
                                     HandleType = HandleTypeEnum.NOTIFY
                                 }

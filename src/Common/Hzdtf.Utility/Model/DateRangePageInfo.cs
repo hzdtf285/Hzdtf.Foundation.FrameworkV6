@@ -22,7 +22,7 @@ namespace Hzdtf.Utility.Model
         {
             get;
             set;
-        } = DateTimeExtensions.CstNow().AddMonths(-1);
+        } = DateTimeExtensions.Now.AddMonths(-1);
 
         /// <summary>
         /// 结束日期
@@ -33,6 +33,6 @@ namespace Hzdtf.Utility.Model
         {
             get;
             set;
-        } = DateTimeExtensions.CstNow();
+        } = DateTimeExtensions.Now;
     }
 }

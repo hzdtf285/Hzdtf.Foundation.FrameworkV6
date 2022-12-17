@@ -41,18 +41,18 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 密码_名称
         /// </summary>
-        public const string LogonPass_Name = "LogonPass";
+        public const string Password_Name = "Password";
 
         /// <summary>
         /// 密码
         /// </summary>
-        [JsonProperty("logonPass")]
+        [JsonProperty("password")]
         [DisplayName("密码")]
         [Required]
         [MaxLength(20)]
         [Display(Name = "密码", Order = 2, AutoGenerateField = false)]
-        [MessagePack.Key("logonPass")]
-        public string LogonPass
+        [MessagePack.Key("password")]
+        public string Password
         {
             get;
             set;
@@ -97,16 +97,16 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 登录时间_名称
         /// </summary>
-        public const string LogonDateTime_Name = "LogonDateTime";
+        public const string LoginTime_Name = "LoginTime";
 
         /// <summary>
         /// 登录时间
         /// </summary>
-        [JsonProperty("logonDateTime")]
+        [JsonProperty("loginTime")]
         [DisplayValueConvert(typeof(DateTimeValueToTextConvert))]
         [Display(Name = "登录时间", Order = 5, AutoGenerateField = false)]
-        [MessagePack.Key("logonDateTime")]
-        public DateTime? LogonDateTime
+        [MessagePack.Key("loginTime")]
+        public DateTime? LoginTime
         {
             get;
             set;
@@ -115,18 +115,18 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 登录IP_名称
         /// </summary>
-        public const string LogonClientIP_Name = "LogonClientIP";
+        public const string LoginClientIP_Name = "LoginClientIP";
 
         /// <summary>
         /// 登录IP
         /// </summary>
-        [JsonProperty("logonClientIP")]
-        [MessagePack.Key("logonClientIP")]
+        [JsonProperty("loginClientIP")]
+        [MessagePack.Key("loginClientIP")]
         [MaxLength(15)]
 
         [DisplayName("登录IP")]
         [Display(Name = "登录IP", Order = 6, AutoGenerateField = true)]
-        public string LogonClientIP
+        public string LoginClientIP
         {
             get;
             set;
@@ -169,38 +169,38 @@ namespace Hzdtf.Utility.Model
         }
 
         /// <summary>
-        /// 商户ID_名称
-        /// 一般情况没有，特殊情况下有用，如SAAS中的商户
+        /// 租赁ID_名称
+        /// 一般情况没有，特殊情况下有用，如SAAS中的租赁
         /// </summary>
-        public const string MerchantId_Name = "merchantID";
+        public const string TeantId_Name = "teantId";
 
         /// <summary>
-        /// 商户ID
-        /// 一般情况没有，特殊情况下有用，如SAAS中的商户
+        /// 租赁ID
+        /// 一般情况没有，特殊情况下有用，如SAAS中的租赁
         /// </summary>
-        [JsonProperty("merchantID")]
-        [Display(Name = "商户ID", Order = 999, AutoGenerateField = false)]
-        [MessagePack.Key("merchantID")]
-        public IdT MerchantID
+        [JsonProperty("teantId")]
+        [Display(Name = "租赁ID", Order = 999, AutoGenerateField = false)]
+        [MessagePack.Key("teantId")]
+        public IdT TeantId
         {
             get;
             set;
         }
 
         /// <summary>
-        /// 商户ID字符串_名称
+        /// 租赁ID字符串_名称
         /// </summary>
-        public const string MerchantIdString_Name = "MerchantIDString";
+        public const string TeantIdString_Name = "TeantIdString";
 
         /// <summary>
-        /// 商户ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
+        /// 租赁ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
         /// </summary>
-        [JsonProperty("merchantIDString")]
+        [JsonProperty("teantIdString")]
         [Display(AutoGenerateField = false)]
-        [MessagePack.Key("merchantIDString")]
-        public string MerchantIDString
+        [MessagePack.Key("teantIdString")]
+        public string TeantIdString
         {
-            get => MerchantID.ToString();
+            get => TeantId.ToString();
         }
     }
 

@@ -22,7 +22,7 @@ namespace Hzdtf.Example.Service.Impl.Quartz
         public override void ExecBusinessHandle(IJobExecutionContext context, long transId)
         {
             //throw new Exception("测试异常");
-            Console.WriteLine($"{DateTimeExtensions.CstNow().ToFullFixedDateTime()}.JobService1");
+            Console.WriteLine($"{DateTimeExtensions.Now.ToFullFixedDateTime()}.JobService1");
         }
     }
 }

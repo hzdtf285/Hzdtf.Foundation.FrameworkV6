@@ -225,7 +225,7 @@ namespace Hzdtf.Workflow.Service.Impl.Engine
                     return;
                 }
 
-                if (reInfo.Data.CreaterID != user.Id)
+                if (reInfo.Data.CreaterId != user.Id)
                 {
                     returnInfo.SetFailureMsg($"Sorry，此流程不是您创建的，无权限操作");
 

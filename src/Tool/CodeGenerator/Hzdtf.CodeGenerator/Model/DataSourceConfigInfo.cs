@@ -76,7 +76,7 @@ namespace Hzdtf.CodeGenerator.Model
             public string PkType { get; set; }
 
             /// <summary>
-            /// 是否商户
+            /// 是否租赁
             /// </summary>
             public bool IsTenant { get; set; }
         }

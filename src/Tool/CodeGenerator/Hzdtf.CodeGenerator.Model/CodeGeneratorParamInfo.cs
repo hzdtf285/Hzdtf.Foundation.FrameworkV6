@@ -47,9 +47,9 @@ namespace Hzdtf.CodeGenerator.Model
         } = PrimaryKeyType.INT;
 
         /// <summary>
-        /// 是否商户
+        /// 是否租赁
         /// </summary>
-        public bool IsMerchant
+        public bool IsTeant
         {
             get;
             set;

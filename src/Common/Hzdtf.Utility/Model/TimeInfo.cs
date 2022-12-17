@@ -18,15 +18,15 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 创建时间_名称
         /// </summary>
-        public const string CreateDateTime_Name = "CreateDateTime";
+        public const string CreateTime_Name = "CreateTime";
 
         /// <summary>
         /// 创建时间
         /// </summary>
-        [JsonProperty("createDateTime")]
+        [JsonProperty("createTime")]
         [Display(AutoGenerateField = false)]
-        [MessagePack.Key("createDateTime")]
-        public DateTime CreateDateTime
+        [MessagePack.Key("createTime")]
+        public DateTime CreateTime
         {
             get;
             set;
@@ -35,15 +35,15 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 修改时间_名称
         /// </summary>
-        public const string ModifyDateTime_Name = "ModifyDateTime";
+        public const string ModifyTime_Name = "ModifyTime";
 
         /// <summary>
         /// 修改时间
         /// </summary>
-        [JsonProperty("modifyDateTime")]
+        [JsonProperty("modifyTime")]
         [Display(AutoGenerateField = false)]
-        [MessagePack.Key("modifyDateTime")]
-        public DateTime ModifyDateTime
+        [MessagePack.Key("modifyTime")]
+        public DateTime ModifyTime
         {
             get;
             set;

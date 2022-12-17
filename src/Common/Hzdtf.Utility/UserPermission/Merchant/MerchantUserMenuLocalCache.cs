@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 using Hzdtf.Utility.Utils;
 using System.Collections.Concurrent;
 
-namespace Hzdtf.Utility.UserPermission.Merchant
+namespace Hzdtf.Utility.UserPermission.Teant
 {
     /// <summary>
-    /// 商户用户菜单本地缓存
+    /// 租赁用户菜单本地缓存
     /// @ 黄振东
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
     [Inject]
-    public class MerchantUserMenuLocalCache<IdT> : SingleTypeLocalMemoryBase<string, IDictionary<string, string[]>>, IMerchantUserMenuPermissionCache<IdT>, IMerchantUserMenuPermission<IdT>
+    public class TeantUserMenuLocalCache<IdT> : SingleTypeLocalMemoryBase<string, IDictionary<string, string[]>>, ITeantUserMenuPermissionCache<IdT>, ITeantUserMenuPermission<IdT>
     {
         /// <summary>
         /// 字典缓存
@@ -31,32 +31,32 @@ namespace Hzdtf.Utility.UserPermission.Merchant
         private static readonly IDictionary<string, DateTime> dicLastAccessTime = new ConcurrentDictionary<string, DateTime>();
 
         /// <summary>
-        /// 商户用户菜单读取
+        /// 租赁用户菜单读取
         /// </summary>
-        protected readonly IMerchantUserMenuReader<IdT> merchantIdUserMenuReader;
+        protected readonly ITeantUserMenuReader<IdT> teantIdUserMenuReader;
 
         /// <summary>
         /// 构造方法
         /// </summary>
-        /// <param name="merchantIdUserMenuReader">商户用户菜单读取</param>
-        public MerchantUserMenuLocalCache(IMerchantUserMenuReader<IdT> merchantIdUserMenuReader = null)
+        /// <param name="teantIdUserMenuReader">租赁用户菜单读取</param>
+        public TeantUserMenuLocalCache(ITeantUserMenuReader<IdT> teantIdUserMenuReader = null)
         {
-            this.merchantIdUserMenuReader = merchantIdUserMenuReader;
+            this.teantIdUserMenuReader = teantIdUserMenuReader;
         }
 
         /// <summary>
         /// 用户是否拥有权限
         /// </summary>
-        /// <param name="merchantId">商户ID</param>
+        /// <param name="teantId">租赁ID</param>
         /// <param name="userId">用户ID</param>
         /// <param name="menuCode">菜单编码</param>
         /// <param name="funCodes">功能编码数组</param>
         /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public ReturnInfo<bool> UserHavePermission(IdT merchantId, IdT userId, string menuCode, string[] funCodes, CommonUseData comData = null)
+        public ReturnInfo<bool> UserHavePermission(IdT teantId, IdT userId, string menuCode, string[] funCodes, CommonUseData comData = null)
         {
             var re = new ReturnInfo<bool>();
-            var reUserMenuFunCodes = GetHavePermissionMenuFunCodes(merchantId, userId, comData);
+            var reUserMenuFunCodes = GetHavePermissionMenuFunCodes(teantId, userId, comData);
             if (reUserMenuFunCodes.Failure() || reUserMenuFunCodes.Data.IsNullOrCount0())
             {
                 re.FromBasic(reUserMenuFunCodes);
@@ -87,18 +87,18 @@ namespace Hzdtf.Utility.UserPermission.Merchant
         /// <summary>
         /// 根据用户ID获取拥有权限的菜单功能编码字典
         /// </summary>
-        /// <param name="merchantId">商户ID</param>
+        /// <param name="teantId">租赁ID</param>
         /// <param name="userId">用户ID</param>
         /// <param name="comData">通用数据</param>
         /// <returns>返回信息 key：菜单编码，value：功能编码数组</returns>
-        public ReturnInfo<IDictionary<string, string[]>> GetHavePermissionMenuFunCodes(IdT merchantId, IdT userId, CommonUseData comData = null)
+        public ReturnInfo<IDictionary<string, string[]>> GetHavePermissionMenuFunCodes(IdT teantId, IdT userId, CommonUseData comData = null)
         {
             var re = new ReturnInfo<IDictionary<string, string[]>>();
-            var key = GetKey(merchantId, userId);
+            var key = GetKey(teantId, userId);
             re.Data = Get(key);
             if (re.Data == null)
             {
-                var reMenuFunCodes = merchantIdUserMenuReader.GetHavePermissionMenuFunCodes(merchantId, userId, comData);
+                var reMenuFunCodes = teantIdUserMenuReader.GetHavePermissionMenuFunCodes(teantId, userId, comData);
                 if (reMenuFunCodes.Failure())
                 {
                     re.FromBasic(reMenuFunCodes);
@@ -118,7 +118,7 @@ namespace Hzdtf.Utility.UserPermission.Merchant
             }
             else
             {
-                dicLastAccessTime[key] = DateTimeExtensions.CstNow();
+                dicLastAccessTime[key] = DateTimeExtensions.Now;
             }
 
             return re;
@@ -131,7 +131,7 @@ namespace Hzdtf.Utility.UserPermission.Merchant
         /// <returns>时间范围内没有访问的键数组</returns>
         public string[] GetWithTSNotAccessKeys(TimeSpan timeSpan)
         {
-            return dicLastAccessTime.Where(p => (DateTimeExtensions.CstNow() - p.Value) >= timeSpan).Select(p => p.Key).ToArray();
+            return dicLastAccessTime.Where(p => (DateTimeExtensions.Now - p.Value) >= timeSpan).Select(p => p.Key).ToArray();
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace Hzdtf.Utility.UserPermission.Merchant
             try
             {
                 dicCache.Add(key, value);
-                dicLastAccessTime.Add(key, DateTimeExtensions.CstNow());
+                dicLastAccessTime.Add(key, DateTimeExtensions.Now);
             }
             catch (ArgumentException) // 忽略添加相同的键异常，为了预防密集的线程过来
             {
@@ -178,17 +178,17 @@ namespace Hzdtf.Utility.UserPermission.Merchant
         /// <summary>
         /// 初始化缓存
         /// </summary>
-        /// <param name="merchantId">商户ID</param>
+        /// <param name="teantId">租赁ID</param>
         /// <param name="userId">用户ID</param>
         /// <param name="comData">通用数据</param>
         /// <returns>返回信息</returns>
-        public BasicReturnInfo InitCache(IdT merchantId, IdT userId, CommonUseData comData = null)
+        public BasicReturnInfo InitCache(IdT teantId, IdT userId, CommonUseData comData = null)
         {
-            var key = GetKey(merchantId, userId);
+            var key = GetKey(teantId, userId);
             var result = Get(key);
             if (result == null)
             {
-                var reMenuFunCodes = merchantIdUserMenuReader.GetHavePermissionMenuFunCodes(merchantId, userId, comData);
+                var reMenuFunCodes = teantIdUserMenuReader.GetHavePermissionMenuFunCodes(teantId, userId, comData);
                 if (reMenuFunCodes.Failure())
                 {
                     return reMenuFunCodes;
@@ -209,23 +209,23 @@ namespace Hzdtf.Utility.UserPermission.Merchant
         }
 
         /// <summary>
-        /// 根据商户ID和用户ID移除缓存
+        /// 根据租赁ID和用户ID移除缓存
         /// </summary>
-        /// <param name="merchantId">商户ID</param>
+        /// <param name="teantId">租赁ID</param>
         /// <param name="userId">用户ID</param>
         /// <returns>是否移除成功</returns>
-        public bool RemoveCache(IdT merchantId, IdT userId)
+        public bool RemoveCache(IdT teantId, IdT userId)
         {
-            return Remove(GetKey(merchantId, userId));
+            return Remove(GetKey(teantId, userId));
         }
 
         /// <summary>
-        /// 根据商户ID和用户ID移除缓存
+        /// 根据租赁ID和用户ID移除缓存
         /// </summary>
-        /// <param name="merchantId">商户ID</param>
+        /// <param name="teantId">租赁ID</param>
         /// <param name="userIds">用户ID数组</param>
         /// <returns>是否移除成功</returns>
-        public bool RemoveCache(IdT merchantId, IdT[] userIds)
+        public bool RemoveCache(IdT teantId, IdT[] userIds)
         {
             if (userIds.IsNullOrLength0())
             {
@@ -235,41 +235,41 @@ namespace Hzdtf.Utility.UserPermission.Merchant
             var keys = new string[userIds.Length];
             for (var i = 0; i < keys.Length; i++)
             {
-                keys[i] = GetKey(merchantId, userIds[i]);
+                keys[i] = GetKey(teantId, userIds[i]);
             }
 
             return Remove(keys);
         }
 
         /// <summary>
-        /// 根据商户ID和用户ID移除缓存
+        /// 根据租赁ID和用户ID移除缓存
         /// </summary>
-        /// <param name="merchantIdMapUserIds">商户ID映射用户ID，key：商户ID，value：用户ID</param>
+        /// <param name="teantIdMapUserIds">租赁ID映射用户ID，key：租赁ID，value：用户ID</param>
         /// <returns>是否移除成功</returns>
-        public bool RemoveCache(params KeyValueInfo<IdT, IdT>[] merchantIdMapUserIds)
+        public bool RemoveCache(params KeyValueInfo<IdT, IdT>[] teantIdMapUserIds)
         {
-            if (merchantIdMapUserIds.IsNullOrLength0())
+            if (teantIdMapUserIds.IsNullOrLength0())
             {
                 return false;
             }
 
-            var keys = new string[merchantIdMapUserIds.Length];
+            var keys = new string[teantIdMapUserIds.Length];
             for (var i = 0; i < keys.Length; i++)
             {
-                keys[i] = GetKey(merchantIdMapUserIds[i].Key, merchantIdMapUserIds[i].Value);
+                keys[i] = GetKey(teantIdMapUserIds[i].Key, teantIdMapUserIds[i].Value);
             }
 
             return Remove(keys);
         }
 
         /// <summary>
-        /// 根据商户ID清空缓存
+        /// 根据租赁ID清空缓存
         /// </summary>
-        /// <param name="merchantId">商户ID</param>
+        /// <param name="teantId">租赁ID</param>
         /// <returns>是否清空成功</returns>
-        public bool ClearCache(IdT merchantId)
+        public bool ClearCache(IdT teantId)
         {
-            var keys = dicCache.Where(p => p.Key.StartsWith($"{merchantId}.")).Select(p => p.Key).ToArray();
+            var keys = dicCache.Where(p => p.Key.StartsWith($"{teantId}.")).Select(p => p.Key).ToArray();
             return Remove(keys);
         }
 
@@ -344,9 +344,9 @@ namespace Hzdtf.Utility.UserPermission.Merchant
         /// <summary>
         /// 获取键
         /// </summary>
-        /// <param name="merchantId">商户ID</param>
+        /// <param name="teantId">租赁ID</param>
         /// <param name="userId">用户ID</param>
         /// <returns>键</returns>
-        private string GetKey(IdT merchantId, IdT userId) => $"{merchantId}.{userId}";
+        private string GetKey(IdT teantId, IdT userId) => $"{teantId}.{userId}";
     }
 }

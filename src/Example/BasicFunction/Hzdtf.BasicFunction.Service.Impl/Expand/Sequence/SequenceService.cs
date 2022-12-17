@@ -37,7 +37,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
         {
             return ExecReturnFuncAndConnectionId<string>((reInfo, connId) =>
             {
-                DateTime currTime = DateTimeExtensions.CstNow();
+                DateTime currTime = DateTimeExtensions.Now;
                 int incr = 0;
                 SequenceInfo sequenceInfo = persistence.SelectBySeqType(seqType, connId);
                 if (sequenceInfo == null)

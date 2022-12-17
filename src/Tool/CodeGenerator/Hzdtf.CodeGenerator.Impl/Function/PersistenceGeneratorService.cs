@@ -110,7 +110,7 @@ namespace Hzdtf.CodeGenerator.Impl.Function
         /// </summary>
         private static readonly string[] IGNORE_UPDATE_PROPS = new string[]
         {
-            "Id", "CreaterId", "Creater", "CreateDateTime"
+            "Id", "CreaterId", "Creater", "CreateTime"
         };
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Hzdtf.CodeGenerator.Impl.Function
 
                     if (!IGNORE_UPDATE_PROPS.Contains(propName))
                     {
-                        if (!(codeParam.IsMerchant && "MerchantID".Equals(propName)))
+                        if (!(codeParam.IsTeant && "TeantId".Equals(propName)))
                         {
                             updFiled.Append($"            \"{c.Name}\",");
                             if (i < table.Columns.Count - 1)

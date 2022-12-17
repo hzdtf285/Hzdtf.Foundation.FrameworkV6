@@ -153,7 +153,7 @@
         </member>
         <member name="P:Hzdtf.CodeGenerator.Model.DataSourceConfigInfo.Builderitem.IsTenant">
             <summary>
-            是否商户
+            是否租赁
             </summary>
         </member>
         <member name="M:Hzdtf.CodeGenerator.Program.Main">

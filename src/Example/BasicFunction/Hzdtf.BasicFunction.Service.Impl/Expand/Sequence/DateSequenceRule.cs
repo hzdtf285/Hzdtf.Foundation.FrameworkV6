@@ -25,7 +25,7 @@ namespace Hzdtf.BasicFunction.Service.Impl.Expand.Sequence
         /// <returns>序列号</returns>
         public string BuilderNo(string seqType, byte noLength, int increment, CommonUseData comData = null)
         {
-            string dateStr = DateTimeExtensions.CstNow().ToCompactFixedShortDate();
+            string dateStr = DateTimeExtensions.Now.ToCompactFixedShortDate();
             StringBuilder result = new StringBuilder($"{seqType}{dateStr}");
             int existsLength = result.Length;
             int length = noLength - existsLength - increment.ToString().Length;

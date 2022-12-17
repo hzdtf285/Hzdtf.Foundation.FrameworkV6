@@ -273,7 +273,7 @@ namespace Hzdtf.Quartz.MySql
                 }
                 else
                 {
-                    jobTask.CreateDateTime = jobTask.ModifyDateTime = DateTimeExtensions.CstNow();
+                    jobTask.CreateTime = jobTask.ModifyTime = DateTimeExtensions.Now;
                     result = Insert(jobTask, connectionId: connId);
                 }
             });

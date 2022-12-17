@@ -184,11 +184,11 @@ namespace Hzdtf.Quartz.Model
 
             InitCreateTime();
             InitModifyTime();
-            if (filter.StartCreateTime != null && IsNeedFilter(ignoreFilterPropNames, "StartCreateTime") && CreateDateTime < filter.StartCreateTime)
+            if (filter.StartCreateTime != null && IsNeedFilter(ignoreFilterPropNames, "StartCreateTime") && CreateTime < filter.StartCreateTime)
             {
                 return false;
             }
-            if (filter.EndCreateTime != null && IsNeedFilter(ignoreFilterPropNames, "EndCreateTime") && CreateDateTime > filter.EndCreateTime)
+            if (filter.EndCreateTime != null && IsNeedFilter(ignoreFilterPropNames, "EndCreateTime") && CreateTime > filter.EndCreateTime)
             {
                 return false;
             }
@@ -217,9 +217,9 @@ namespace Hzdtf.Quartz.Model
         /// </summary>
         public void InitCreateTime()
         {
-            if (CreateDateTime != DateTime.MinValue)
+            if (CreateTime != DateTime.MinValue)
             {
-                CreateDateTime = DateTimeExtensions.CstNow();
+                CreateTime = DateTimeExtensions.Now;
             }
         }
 
@@ -228,9 +228,9 @@ namespace Hzdtf.Quartz.Model
         /// </summary>
         public void InitModifyTime()
         {
-            if (ModifyDateTime != DateTime.MinValue)
+            if (ModifyTime != DateTime.MinValue)
             {
-                ModifyDateTime = DateTimeExtensions.CstNow();
+                ModifyTime = DateTimeExtensions.Now;
             }
         }
     }

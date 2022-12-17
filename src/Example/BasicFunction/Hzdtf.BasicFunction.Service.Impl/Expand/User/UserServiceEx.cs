@@ -87,7 +87,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                     return false;
                 }
 
-                user.LogonPass = MD5Util.Encryption16(currUserModifyPassword.NewPassword);
+                user.Password = MD5Util.Encryption16(currUserModifyPassword.NewPassword);
                 user.SetModifyInfo(UserTool<int>.GetCurrUser(comData));
 
                 bool result = persistence.UpdatePasswordById(user, connId) > 0;
@@ -114,7 +114,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                 UserInfo user = new UserInfo()
                 {
                     Id = modifyPassword.Id,
-                    LogonPass = MD5Util.Encryption16(modifyPassword.NewPassword)
+                    Password = MD5Util.Encryption16(modifyPassword.NewPassword)
                 };
                 user.SetModifyInfo(UserTool<int>.GetCurrUser(comData));
 
@@ -412,7 +412,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                     returnInfo.Data = result;
                     reInfo.SetSuccessMsg("登录成功");
 
-                    result.Memo = result.LogonPass = result.Modifier = result.Creater = null;
+                    result.Memo = result.Password = result.Modifier = result.Creater = null;
 
                     log.InfoAsync($"登录ID:{result.LoginId},用户编号:{result.Code},名称:{result.Name} 成功授权",
                         null, typeof(UserService).Name, eventId: comData.GetEventId());
@@ -452,7 +452,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
                     reInfo.SetFailureMsg("找不到该用户");
                     return null;
                 }
-                protoReturnInfo.Data.LogonPass = null;
+                protoReturnInfo.Data.Password = null;
 
                 // 查找该用户所属角色
                 ReturnInfo<IList<RoleInfo>> reRoleInfo = UserRoleService.OwnRolesByUserId(userId, connectionId: connId, comData: comData);
@@ -540,7 +540,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
 
                 if (returnInfo.Success())
                 {
-                    model.LogonPass = MD5Util.Encryption16(model.LogonPass);
+                    model.Password = MD5Util.Encryption16(model.Password);
                 }
             }
             catch (Exception ex)
@@ -567,7 +567,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
         {
             if (returnInfo.Success() && returnInfo.Data != null)
             {
-                returnInfo.Data.LogonPass = null;
+                returnInfo.Data.Password = null;
             }
         }
 

@@ -117,12 +117,12 @@ namespace Hzdtf.BasicFunction.Controller.Home
             {
                 if (IdentityAuth != null)
                 {
-                    var busRe = IdentityAuth.Accredit(loginInfo.LoginID, loginInfo.LogonPass, comData);
+                    var busRe = IdentityAuth.Accredit(loginInfo.LoginId, loginInfo.Password, comData);
                     reInfo.FromBasic(busRe);
                 }
                 else
                 {
-                    var busRe = IdentityBasicAuth.Accredit(loginInfo.LoginID, loginInfo.LogonPass, comData);
+                    var busRe = IdentityBasicAuth.Accredit(loginInfo.LoginId, loginInfo.Password, comData);
                     reInfo.FromBasic(busRe);
                 }
 
@@ -149,7 +149,7 @@ namespace Hzdtf.BasicFunction.Controller.Home
             var comData = HttpContext.CreateCommonUseData(ComDataFactory, menuCode: "Authorization", functionCodes: "LoginToToken");
             return ExecLogin(loginInfo, (user, pwd, reInfo) =>
             {
-                var busRe = IdentityTokenAuth.AccreditToToken(loginInfo.LoginID, loginInfo.LogonPass, comData);
+                var busRe = IdentityTokenAuth.AccreditToToken(loginInfo.LoginId, loginInfo.Password, comData);
                 reInfo.FromBasic(busRe);
                 if (reInfo.Success())
                 {
@@ -245,7 +245,7 @@ namespace Hzdtf.BasicFunction.Controller.Home
                 }
             }
 
-            callbackLogin(loginInfo.LoginID, loginInfo.LogonPass, returnInfo);
+            callbackLogin(loginInfo.LoginId, loginInfo.Password, returnInfo);
             if (returnInfo.Failure() || returnInfo.Data == null)
             {
                 HttpContext.Session.SetInt32("ErrLoginNum", num);

@@ -28,7 +28,7 @@ namespace Hzdtf.BasicFunction.MySql
         private readonly static string[] INSERT_FIELD_NAMES = new string[]
         {
             "id",
-            "merchant_id",
+            "teant_id",
             "name",
         };
 
@@ -46,7 +46,7 @@ namespace Hzdtf.BasicFunction.MySql
         private readonly static string[] FIELD_MAP_PROPS = new string[]
         {
             "id Id",
-            "merchant_id MerchantId",
+            "teant_id TeantId",
             "name Name",
         };
 
@@ -77,8 +77,8 @@ namespace Hzdtf.BasicFunction.MySql
 ﻿                case "id":
                     return model.Id;
 
-﻿                case "merchant_id":
-                    return model.MerchantID;
+﻿                case "teant_id":
+                    return model.TeantId;
 
 ﻿                case "name":
                     return model.Name;

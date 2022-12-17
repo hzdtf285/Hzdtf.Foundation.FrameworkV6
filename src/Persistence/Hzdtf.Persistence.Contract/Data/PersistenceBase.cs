@@ -19,7 +19,7 @@ namespace Hzdtf.Persistence.Contract.Data
 {
     /// <summary>
     /// 持久化基类
-    /// 如果可实例化的子类包含有MerchantId属性（字段），则默认代表中存在商户ID，本类对外提供所有的增/删/改/查操作都自动加上商户ID约束，同时取商户ID时，默认取当前用户的租房ID属性（则执行UserTool.GetCurrUser()方法）
+    /// 如果可实例化的子类包含有TeantId属性（字段），则默认代表中存在租赁ID，本类对外提供所有的增/删/改/查操作都自动加上租赁ID约束，同时取租赁ID时，默认取当前用户的租房ID属性（则执行UserTool.GetCurrUser()方法）
     /// @ 黄振东
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
@@ -939,34 +939,34 @@ namespace Hzdtf.Persistence.Contract.Data
         /// </summary>
         /// <param name="comData">通用数据</param>
         /// <returns>查询时是否需要追加租赁ID为过滤条件</returns>
-        protected virtual bool IsExistsMerchantId(CommonUseData comData = null)
+        protected virtual bool IsExistsTeantId(CommonUseData comData = null)
         {
-            return IsExistsMerchantId(out _, comData);
+            return IsExistsTeantId(out _, comData);
         }
 
         /// <summary>
         /// 是否存在租赁ID
         /// </summary>
-        /// <param name="currUserMerchantId">当前用户商户ID</param>
+        /// <param name="currUserTeantId">当前用户租赁ID</param>
         /// <param name="comData">通用数据</param>
         /// <returns>是否存在租赁ID</returns>
-        protected virtual bool IsExistsMerchantId(out IdT currUserMerchantId, CommonUseData comData = null)
+        protected virtual bool IsExistsTeantId(out IdT currUserTeantId, CommonUseData comData = null)
         {
-            currUserMerchantId = default(IdT);
+            currUserTeantId = default(IdT);
             return false; // 暂时返回false
 
-            if (ModelContainerMerchantId())
+            if (ModelContainerTeantId())
             {
                 var currUser = UserTool<IdT>.GetCurrUser(comData);
                 if (currUser == null)
                 {
                     return false;
                 }
-                if (identity.IsEmpty(currUser.MerchantID))
+                if (identity.IsEmpty(currUser.TeantId))
                 {
                     return false;
                 }
-                currUserMerchantId = currUser.MerchantID;
+                currUserTeantId = currUser.TeantId;
 
                 return true;
             }
@@ -975,50 +975,50 @@ namespace Hzdtf.Persistence.Contract.Data
         }
 
         /// <summary>
-        /// 模型是否包含商户ID
+        /// 模型是否包含租赁ID
         /// </summary>
-        /// <returns>模型是否包含商户ID</returns>
-        protected virtual bool ModelContainerMerchantId() => false;
+        /// <returns>模型是否包含租赁ID</returns>
+        protected virtual bool ModelContainerTeantId() => false;
 
         /// <summary>
-        /// 模型是否已设置商户ID
+        /// 模型是否已设置租赁ID
         /// </summary>
         /// <param name="model">模型</param>
-        /// <returns>模型是否已设置商户ID</returns>
-        protected virtual bool ModelIsSetMerchantId(ModelT model) => false;
+        /// <returns>模型是否已设置租赁ID</returns>
+        protected virtual bool ModelIsSetTeantId(ModelT model) => false;
 
         /// <summary>
-        /// 查询是否追加商户ID，默认为否
+        /// 查询是否追加租赁ID，默认为否
         /// </summary>
-        /// <returns>查询是否不追加商户ID</returns>
-        protected virtual bool SelectIsAppendMerchantId() => false;
+        /// <returns>查询是否不追加租赁ID</returns>
+        protected virtual bool SelectIsAppendTeantId() => false;
 
         /// <summary>
         /// 设置模型的租赁ID
         /// </summary>
         /// <param name="model">模型</param>
-        /// <param name="merchantId">租赁ID</param>
-        protected virtual void SetMerchantId(ModelT model, IdT merchantId)
+        /// <param name="teantId">租赁ID</param>
+        protected virtual void SetTeantId(ModelT model, IdT teantId)
         {
             if (model == null)
             {
                 return;
             }
 
-            if (model is PersonTimeMerchantInfo<ModelT>)
+            if (model is PersonTimeTeantInfo<ModelT>)
             {
-                var temp = model as PersonTimeMerchantInfo<IdT>;
-                temp.MerchantID = merchantId;
+                var temp = model as PersonTimeTeantInfo<IdT>;
+                temp.TeantId = teantId;
             }
-            if (model is PersonTimeMerchantInfo<IdT>)
+            if (model is PersonTimeTeantInfo<IdT>)
             {
-                var temp = model as PersonTimeMerchantInfo<IdT>;
-                temp.MerchantID = merchantId;
+                var temp = model as PersonTimeTeantInfo<IdT>;
+                temp.TeantId = teantId;
             }
             else if (model is BasicUserInfo<IdT>)
             {
                 var temp = model as BasicUserInfo<IdT>;
-                temp.MerchantID = merchantId;
+                temp.TeantId = teantId;
             }
         }
 

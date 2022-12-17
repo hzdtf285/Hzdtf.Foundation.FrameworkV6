@@ -51,9 +51,9 @@
             主键类型
             </summary>
         </member>
-        <member name="P:Hzdtf.CodeGenerator.Model.CodeParamInfo.IsMerchant">
+        <member name="P:Hzdtf.CodeGenerator.Model.CodeParamInfo.IsTeant">
             <summary>
-            是否商户
+            是否租赁
             </summary>
         </member>
         <member name="T:Hzdtf.CodeGenerator.Model.CodeGeneratorParamInfo">

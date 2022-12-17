@@ -17,7 +17,7 @@ namespace Hzdtf.Utility.Event
         {
             get;
             set;
-        } = DateTimeExtensions.CstNow();
+        } = DateTimeExtensions.Now;
 
         /// <summary>
         /// 源

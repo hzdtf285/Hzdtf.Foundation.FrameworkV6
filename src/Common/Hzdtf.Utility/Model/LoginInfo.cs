@@ -17,12 +17,12 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 登录ID
         /// </summary>
-        [JsonProperty("loginID")]
+        [JsonProperty("loginId")]
         [DisplayName("登录ID")]
         [MaxLength(20)]
         [Required]
-        [MessagePack.Key("loginID")]
-        public string LoginID
+        [MessagePack.Key("loginId")]
+        public string LoginId
         {
             get;
             set;
@@ -31,12 +31,12 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 密码
         /// </summary>
-        [JsonProperty("logonPass")]
+        [JsonProperty("password")]
         [DisplayName("密码")]
         [Required]
         [MaxLength(20)]
-        [MessagePack.Key("logonPass")]
-        public string LogonPass
+        [MessagePack.Key("password")]
+        public string Password
         {
             get;
             set;

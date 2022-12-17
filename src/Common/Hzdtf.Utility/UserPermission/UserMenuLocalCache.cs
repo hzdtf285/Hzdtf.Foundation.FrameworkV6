@@ -78,7 +78,7 @@ namespace Hzdtf.Utility.UserPermission
             }
             else
             {
-                dicLastAccessTime[userId] = DateTimeExtensions.CstNow();
+                dicLastAccessTime[userId] = DateTimeExtensions.Now;
             }
 
             if (userMenuFunCodes.ContainsKey(menuCode))
@@ -109,7 +109,7 @@ namespace Hzdtf.Utility.UserPermission
         /// <returns>时间范围内没有访问的用户ID数组</returns>
         public IdT[] GetWithTSNotAccessKeys(TimeSpan timeSpan)
         {
-            return dicLastAccessTime.Where(p => (DateTimeExtensions.CstNow() - p.Value) >= timeSpan).Select(p => p.Key).ToArray();
+            return dicLastAccessTime.Where(p => (DateTimeExtensions.Now - p.Value) >= timeSpan).Select(p => p.Key).ToArray();
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace Hzdtf.Utility.UserPermission
             try
             {
                 dicCache.Add(key, value);
-                dicLastAccessTime.Add(key, DateTimeExtensions.CstNow());
+                dicLastAccessTime.Add(key, DateTimeExtensions.Now);
             }
             catch (ArgumentException) // 忽略添加相同的键异常，为了预防密集的线程过来
             {

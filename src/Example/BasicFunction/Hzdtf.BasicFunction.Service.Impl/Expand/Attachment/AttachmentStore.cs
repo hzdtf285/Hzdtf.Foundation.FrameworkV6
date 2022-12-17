@@ -86,7 +86,7 @@ namespace Hzdtf.BasicFunction.Service.Impl.Expand.Attachment
         public virtual ReturnInfo<IList<string>> Upload(CommonUseData comData = null, params AttachmentStreamInfo[] attachmentStream)
         {
             // 以当前年月为目录
-            string yearMonthDic = $"{DateTimeExtensions.CstNow().ToCompactShortYM()}/";
+            string yearMonthDic = $"{DateTimeExtensions.Now.ToCompactShortYM()}/";
             string dic = $"{FileRoot}{yearMonthDic}";
             lock (syncCreateRoot)
             {

@@ -1934,7 +1934,7 @@ namespace Hzdtf.Service.Impl
             {
                 var s = sourceModel as PersonTimeInfo<IdT>;
                 var n = newModel as PersonTimeInfo<IdT>;
-                if (s.ModifyDateTime > n.ModifyDateTime)
+                if (s.ModifyTime > n.ModifyTime)
                 {
                     var msg = localize.Get(ServiceCodeDefine.DATA_MODIFIED_CULTURE_KEY, "数据已被[{0}]修改过,请重新加载数据");
                     returnInfo.SetCodeMsg(ServiceCodeDefine.DATA_MODIFIED, string.Format(msg, s.Modifier));

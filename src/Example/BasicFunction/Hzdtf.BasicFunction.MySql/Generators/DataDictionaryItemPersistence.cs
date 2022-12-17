@@ -110,22 +110,22 @@ namespace Hzdtf.BasicFunction.MySql
                     return model.DataDictionaryId;
 
 ﻿                case "creater_id":
-                    return model.CreaterID;
+                    return model.CreaterId;
 
 ﻿                case "creater":
                     return model.Creater;
 
 ﻿                case "create_time":
-                    return model.CreateDateTime;
+                    return model.CreateTime;
 
 ﻿                case "modifier_id":
-                    return model.ModifierID;
+                    return model.ModifierId;
 
 ﻿                case "modifier":
                     return model.Modifier;
 
 ﻿                case "modify_time":
-                    return model.ModifyDateTime;
+                    return model.ModifyTime;
 
 ﻿                case "text":
                     return model.Text;

@@ -51,7 +51,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
 
                 foreach (var u in users)
                 {
-                    u.LogonPass = null;
+                    u.Password = null;
                 }
 
                 return users;
@@ -77,7 +77,7 @@ namespace Hzdtf.BasicFunction.Service.Impl
 
                 foreach (var u in users)
                 {
-                    u.LogonPass = null;
+                    u.Password = null;
                 }
 
                 return users;

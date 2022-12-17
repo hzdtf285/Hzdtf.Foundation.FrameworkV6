@@ -62,7 +62,7 @@ namespace Hzdtf.Quartz.MySql
         /// </summary>
         private readonly static string[] FIELD_MAP_PROPS = new string[]
         {
-            "create_date_time CreateDateTime",
+            "create_date_time CreateTime",
             "id Id",
             "job_full_class JobFullClass",
             "job_params_json_string JobParamsJsonString",
@@ -100,7 +100,7 @@ namespace Hzdtf.Quartz.MySql
             switch (field)
             {
 ﻿                case "create_date_time":
-                    return model.CreateDateTime;
+                    return model.CreateTime;
 
 ﻿                case "id":
                     return model.Id;
@@ -121,7 +121,7 @@ namespace Hzdtf.Quartz.MySql
                     return model.JtName;
 
 ﻿                case "modify_date_time":
-                    return model.ModifyDateTime;
+                    return model.ModifyTime;
 
 ﻿                case "successed_remove":
                     return model.SuccessedRemove;
