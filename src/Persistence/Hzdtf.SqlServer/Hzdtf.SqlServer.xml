@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.SqlServer</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.Data.SqlClient.SqlBulkCopyExtensions">
+            <summary>
+            SqlBulkCopy扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Microsoft.Data.SqlClient.SqlBulkCopyExtensions.ExecSqlBulkCopy``1(System.Collections.Generic.IList{``0},System.String,System.Data.IDbConnection,System.Data.IDbTransaction,System.Action{Microsoft.Data.SqlClient.SqlBulkCopy},System.Func{System.Reflection.PropertyInfo,System.Boolean})">
+            <summary>
+            执行批量插入
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="tableName">表名</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="callbackBulkCopy">回调BulkCopy</param>
+            <param name="eachPropertyFunc">循环属性函数</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Microsoft.Data.SqlClient.SqlBulkCopyExtensions.ExecSqlBulkCopy(System.Data.DataTable,System.Data.IDbConnection,System.Data.IDbTransaction,System.Action{Microsoft.Data.SqlClient.SqlBulkCopy})">
+            <summary>
+            执行批量插入
+            </summary>
+            <param name="table">表</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="callbackBulkCopy">回调BulkCopy</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="T:Hzdtf.SqlServer.SqlServerDapperBase`2">
+            <summary>
+            SqlServer Dapper基类
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+        </member>
+        <member name="P:Hzdtf.SqlServer.SqlServerDapperBase`2.PfxEscapeChar">
+            <summary>
+            转义符前辍
+            </summary>
+        </member>
+        <member name="P:Hzdtf.SqlServer.SqlServerDapperBase`2.SufxEscapeChar">
+            <summary>
+            转义符后辍
+            </summary>
+        </member>
+        <member name="F:Hzdtf.SqlServer.SqlServerDapperBase`2.syncInsertFieldMapTypes">
+            <summary>
+            同步插入的字段映射类型字典
+            </summary>
+        </member>
+        <member name="F:Hzdtf.SqlServer.SqlServerDapperBase`2.insertFieldMapTypes">
+            <summary>
+            插入的字段映射类型字典
+            </summary>
+        </member>
+        <member name="P:Hzdtf.SqlServer.SqlServerDapperBase`2.InsertFieldMapTypes">
+            <summary>
+            插入的字段映射类型字典
+            </summary>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.#ctor(Hzdtf.Persistence.Contract.Basic.IDefaultConnectionString,Hzdtf.Logger.Contract.ILogable,Hzdtf.Utility.Model.Identitys.IIdentity{`0},Hzdtf.Utility.Localization.ILocalization,Hzdtf.Persistence.Contract.PermissionFilter.IDataPermissionFilter,Hzdtf.Persistence.Contract.PermissionFilter.IFieldPermissionFilter)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="defaultConnectionString">默认连接字符串，默认取0主库；1从库</param>
+            <param name="log">日志</param>
+            <param name="identity">ID</param>
+            <param name="localize">本地化</param>
+            <param name="dataPermissionFilter">数据权限过滤</param>
+            <param name="fieldPermissionFilter">字段权限过滤</param>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.Insert(System.Collections.Generic.IList{`1},System.Data.IDbConnection,System.String[],System.Boolean,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            插入模型列表
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.CreateDbConnection(System.String)">
+            <summary>
+            创建数据库连接
+            </summary>
+            <param name="connectionString">连接字符串</param>
+            <returns>数据库连接</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.GetPartPageSql(System.Int32,System.Int32)">
+            <summary>
+            获取部分的分页SQL语句
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <returns>部分的分页SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.GetLastInsertIdSql">
+            <summary>
+            获取最后插入ID SQL语句
+            </summary>
+            <returns>最后插入ID SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.IsExceptionPkRepeat(System.Exception)">
+            <summary>
+            判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.StrictnessIsExceptionPkRepeat(System.Exception)">
+            <summary>
+            严格判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.GetNoLockTableSql(System.String,System.String)">
+            <summary>
+            获取不锁表的SQL
+            </summary>
+            <param name="table">表名</param>
+            <param name="alias">别名</param>
+            <returns>不锁表的SQL</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.SelectSql(System.SqlPropInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            查询模型列表SQL
+            </summary>
+            <param name="param">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>模型列表SQL</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.IsPageMustSort">
+            <summary>
+            是否分页必须要排序
+            </summary>
+            <returns>是否分页必须要排序，默认为是</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.ExecSqlBulkCopy(System.Collections.Generic.IList{`1},System.Data.IDbConnection,System.String[],System.Boolean,System.Data.IDbTransaction)">
+            <summary>
+            执行批量插入
+            会拿模型第1条数据作为Id作为默认值
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="propertyNames">属性名称数组</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="dbTransaction">数据库事务</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.IsCommonExceptionPkRepeat(System.Exception)">
+            <summary>
+            判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.OtherIsPkRepeat(Microsoft.Data.SqlClient.SqlException)">
+            <summary>
+            其他判断主键重复，此方法目的是为了异常可能包含其他非主键重复的
+            如果子类没重写，默认为是
+            </summary>
+            <param name="ex">异常</param>
+            <returns>其他判断主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDapperBase`2.SetSqlBulkCopy(Microsoft.Data.SqlClient.SqlBulkCopy)">
+            <summary>
+            设置SQL Bulk Copy
+            </summary>
+            <param name="bulk">SQL Bulk Copy</param>
+        </member>
+        <member name="T:Hzdtf.SqlServer.SqlServerDefault">
+            <summary>
+            SQL Server默认
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDefault.#ctor(Hzdtf.Persistence.Contract.Basic.IDefaultConnectionString,Hzdtf.Logger.Contract.ILogable)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="defaultConnectionString">默认连接字符串，默认取0主库；1从库</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDefault.ExecReturnFuncAndConnectionId``1(System.Func{Hzdtf.Utility.Model.Return.ReturnInfo{``0},System.String,``0},Hzdtf.Utility.Model.Return.ReturnInfo{``0},System.String,Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            执行返回函数且带有连接ID
+            </summary>
+            <typeparam name="OutT">输出类型</typeparam>
+            <param name="func">函数</param>
+            <param name="returnInfo">返回信息</param>
+            <param name="connectionId">连接ID</param>
+            <param name="accessMode">访问模式</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDefault.ExecReturnFunc``1(System.Func{Hzdtf.Utility.Model.Return.ReturnInfo{``0},``0},Hzdtf.Utility.Model.Return.ReturnInfo{``0})">
+            <summary>
+            执行返回函数
+            </summary>
+            <typeparam name="OutT">输出类型</typeparam>
+            <param name="func">函数</param>
+            <param name="returnInfo">返回信息</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDefault.ExecProcConnectionId(System.Action{System.String},System.String,Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            执行连接ID过程
+            如果传过来的连接ID为空，则会创建新的连接ID，结束后会自动注释连接ID，否则不会
+            </summary>
+            <param name="action">动作</param>
+            <param name="connectionId">连接ID</param>
+            <param name="accessMode">访问模式</param>
+        </member>
+        <member name="M:Hzdtf.SqlServer.SqlServerDefault.CreateDbConnection(System.String)">
+            <summary>
+            创建数据库连接
+            </summary>
+            <param name="connectionString">连接字符串</param>
+            <returns>数据库连接</returns>
+        </member>
+    </members>
+</doc>

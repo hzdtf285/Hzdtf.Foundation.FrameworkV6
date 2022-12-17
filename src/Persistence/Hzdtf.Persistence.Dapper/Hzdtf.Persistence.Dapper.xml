@@ -1,0 +1,1210 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.Persistence.Dapper</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2">
+            <summary>
+            通用Sql Dapper基类
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+        </member>
+        <member name="P:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.PfxEscapeChar">
+            <summary>
+            转义符前辍
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.SufxEscapeChar">
+            <summary>
+            转义符后辍
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.WHERE_ID_EQUAL_PARAM_SQL">
+            <summary>
+            带ID等于参数的条件SQL（包含前面的WHERE）
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.ID_EQUAL_PARAM_SQL">
+            <summary>
+            带ID等于参数的条件SQL（不包含前面的WHERE）
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.WrapPfxSufxTable">
+            <summary>
+            包装加上前后辍表
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.#ctor(Hzdtf.Persistence.Contract.Basic.IDefaultConnectionString,Hzdtf.Logger.Contract.ILogable,Hzdtf.Utility.Model.Identitys.IIdentity{`0},Hzdtf.Utility.Localization.ILocalization,Hzdtf.Persistence.Contract.PermissionFilter.IDataPermissionFilter,Hzdtf.Persistence.Contract.PermissionFilter.IFieldPermissionFilter)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="defaultConnectionString">默认连接字符串，默认取0主库；1从库</param>
+            <param name="log">日志</param>
+            <param name="identity">ID</param>
+            <param name="localize">本地化</param>
+            <param name="dataPermissionFilter">数据权限过滤</param>
+            <param name="fieldPermissionFilter">字段权限过滤</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.SelectSql(`0,System.String,System.String,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID查询模型SQL语句
+            </summary>
+            <param name="id">ID</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="fieldPermissionSql">字段权限SQL</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.SelectSql(`0[],System.String,System.String,Dapper.DynamicParameters@,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID集合查询模型列表SQL语句
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="fieldPermissionSql">字段权限SQL</param>
+            <param name="parameters">参数</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.CountSql(`0,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID统计模型数SQL语句
+            </summary>
+            <param name="id">ID</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.CountSql(System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            统计模型数SQL语句
+            </summary>
+            <param name="pfx">前辍</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.BasicCountSql(System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            基本统计模型数SQL语句
+            </summary>
+            <param name="pfx">前辍</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.SelectSql(System.String,System.String,System.String[],System.Boolean,System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            查询模型列表SQL语句
+            </summary>
+            <param name="pfx">前辍</param>
+            <param name="appendFieldSqls">追加字段SQL，包含前面的,</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="fieldPermissionSql">字段权限SQL</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.BasicSelectSql(System.String,System.String,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            基本查询SQL
+            </summary>
+            <param name="pfx">前辍</param>
+            <param name="appendFieldSqls">追加字段SQL，包含前面的,</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <param name="beforeFieldSqls">添加字段前的SQL</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.SelectPageSql(System.Int32,System.Int32,System.String,System.String,Dapper.DynamicParameters@,Hzdtf.Utility.Model.FilterInfo,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            查询模型列表并分页SQL语句
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="fieldPermissionSql">字段权限SQL</param>
+            <param name="parameters">参数</param>
+            <param name="filter">筛选</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.MergeWhereSql(Hzdtf.Utility.Model.FilterInfo,Dapper.DynamicParameters@,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            组合条件SQL
+            </summary>
+            <param name="filter">筛选</param>
+            <param name="parameters">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>条件SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.MergeWhereSql(System.Text.StringBuilder,Hzdtf.Utility.Model.FilterInfo,Dapper.DynamicParameters@,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            组合条件SQL
+            </summary>
+            <param name="whereSql">条件SQL</param>
+            <param name="filter">筛选</param>
+            <param name="parameters">参数</param>
+            <param name="comData">通用数据</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.AppendCreateTimeSql(System.Text.StringBuilder,Hzdtf.Utility.Model.FilterInfo,Dapper.DynamicParameters,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            追加创建时间SQL
+            </summary>
+            <param name="whereSql">条件SQL</param>
+            <param name="filter">筛选</param>
+            <param name="parameters">参数</param>
+            <param name="comData">通用数据</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.AppendKeywordSql(System.Text.StringBuilder,Hzdtf.Utility.Model.KeywordFilterInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            追加按关键字查询的SQL
+            </summary>
+            <param name="whereSql">条件SQL</param>
+            <param name="keywordFilter">关键字筛选</param>
+            <param name="comData">通用数据</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetPageKeywordFields">
+            <summary>
+            获取分页按关键字查询的字段集合
+            </summary>
+            <returns>分页按关键字查询的字段集合</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.CountByFilterSql(Hzdtf.Utility.Model.FilterInfo,System.String,Dapper.DynamicParameters@,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据筛选信息统计模型数SQL语句
+            </summary>
+            <param name="filter">筛选信息</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="parameters">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetMerchantIdFilterSql(System.Boolean,System.Boolean,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            获取商户ID筛选SQL
+            </summary>
+            <param name="isBeforeAppWhere">是否前面追加WHERE</param>
+            <param name="isBeforeAppAnd">是否前面追加AND</param>
+            <param name="pfx">前辍</param>
+            <param name="comData">通用数据</param>
+            <returns>商户ID筛选SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetMerchantIdFilterSql2(System.Boolean,System.Boolean,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            获取商户ID筛选SQL2
+            </summary>
+            <param name="isBeforeAppWhere">是否前面追加WHERE</param>
+            <param name="isAfterAppAnd">是否后面追加AND</param>
+            <param name="pfx">前辍</param>
+            <param name="comData">通用数据</param>
+            <returns>商户ID筛选SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.DefaultPageSortSql(System.String)">
+            <summary>
+            默认分页排序SQL，默认是按修改时间降序、创建时间降序、ID升序。如果要改变，请在子类重写
+            </summary>
+            <param name="pfx">前辍</param>
+            <returns>默认排序SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.SelectModifyInfoByIdAndGeModifyTimeSql(`1,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="model">模型</param>
+            <param name="comData">通用数据</param>
+            <returns>只有修改信息的SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.SelectModifyInfosByIdAndGeModifyTimeSql(`1[],Dapper.DynamicParameters@,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="models">模型数组</param>
+            <param name="parameters">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>只有修改信息的SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.CountSql(System.SqlPropInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            统计模型数SQL
+            </summary>
+            <param name="param">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>模型数SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.InsertSql(`1,System.String[],System.Boolean,System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            插入模型SQL语句
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="isGetAutoId">是否获取自增ID</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.InsertSql(System.Collections.Generic.IList{`1},Dapper.DynamicParameters@,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            插入模型列表SQL语句
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="para">参数集合</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.UpdateByIdSql(`1,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID更新模型SQL语句
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.DeleteByIdSql(`0,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID删除模型SQL语句
+            </summary>
+            <param name="id">ID</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.DeleteByIdsSql(`0[],Dapper.DynamicParameters@,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID数组删除模型SQL语句
+            </summary>
+            <param name="ids">ID数组</param>
+            <param name="parameters">参数集合</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.DeleteSql(Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            删除所有模型SQL语句
+            </summary>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.UpdateSql(System.SqlPropInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            更新模型SQL语句
+            </summary>
+            <param name="param">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>更新模型SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.DeleteSql(System.SqlPropInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            删除模型SQL语句
+            </summary>
+            <param name="param">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>删除模型SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.BasicDeleteSql(Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            基本删除所有模型SQL语句
+            </summary>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.ModelContainerMerchantId">
+            <summary>
+            模型是否包含商户ID
+            </summary>
+            <returns>模型是否包含商户ID</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.ModelIsSetMerchantId(`1)">
+            <summary>
+            模型是否已设置商户ID
+            </summary>
+            <param name="model">模型</param>
+            <returns>模型是否已设置商户ID</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.DeleteByTableSql(System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据表名删除所有模型SQL语句
+            </summary>
+            <param name="table">表名</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.BasicDeleteByTableSql(System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            基本根据表名删除所有模型SQL语句
+            </summary>
+            <param name="table">表名</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.DeleteByTableAndForignKeySql(System.String,System.String,`0[],Dapper.DynamicParameters@,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据表名、外键字段和外键值删除模型SQL语句
+            </summary>
+            <param name="table">表名</param>
+            <param name="foreignKeyName">外键名称</param>
+            <param name="foreignKeyValues">外键值集合</param>
+            <param name="parameters">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.SelectPageSql(System.Int32,System.Int32,System.SqlPropInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            查询模型分页SQL
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="param">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>模型分页SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.InsertFieldNames">
+            <summary>
+            插入字段名集合
+            </summary>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.UpdateFieldNames">
+            <summary>
+            更新字段名称集合
+            </summary>
+            <returns>更新字段名称集合</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetValueByFieldName(`1,System.String)">
+            <summary>
+            根据字段名获取模型的值
+            </summary>
+            <param name="model">模型</param>
+            <param name="field">字段名</param>
+            <returns>值</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetPartPageSql(System.Int32,System.Int32)">
+            <summary>
+            获取部分的分页SQL语句
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <returns>部分的分页SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetLastInsertIdSql">
+            <summary>
+            获取最后插入ID SQL语句
+            </summary>
+            <returns>最后插入ID SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetWhereIdsSql(`0[],Dapper.DynamicParameters@,System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID数组获取ID条件SQL语句，不包含where
+            </summary>
+            <param name="ids">ID数组</param>
+            <param name="parameters">参数</param>
+            <param name="prefixTable">表前辍</param>
+            <param name="idField">ID字段</param>
+            <param name="comData">通用数据</param>
+            <returns>ID条件SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetWhereTypesSql``1(``0[],Dapper.DynamicParameters@,System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据值数组获取条件SQL语句，不包含where
+            </summary>
+            <param name="values">值数组</param>
+            <param name="parameters">参数</param>
+            <param name="field">字段</param>
+            <param name="prefixTable">表前辍</param>
+            <param name="comData">通用数据</param>
+            <returns>ID条件SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetSortSql(Hzdtf.Utility.Enums.SortType,System.String,System.String)">
+            <summary>
+            获取排序SQL语句
+            </summary>
+            <param name="sort">排序</param>
+            <param name="prop">排序的属性名</param>
+            <param name="pfx">前辍</param>
+            <returns>排序SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetSortSqlByField(Hzdtf.Utility.Enums.SortType,System.String,System.String)">
+            <summary>
+            根据字段名获取排序SQL语句
+            </summary>
+            <param name="sort">排序</param>
+            <param name="field">排序的字段名</param>
+            <param name="pfx">前辍</param>
+            <returns>排序SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.JoinSelectPropMapFields(System.String[],System.String)">
+            <summary>
+            连接查询的属性映射字段集合
+            带有,号
+            </summary>
+            <param name="props">属性名集合（如果为null则取全部）</param>
+            <param name="pfx">前辍</param>
+            <returns>连接后的查询的属性映射字段集合</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.JoinSelectPropMapNotFields(System.String[],System.String)">
+            <summary>
+            连接查询的属性映射取反字段集合
+            带有,号
+            </summary>
+            <param name="props">属性名集合（如果为null则取全部）</param>
+            <param name="pfx">前辍</param>
+            <returns>连接后的查询的属性映射取反字段集合</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetModifyInfoSql(`1)">
+            <summary>
+            获取修改信息SQL
+            前面带有,前辍
+            </summary>
+            <param name="model">模型</param>
+            <returns>修改信息SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetSelectPageSortSql(Hzdtf.Utility.Model.FilterInfo,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            获取查询分页排序的SQL
+            </summary>
+            <param name="filter">筛选信息</param>
+            <param name="pfx">前辍</param>
+            <param name="comData">通用数据</param>
+            <returns>分页排序的SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.AppendSelectPageFieldsSql(Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            追加查询分页字段SQL
+            </summary>
+            <param name="comData">通用数据</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.AppendSelectPageWhereSql(System.Text.StringBuilder,Dapper.DynamicParameters,Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            追加查询分页条件SQL
+            </summary>
+            <param name="whereSql">where语句</param>
+            <param name="parameters">参数</param>
+            <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetSelectPageJoinSql(Dapper.DynamicParameters,Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            获取查询分页连接SQL
+            </summary>
+            <param name="parameters">参数</param>
+            <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
+            <returns>连接SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.ConvertSortName(System.String)">
+            <summary>
+            转换排序名称
+            </summary>
+            <param name="sortName">排名名称</param>
+            <returns>排序名称</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.WrapInsertFieldNames(`0,System.String[])">
+            <summary>
+            包装插入字段名集合
+            </summary>
+            <param name="id">ID</param>
+            <param name="propertyNames">属性名称集合</param>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.WrapInsertNotFieldNames(`0,System.String[])">
+            <summary>
+            包装插入取反字段名集合
+            </summary>
+            <param name="id">ID</param>
+            <param name="propertyNames">属性名称集合</param>
+            <returns>插入字段名集合</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.CreateWhereSql(System.Boolean)">
+            <summary>
+            创建where语句
+            </summary>
+            <param name="isAppendAnd">是否在尾加加and</param>
+            <returns>where语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetLikeMode">
+            <summary>
+            获取Like模式，默认为左匹配
+            </summary>
+            <returns>Like模式</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetSelectTableName(System.String,System.String)">
+            <summary>
+            获取查询表名
+            </summary>
+            <param name="table">表名，为空则默认等于WrapPfxSufxTable</param>
+            <param name="alias">别名</param>
+            <returns>查询表名</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetFilterSql(System.String,System.Boolean)">
+            <summary>
+            获取过滤SQL
+            </summary>
+            <param name="filterSql">过滤SQL</param>
+            <param name="isReplaceFilterSql">是否替换过滤SQL</param>
+            <returns>过滤SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetSortSql(System.Collections.Generic.IDictionary{System.String,Hzdtf.Utility.Enums.SortType})">
+            <summary>
+            获取排序SQL
+            </summary>
+            <param name="propMapSortTypes">属性映射排序类型字典 key：属性名，value：排序类型</param>
+            <returns>排序SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.IsPageMustSort">
+            <summary>
+            是否分页必须要排序
+            </summary>
+            <returns>是否分页必须要排序，默认为否</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.CombineInsertSqlByFieldNames(System.String[])">
+            <summary>
+            根据字段名称集合组合插入SQL语句
+            </summary>
+            <param name="fieldNames">字段名称集合</param>
+            <returns>插入SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.CombineBatchInsertSqlByFieldNames(System.String[],System.Collections.Generic.IList{`1},Dapper.DynamicParameters@)">
+            <summary>
+            根据字段名称集合组合批量插入SQL语句
+            </summary>
+            <param name="fieldNames">字段名称集合</param>
+            <param name="models">模型列表</param>
+            <param name="para">参数</param>
+            <returns>插入SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.CompareUpdateSqlByFieldNames(System.String[])">
+            <summary>
+            根据字段名称集合组合更新SQL语句
+            </summary>
+            <param name="fieldNames">字段名称集合</param>
+            <returns>更新SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetUpdateFieldsSql(System.String[])">
+            <summary>
+            获取更新字段SQL
+            如果传入的属性名称为null则获取子类的字段
+            </summary>
+            <param name="propertyNames">属性名称</param>
+            <returns>更新字段SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetUpdateNotFieldFieldsSql(System.String[])">
+            <summary>
+            获取更新取反字段SQL
+            如果传入的属性名称为null则获取子类的字段
+            </summary>
+            <param name="propertyNames">属性名称</param>
+            <returns>更新字段SQL</returns>
+        </member>
+        <member name="T:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2">
+            <summary>
+            Dapper持久化基类
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+        </member>
+        <member name="P:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Table">
+            <summary>
+            表
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.IdFieldName">
+            <summary>
+            Id字段名，默认为“Id”
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.#ctor(Hzdtf.Persistence.Contract.Basic.IDefaultConnectionString,Hzdtf.Logger.Contract.ILogable,Hzdtf.Utility.Model.Identitys.IIdentity{`0},Hzdtf.Utility.Localization.ILocalization,Hzdtf.Persistence.Contract.PermissionFilter.IDataPermissionFilter,Hzdtf.Persistence.Contract.PermissionFilter.IFieldPermissionFilter)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="defaultConnectionString">默认连接字符串，默认取0主库；1从库</param>
+            <param name="log">日志</param>
+            <param name="identity">ID</param>
+            <param name="localize">本地化</param>
+            <param name="dataPermissionFilter">数据权限过滤</param>
+            <param name="fieldPermissionFilter">字段权限过滤</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Select(`0,System.Data.IDbConnection,System.Data.IDbTransaction,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID查询模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Select(`0[],System.Data.IDbConnection,System.Data.IDbTransaction,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID集合查询模型
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>模型列表</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Count(`0,System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID统计模型数
+            </summary>
+            <param name="id">ID</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <returns>模型数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Count(System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            统计模型数
+            </summary>
+            <returns>模型数</returns>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Select(System.Data.IDbConnection,System.Data.IDbTransaction,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            查询模型列表
+            </summary>
+            <returns>模型列表</returns>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectPage(System.Int32,System.Int32,System.Data.IDbConnection,Hzdtf.Utility.Model.FilterInfo,System.Data.IDbTransaction,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            查询模型列表并分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="filter">筛选</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="propertyNames">属性名称集合</param>>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>分页信息</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectModifyInfoByIdAndGeModifyTime(`1,System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="model">模型</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <returns>只有修改信息的模型</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectModifyInfosByIdAndGeModifyTime(`1[],System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="models">模型数组</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <returns>只有修改信息的模型列表</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Select(System.SqlPropInfo,System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            查询模型列表
+            </summary>
+            <param name="param">参数</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型列表</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Count(System.SqlPropInfo,System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData,System.String)">
+            <summary>
+            统计模型数
+            </summary>
+            <param name="param">参数</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <param name="connectionId">连接ID</param>
+            <returns>模型数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectPage(System.Int32,System.Int32,System.Data.IDbConnection,System.SqlPropInfo,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            查询模型列表并分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="param">参数</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <returns>分页信息</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Insert(`1,System.Data.IDbConnection,System.String[],System.Boolean,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            插入模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Insert(System.Collections.Generic.IList{`1},System.Data.IDbConnection,System.String[],System.Boolean,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            插入模型列表
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.UpdateById(`1,System.Data.IDbConnection,System.Data.IDbTransaction,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID更新模型
+            </summary>
+            <param name="model">模型</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.DeleteById(`0,System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID删除模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.DeleteByIds(`0[],System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID数组删除模型
+            </summary>
+            <param name="ids">ID数组</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Delete(System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            删除所有模型
+            </summary>
+            <returns>影响行数</returns>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Update(System.SqlPropInfo,System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            更新模型
+            </summary>
+            <param name="param">参数</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.Delete(System.SqlPropInfo,System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            删除模型
+            </summary>
+            <param name="param">参数</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.DeleteSlaveTable(System.String,System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            删除从表
+            </summary>
+            <param name="table">从表</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.DeleteSlaveTableByForeignKeys(System.String,System.String,`0[],System.Data.IDbConnection,System.Data.IDbTransaction,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            删除从表
+            </summary>
+            <param name="table">从表</param>
+            <param name="foreignKeyName">外键名称</param>
+            <param name="foreignKeyValues">外键值集合</param>
+            <param name="dbConnection">数据库连接</param>
+            <param name="dbTransaction">数据库事务</param>
+            <param name="comData">通用数据</param>
+            <returns>影响行数</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectSql(`0,System.String,System.String,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID查询模型SQL语句
+            </summary>
+            <param name="id">ID</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="fieldPermissionSql">字段权限SQL</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectSql(`0[],System.String,System.String,Dapper.DynamicParameters@,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID集合查询模型列表SQL语句
+            </summary>
+            <param name="ids">ID集合</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="fieldPermissionSql">字段权限SQL</param>
+            <param name="parameters">参数</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.CountSql(`0,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID统计模型数SQL语句
+            </summary>
+            <param name="id">ID</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.CountSql(System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            统计模型数SQL语句
+            </summary>
+            <param name="pfx">前辍</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.CountByFilterSql(Hzdtf.Utility.Model.FilterInfo,System.String,Dapper.DynamicParameters@,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据筛选信息统计模型数SQL语句
+            </summary>
+            <param name="filter">筛选信息</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="parameters">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectSql(System.String,System.String,System.String[],System.Boolean,System.String,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            查询模型列表
+            </summary>
+            <param name="pfx">前辍</param>
+            <param name="appendFieldSqls">追加字段SQL，包含前面的,</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="fieldPermissionSql">字段权限SQL</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectPageSql(System.Int32,System.Int32,System.String,System.String,Dapper.DynamicParameters@,Hzdtf.Utility.Model.FilterInfo,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            查询模型列表并分页SQL语句
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="dataPermissionSql">数据权限SQL</param>
+            <param name="fieldPermissionSql">字段权限SQL</param>
+            <param name="parameters">参数</param>
+            <param name="filter">筛选</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectModifyInfoByIdAndGeModifyTimeSql(`1,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID和大于修改时间查询修改信息（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="model">模型</param>
+            <param name="comData">通用数据</param>
+            <returns>只有修改信息的SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectModifyInfosByIdAndGeModifyTimeSql(`1[],Dapper.DynamicParameters@,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID和大于修改时间查询修改信息列表（多用于乐观锁的判断，以修改时间为判断）
+            </summary>
+            <param name="models">模型数组</param>
+            <param name="parameters">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>只有修改信息的SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectSql(System.SqlPropInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            查询模型列表SQL
+            </summary>
+            <param name="param">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>模型列表SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.CountSql(System.SqlPropInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            统计模型数SQL
+            </summary>
+            <param name="param">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>模型数SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.SelectPageSql(System.Int32,System.Int32,System.SqlPropInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            查询模型分页SQL
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="param">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>模型分页SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.InsertSql(`1,System.String[],System.Boolean,System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            插入模型SQL语句
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="isGetInsertId">是否获取自增ID</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.InsertSql(System.Collections.Generic.IList{`1},Dapper.DynamicParameters@,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            插入模型列表SQL语句
+            </summary>
+            <param name="models">模型列表</param>
+            <param name="parameters">动态参数</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.UpdateByIdSql(`1,System.String[],System.Boolean,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID更新模型SQL语句
+            </summary>
+            <param name="model">模型</param>
+            <param name="propertyNames">属性名称集合</param>
+            <param name="isPropertyGetNot">属性是否取反，如果取反，则propertyNames则为排除的属性名称集合</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.DeleteByIdSql(`0,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID删除模型SQL语句
+            </summary>
+            <param name="id">ID</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.DeleteByIdsSql(`0[],Dapper.DynamicParameters@,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据ID数组删除模型SQL语句
+            </summary>
+            <param name="ids">ID数组</param>
+            <param name="parameters">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.DeleteSql(Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            删除所有模型SQL语句
+            </summary>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.UpdateSql(System.SqlPropInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            更新模型SQL语句
+            </summary>
+            <param name="param">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>更新模型SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.DeleteSql(System.SqlPropInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            删除模型SQL语句
+            </summary>
+            <param name="param">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>删除模型SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.DeleteByTableSql(System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据表名删除所有模型SQL语句
+            </summary>
+            <param name="table">表名</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.DeleteByTableAndForignKeySql(System.String,System.String,`0[],Dapper.DynamicParameters@,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            根据表名、外键字段和外键值删除模型SQL语句
+            </summary>
+            <param name="table">表名</param>
+            <param name="foreignKeyName">外键名称</param>
+            <param name="foreignKeyValues">外键值集合</param>
+            <param name="parameters">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.GetSelectSortNamePfx(Hzdtf.Utility.Model.FilterInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            获取查询的排序名称前辍，如果是主表，可以为null或空
+            </summary>
+            <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
+            <returns>查询分页的排序名称前辍</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.GetSelectSortNamePfx(System.String)">
+            <summary>
+            获取查询的排序名称前辍，如果是主表，可以为null或空
+            </summary>
+            <param name="sortName">排序名称</param>
+            <returns>查询分页的排序名称前辍</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.CreateDataPermissionFilter(System.String,System.Data.IDbConnection,System.Data.IDbTransaction,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            创建数据权限过滤
+            </summary>
+            <param name="methodName">方法名</param>
+            <param name="conn">数据库连接</param>
+            <param name="trans">数据库事务</param>
+            <param name="tbPfx">表前辍</param>
+            <param name="comData">通用数据</param>
+            <returns>数据权限过滤</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.CreateFieldPermissionFilter(System.String,System.Data.IDbConnection,System.Data.IDbTransaction,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            创建字段权限过滤
+            </summary>
+            <param name="methodName">方法名</param>
+            <param name="conn">数据库连接</param>
+            <param name="trans">数据库事务</param>
+            <param name="tbPfx">表前辍</param>
+            <param name="comData">通用数据</param>
+            <returns>字段权限过滤</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.ExecDataPermissionFilter(System.String,System.Data.IDbConnection,System.Data.IDbTransaction,Dapper.DynamicParameters@,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            执行数据权限过滤
+            </summary>
+            <param name="methodName">方法名</param>
+            <param name="conn">数据库连接</param>
+            <param name="trans">数据库事务</param>
+            <param name="param">参数</param>
+            <param name="tbPfx">表前辍</param>
+            <param name="comData">通用数据</param>
+            <returns>过滤SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.ExecFieldPermissionFilter(System.String,System.Data.IDbConnection,System.Data.IDbTransaction,System.Boolean@,System.String,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            执行字段权限过滤
+            </summary>
+            <param name="methodName">方法名</param>
+            <param name="conn">数据库连接</param>
+            <param name="trans">数据库事务</param>
+            <param name="tbPfx">表前辍</param>
+            <param name="sqlEmptyNotFilter">SQL为空时则不过滤，默认为是</param>
+            <param name="comData">通用数据</param>
+            <returns>过滤SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.EqualWhereSql">
+            <summary>
+            匹配条件SQL
+            </summary>
+            <returns>不匹配条件SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.NoEqualWhereSql">
+            <summary>
+            不匹配条件SQL
+            </summary>
+            <returns>不匹配条件SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.IsExceptionPkRepeat(System.Exception)">
+            <summary>
+            判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.IsEnableSelectNolockTable">
+            <summary>
+            是否开启查询不锁表
+            在配置里ConnectionStrings:EnableSelectNolockTable定义布尔值，如果没配置，默认为否。如果需要个性化，请在子类里重写此方法
+            </summary>
+            <returns>是否开启查询不锁表</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.GetNoLockTableSql(System.String,System.String)">
+            <summary>
+            获取不锁表的SQL
+            </summary>
+            <param name="table">表名</param>
+            <param name="alias">别名</param>
+            <returns>不锁表的SQL</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.GetPropByField(System.String,System.String[])">
+            <summary>
+            根据字段名获取属性名
+            </summary>
+            <param name="field">字段</param>
+            <param name="fieldMapProps">字段映射属性集合</param>
+            <returns>属性名</returns>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperPersistenceBase`2.GetFieldByProp(System.String,System.String[])">
+            <summary>
+            根据属性名获取字段名
+            </summary>
+            <param name="prop">属性</param>
+            <param name="fieldMapProps">字段映射属性集合</param>
+            <returns>属性名</returns>
+        </member>
+        <member name="T:Hzdtf.Persistence.Dapper.DapperUtil">
+            <summary>
+            Dapper辅助类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Persistence.Dapper.DapperUtil.MergeParams(Dapper.DynamicParameters,Dapper.DynamicParameters)">
+            <summary>
+            合并参数
+            </summary>
+            <param name="param1">参数1</param>
+            <param name="param2">参数2</param>
+            <returns>合并后的参数</returns>
+        </member>
+    </members>
+</doc>

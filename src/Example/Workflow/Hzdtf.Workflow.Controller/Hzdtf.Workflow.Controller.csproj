@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Authors>黄振东</Authors>
+    <Company>Hzdtf</Company>
+    <Product>工作流控制器类库</Product>
+    <Description>工作流控制器类库，运行.Net6以上</Description>
+    <OutputType>Library</OutputType>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Hzdtf.Workflow.Controller.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Hzdtf.Workflow.Controller.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\BasicFunction\Hzdtf.BasicFunction.Controller\Hzdtf.BasicFunction.Controller.csproj" />
+    <ProjectReference Include="..\Hzdtf.Workflow.Service.Contract\Hzdtf.Workflow.Service.Contract.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,299 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.BasicController</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.BasicController.BasicControllerBase`3">
+            <summary>
+            基本控制器基类
+            </summary>
+            <typeparam name="IdT">Id类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+            <typeparam name="ServiceT">服务类型</typeparam>
+        </member>
+        <member name="F:Hzdtf.BasicController.BasicControllerBase`3.log">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="P:Hzdtf.BasicController.BasicControllerBase`3.config">
+            <summary>
+            配置
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicController.BasicControllerBase`3.service">
+            <summary>
+            服务
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicController.BasicControllerBase`3.localize">
+            <summary>
+            本地化
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicController.BasicControllerBase`3.comUseDataFactory">
+            <summary>
+            通用数据工厂
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicController.BasicControllerBase`3.#ctor(Hzdtf.Logger.Contract.ILogable,`2,Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.Factory.ISimpleFactory{Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Model.CommonUseData})">
+            <summary>
+            构造方法
+            </summary>
+            <param name="log">日志</param>
+            <param name="service">配置</param>
+            <param name="localize">服务</param>
+            <param name="comUseDataFactory">本地化</param>
+        </member>
+        <member name="T:Hzdtf.BasicController.IPagingParseFilter">
+            <summary>
+            分页解析筛选接口
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicController.IPagingParseFilter.ToFilterObjectFromHttp``1(Microsoft.AspNetCore.Http.HttpRequest,System.Int32@,System.Int32@)">
+            <summary>
+            从HTTP请求对象转换为筛选对象
+            </summary>
+            <typeparam name="PagingFilterObjectT">分页筛选对象类型</typeparam>
+            <param name="httpRequest">HTTP请求对象</param>
+            <param name="pageIndex">页码（从0开始）</param>
+            <param name="pageSize">每页记录数</param>
+            <returns>分页筛选对象</returns>
+        </member>
+        <member name="T:Hzdtf.BasicController.JqGridPagingParseFilter">
+            <summary>
+            JqGrid分页解析筛选
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicController.JqGridPagingParseFilter.ToFilterObjectFromHttp``1(Microsoft.AspNetCore.Http.HttpRequest,System.Int32@,System.Int32@)">
+            <summary>
+            从HTTP请求对象转换为筛选对象
+            </summary>
+            <typeparam name="PagingFilterObjectT">分页筛选对象类型</typeparam>
+            <param name="httpRequest">HTTP请求对象</param>
+            <param name="pageIndex">页码（从0开始）</param>
+            <param name="pageSize">每页记录数</param>
+            <returns>分页筛选对象</returns>
+        </member>
+        <member name="T:Hzdtf.BasicController.ManageControllerBase`4">
+            <summary>
+            管理控制器基类
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">Id类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+            <typeparam name="ServiceT">服务类型</typeparam>
+            <typeparam name="PageInfoT">页面信息类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.#ctor(Hzdtf.Logger.Contract.ILogable,`2,Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.Factory.ISimpleFactory{Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Model.CommonUseData})">
+            <summary>
+            构造方法
+            </summary>
+            <param name="log">日志</param>
+            <param name="service">服务</param>
+            <param name="localize">本地化</param>
+            <param name="comUseDataFactory">通用数据工厂</param>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.Get(`0)">
+            <summary>
+            根据ID查找模型
+            </summary>
+            <param name="id">ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.Post(`1)">
+            <summary>
+            添加模型
+            </summary>
+            <param name="model">模型</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.Put(`0,`1)">
+            <summary>
+            修改模型
+            </summary>
+            <param name="id">ID</param>
+            <param name="model">模型</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.Delete(`0)">
+            <summary>
+            移除模型
+            </summary>
+            <param name="id">ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.BatchAdd(System.Collections.Generic.IList{`1})">
+            <summary>
+            批量添加模型列表
+            </summary>
+            <param name="models">模型列表</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.BatchRemove(`0[])">
+            <summary>
+            根据ID集合批量移除模型
+            </summary>
+            <param name="ids">ID集合</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.Count">
+            <summary>
+            统计模型数量
+            </summary>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.ManageControllerBase`4.Exists(`0)">
+            <summary>
+            根据ID获取是否存在模型
+            </summary>
+            <returns>返回信息</returns>
+        </member>
+        <member name="T:Hzdtf.BasicController.PageDataControllerBase`4">
+            <summary>
+            页面数据控制器基类
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">Id类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+            <typeparam name="ServiceT">服务类型</typeparam>
+            <typeparam name="PageInfoT">页面信息类型</typeparam>
+        </member>
+        <member name="M:Hzdtf.BasicController.PageDataControllerBase`4.#ctor(Hzdtf.Logger.Contract.ILogable,`2,Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.Factory.ISimpleFactory{Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Model.CommonUseData})">
+            <summary>
+            构造方法
+            </summary>
+            <param name="log">日志</param>
+            <param name="service">配置</param>
+            <param name="localize">服务</param>
+            <param name="comUseDataFactory">本地化</param>
+        </member>
+        <member name="M:Hzdtf.BasicController.PageDataControllerBase`4.PageData">
+            <summary>
+            获取页面数据，包含当前用户所拥有的权限功能列表
+            </summary>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.PageDataControllerBase`4.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{`3},Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            填充页面数据，包含当前用户所拥有的权限功能列表
+            </summary>
+            <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
+        </member>
+        <member name="M:Hzdtf.BasicController.PageDataControllerBase`4.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            创建页面数据
+            </summary>
+            <param name="comData">通用数据</param>
+            <returns>页面数据</returns>
+        </member>
+        <member name="T:Hzdtf.BasicController.PagingControllerBase`5">
+            <summary>
+            分页控制器基类
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">Id类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+            <typeparam name="ServiceT">服务类型</typeparam>
+            <typeparam name="PageInfoT">页面信息类型</typeparam>
+            <typeparam name="PageFilterT">分页筛选类型</typeparam>
+        </member>
+        <member name="F:Hzdtf.BasicController.PagingControllerBase`5.pagingParseFilter">
+            <summary>
+            分页解析筛选
+            </summary>
+        </member>
+        <member name="F:Hzdtf.BasicController.PagingControllerBase`5.pagingReturnConvert">
+            <summary>
+            分页返回转换
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.#ctor(Hzdtf.Logger.Contract.ILogable,`2,Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.Factory.ISimpleFactory{Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Model.CommonUseData},Hzdtf.BasicController.IPagingParseFilter,Hzdtf.Utility.Model.Page.IPagingReturnConvert)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="log">日志</param>
+            <param name="service">配置</param>
+            <param name="localize">服务</param>
+            <param name="comUseDataFactory">本地化</param>
+            <param name="pagingParseFilter">分页解析筛选</param>
+            <param name="pagingReturnConvert">分页返回转换</param>
+        </member>
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.Page">
+            <summary>
+            执行分页获取数据
+            </summary>
+            <returns>分页返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.DoPage(Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            去分页
+            </summary>
+            <param name="comData">通用数据</param>
+            <returns>返回信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.QueryPageFromService(System.Int32,System.Int32,`4,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            从服务里查询分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.AfterPage(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.Page.PagingInfo{`1}},System.Int32,System.Int32,`4,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            分页后
+            </summary>
+            <param name="returnInfo">返回信息</param>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.PagingControllerBase`5.AppendFilterParams(`4,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            追加筛选参数
+            </summary>
+            <param name="pageFilter">分页筛选</param>
+            <param name="comData">通用数据</param>
+        </member>
+        <member name="T:Hzdtf.BasicController.SystemController">
+            <summary>
+            系统控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.BasicController.SystemController.CurrConnCount">
+            <summary>
+            获取当前数据库连接数
+            </summary>
+            <returns>当前数据库连接数</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.SystemController.CurrTransactionCount">
+            <summary>
+            获取当前数据库事务数
+            </summary>
+            <returns>当前数据库事务数</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.SystemController.CurrCulture">
+            <summary>
+            获取当前语言文化
+            </summary>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.BasicController.SystemController.SetCurrCulture(System.String)">
+            <summary>
+            设置当前语言文化
+            </summary>
+            <param name="culture">文化</param>
+            <returns>返回信息</returns>
+        </member>
+    </members>
+</doc>

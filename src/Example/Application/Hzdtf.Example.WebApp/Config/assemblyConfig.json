@@ -1,0 +1,50 @@
+{
+  "Services": [
+    {
+      "Names": [
+        "FoxUC.BasicController",
+        "FoxUC.BasicFunction.Controller",
+        "FoxUC.Workflow.Controller",
+        "FoxUC.Example.Controller"
+      ]
+    },
+    {
+      "Names": [
+        "FoxUC.Utility",
+        "FoxUC.Utility.AspNet",
+        "FoxUC.Logger.Contract",
+        "FoxUC.Logger.Integration.ENLog",
+        "FoxUC.Logger.Exceptionless",
+        "FoxUC.Logger.Integration.MicrosoftLog",
+        "FoxUC.AUC.Contract",
+        "FoxUC.AUC.AspNet",
+        "FoxUC.Persistence.Contract",
+        "FoxUC.BasicFunction.Persistence.Contract",
+        "FoxUC.BasicFunction.MySql",
+        "FoxUC.Workflow.Persistence.Contract",
+        "FoxUC.Workflow.MySql",
+        "FoxUC.Example.Persistence.Contract",
+        "FoxUC.Example.MySql",
+        "FoxUC.Quartz.Extensions",
+        "FoxUC.Quartz.SqlServer"
+      ], 
+      "Lifecycle": "SIGNLETON"
+    },
+    {
+      "Names": [
+        "FoxUC.BasicFunction.Service.Contract",
+        "FoxUC.BasicFunction.Service.Impl",
+        "FoxUC.Workflow.Service.Contract",
+        "FoxUC.Workflow.Service.Impl",
+        "FoxUC.BasicFunction.Workflow",
+        "FoxUC.Example.Service.Contract",
+        "FoxUC.Example.Service.Impl"
+      ],
+      "Lifecycle": "SIGNLETON",
+      "Intercepteds": [
+        "FoxUC.Persistence.Autofac,FoxUC.Persistence.Autofac.TransactionInterceptor"
+      ]
+    }
+  ],
+  "IsLoadAutoMapperConfig": true
+}

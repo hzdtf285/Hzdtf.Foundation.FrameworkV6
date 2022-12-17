@@ -1,0 +1,304 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.Workflow.Controller</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.Workflow.Controller.MyApplyFlowController">
+            <summary>
+            我申请的流程控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Workflow.Controller.MyApplyFlowController.userService">
+            <summary>
+            用户服务
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyApplyFlowController.#ctor(Hzdtf.Logger.Contract.ILogable,Hzdtf.Workflow.Service.Contract.IWorkflowService,Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.Factory.ISimpleFactory{Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Model.CommonUseData},Hzdtf.BasicController.IPagingParseFilter,Hzdtf.Utility.Model.Page.IPagingReturnConvert,Hzdtf.BasicFunction.Service.Contract.IUserService)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="log">日志</param>
+            <param name="service">服务</param>
+            <param name="localize">本地化</param>
+            <param name="comUseDataFactory">通用数据工厂</param>
+            <param name="pagingParseFilter">分页解析筛选</param>
+            <param name="pagingReturnConvert">分页返回转换</param>
+            <param name="userService">用户服务</param>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyApplyFlowController.QueryPageFromService(System.Int32,System.Int32,Hzdtf.Workflow.Model.Expand.Filter.ApplyFlowFilterInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            从服务里查询分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyApplyFlowController.GetFlowDetail(System.Int32)">
+            <summary>
+            获取流程明细信息
+            </summary>
+            <param name="workflowId">工作流ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyApplyFlowController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.DateRangePageInfo},Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            填充页面数据，包含当前用户所拥有的权限功能列表
+            </summary>
+            <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyApplyFlowController.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            创建页面数据
+            </summary>
+            <param name="comData">通用数据</param>
+            <returns>页面数据</returns>
+        </member>
+        <member name="T:Hzdtf.Workflow.Controller.MyAuditedFlowController">
+            <summary>
+            我的已审核流程控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Workflow.Controller.MyAuditedFlowController.userService">
+            <summary>
+            用户服务
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyAuditedFlowController.#ctor(Hzdtf.Logger.Contract.ILogable,Hzdtf.Workflow.Service.Contract.IWorkflowService,Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.Factory.ISimpleFactory{Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Model.CommonUseData},Hzdtf.BasicController.IPagingParseFilter,Hzdtf.Utility.Model.Page.IPagingReturnConvert,Hzdtf.BasicFunction.Service.Contract.IUserService)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="log">日志</param>
+            <param name="service">服务</param>
+            <param name="localize">本地化</param>
+            <param name="comUseDataFactory">通用数据工厂</param>
+            <param name="pagingParseFilter">分页解析筛选</param>
+            <param name="pagingReturnConvert">分页返回转换</param>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyAuditedFlowController.QueryPageFromService(System.Int32,System.Int32,Hzdtf.Workflow.Model.Expand.Filter.AuditFlowFilterInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            从服务里查询分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyAuditedFlowController.GetFlowDetail(System.Int32,System.Int32)">
+            <summary>
+            获取流程明细信息
+            </summary>
+            <param name="workflowId">工作流ID</param>
+            <param name="handleId">处理ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyAuditedFlowController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.DateRangePageInfo},Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            填充页面数据，包含当前用户所拥有的权限功能列表
+            </summary>
+            <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyAuditedFlowController.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            创建页面数据
+            </summary>
+            <param name="comData">通用数据</param>
+            <returns>页面数据</returns>
+        </member>
+        <member name="T:Hzdtf.Workflow.Controller.MyWaitFlowController">
+            <summary>
+            我的待办流程控制器
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Workflow.Controller.MyWaitFlowController.userService">
+            <summary>
+            用户服务
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Workflow.Controller.MyWaitFlowController.workflowHandleService">
+            <summary>
+            工作流处理服务
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Workflow.Controller.MyWaitFlowController.workFlowAudit">
+            <summary>
+            工作流审核
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.#ctor(Hzdtf.Logger.Contract.ILogable,Hzdtf.Workflow.Service.Contract.IWorkflowService,Hzdtf.Utility.Localization.ILocalization,Hzdtf.Utility.Factory.ISimpleFactory{Microsoft.AspNetCore.Http.HttpContext,Hzdtf.Utility.Model.CommonUseData},Hzdtf.BasicController.IPagingParseFilter,Hzdtf.Utility.Model.Page.IPagingReturnConvert,Hzdtf.BasicFunction.Service.Contract.IUserService,Hzdtf.Workflow.Service.Contract.IWorkflowHandleService,Hzdtf.Workflow.Service.Contract.Engine.IWorkflowAudit)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="log">日志</param>
+            <param name="service">服务</param>
+            <param name="localize">本地化</param>
+            <param name="comUseDataFactory">通用数据工厂</param>
+            <param name="pagingParseFilter">分页解析筛选</param>
+            <param name="pagingReturnConvert">分页返回转换</param>
+            <param name="userService">用户服务</param>
+            <param name="workflowHandleService">工作流处理服务</param>
+            <param name="workFlowAudit">工作流审核</param>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.QueryPageFromService(System.Int32,System.Int32,Hzdtf.Workflow.Model.Expand.Filter.WaitHandleFilterInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            从服务里查询分页
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <param name="filter">筛选</param>
+            <param name="comData">通用数据</param>
+            <returns>返回信息任务</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.ModifyReadedByHandleId(System.Int32)">
+            <summary>
+            根据处理ID修改为已读
+            </summary>
+            <param name="handleId">处理ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.GetAuditDetail(System.Int32,System.Int32)">
+            <summary>
+            获取审核明细信息
+            </summary>
+            <param name="workflowId">工作流ID</param>
+            <param name="handleId">处理ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.ExecAudit(Hzdtf.Workflow.Model.Expand.FlowAuditInfo)">
+            <summary>
+            执行审核
+            </summary>
+            <param name="flowAudit">流程审核信息</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.GetFlowDetail(System.Int32,System.Int32)">
+            <summary>
+            获取流程明细信息
+            </summary>
+            <param name="workflowId">工作流ID</param>
+            <param name="handleId">处理ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.FillPageData(Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Utility.Model.DateRangePageInfo},Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            填充页面数据，包含当前用户所拥有的权限功能列表
+            </summary>
+            <param name="returnInfo">返回信息</param>
+            <param name="comData">通用数据</param>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.MyWaitFlowController.CreatePageData(Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            创建页面数据
+            </summary>
+            <param name="comData">通用数据</param>
+            <returns>页面数据</returns>
+        </member>
+        <member name="T:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1">
+            <summary>
+            工作流表单控制器基类
+            @ 黄振东
+            </summary>
+            <typeparam name="FormT">表单类型</typeparam>
+        </member>
+        <member name="P:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.WorkflowInitService">
+            <summary>
+            工作流初始服务
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.WorkflowRemove">
+            <summary>
+            工作流移除
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.WorkflowForceRemove">
+            <summary>
+            工作流强制移除
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.WorkflowUndo">
+            <summary>
+            工作流撤消
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.FormDataReader">
+            <summary>
+            表单数据读取
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.ComDataFactory">
+            <summary>
+            通用数据工厂
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.Save(Hzdtf.Workflow.Model.Expand.FlowInitInfo{`0})">
+            <summary>
+            保存
+            </summary>
+            <param name="flowInit">流程初始</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.Apply(Hzdtf.Workflow.Model.Expand.FlowInitInfo{`0})">
+            <summary>
+            申请
+            </summary>
+            <param name="flowInit">流程初始</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.RemoveByWorkflowId(System.Int32)">
+            <summary>
+            根据工作流ID移除
+            </summary>
+            <param name="workflowId">工作流ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.ForceRemoveByWorkflowId(System.Int32)">
+            <summary>
+            根据工作流ID强制移除
+            </summary>
+            <param name="workflowId">工作流ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.UndoByWorkflowId(System.Int32)">
+            <summary>
+            根据工作流ID撤消
+            </summary>
+            <param name="workflowId">工作流ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.GetFormDetail(System.Int32)">
+            <summary>
+            根据工作流ID获取表单明细
+            </summary>
+            <param name="workflowId">工作流ID</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.Execute(Hzdtf.Workflow.Model.Expand.FlowInitInfo{`0},System.Func{Hzdtf.Utility.Model.Return.ReturnInfo{Hzdtf.Workflow.Model.Expand.WorkflowBasicInfo}})">
+            <summary>
+            执行
+            </summary>
+            <param name="flowInit">流程初始</param>
+            <param name="func">回调执行</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.GetWorkflowCode">
+            <summary>
+            获取工作流编码
+            </summary>
+            <returns>工作流编码</returns>
+        </member>
+        <member name="M:Hzdtf.Workflow.Controller.WorkflowFormControllerBase`1.SetFlowInitPropertys(Hzdtf.Workflow.Model.Expand.FlowInitInfo{`0})">
+            <summary>
+            设置流程初始化属性
+            </summary>
+            <param name="flowInit">流程初始</param>
+        </member>
+    </members>
+</doc>

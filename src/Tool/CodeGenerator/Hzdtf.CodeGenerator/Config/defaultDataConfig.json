@@ -1,0 +1,15 @@
+{
+  "DataSource": {
+    "Type": "SqlServer",
+    "Host": "127.0.0.1",
+    "Port": 1433,
+    "Db": "Master",
+    "User": "sa",
+    "Password": "123"
+  },
+  "BuilderItem": {
+    "Namespace": "Hzdtf.Example",
+    "PkType": "雪花算法",
+    "IsMerchant": false
+  }
+}

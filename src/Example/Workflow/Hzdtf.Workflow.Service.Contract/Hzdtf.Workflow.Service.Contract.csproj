@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Authors>黄振东</Authors>
+    <Company>Hzdtf</Company>
+    <Product>工作流服务契约类库</Product>
+    <Description>工作流服务契约类库，运行在.Net6以上</Description>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>Hzdtf.Workflow.Service.Contract.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DocumentationFile>Hzdtf.Workflow.Service.Contract.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Service\Hzdtf.Service.Contract\Hzdtf.Service.Contract.csproj" />
+    <ProjectReference Include="..\Hzdtf.Workflow.Model\Hzdtf.Workflow.Model.csproj" />
+  </ItemGroup>
+
+</Project>

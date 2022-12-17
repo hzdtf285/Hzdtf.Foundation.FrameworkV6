@@ -1,0 +1,36 @@
+﻿using Hzdtf.BasicController;
+using |NamespacePfx|.Model;
+using |NamespacePfx|.Service.Contract;
+using Hzdtf.Utility.Attr;
+using Hzdtf.Utility.Model;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
+using Hzdtf.Utility.RoutePermission;
+
+namespace |NamespacePfx|.Controller
+{
+    /// <summary>
+    /// |Description|控制器
+    /// @ 黄振东
+    /// </summary>
+    [Inject]
+    [ApiController]
+    [Route("api/[controller]")]
+    [Authorize]
+    [RoutePermission("|Model|")]
+    public partial class |Name| : ManageControllerBase<|PkType|, |Model|Info, I|Model|Service>
+    {
+        /// <summary>
+        /// 构造方法
+        /// </summary>
+        /// <param name="log">日志</param>
+        /// <param name="service">服务</param>
+        /// <param name="localize">本地化</param>
+        /// <param name="comUseDataFactory">通用数据工厂</param>
+        public |Name|(ILogable log = null, I|Model|Service service = null, ILocalization localize = null, ISimpleFactory<HttpContext, CommonUseData> comUseDataFactory = null)
+            : base(log, service, localize, comUseDataFactory)
+        {
+        }
+    }
+}

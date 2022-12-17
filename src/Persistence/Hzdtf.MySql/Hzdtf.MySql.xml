@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.MySql</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.MySql.MySqlDapperBase`2">
+            <summary>
+            MySql Dapper基类
+            @ 黄振东
+            </summary>
+            <typeparam name="IdT">ID类型</typeparam>
+            <typeparam name="ModelT">模型类型</typeparam>
+        </member>
+        <member name="P:Hzdtf.MySql.MySqlDapperBase`2.PfxEscapeChar">
+            <summary>
+            转义符前辍
+            </summary>
+        </member>
+        <member name="P:Hzdtf.MySql.MySqlDapperBase`2.SufxEscapeChar">
+            <summary>
+            转义符后辍
+            </summary>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.#ctor(Hzdtf.Persistence.Contract.Basic.IDefaultConnectionString,Hzdtf.Logger.Contract.ILogable,Hzdtf.Utility.Model.Identitys.IIdentity{`0},Hzdtf.Utility.Localization.ILocalization,Hzdtf.Persistence.Contract.PermissionFilter.IDataPermissionFilter,Hzdtf.Persistence.Contract.PermissionFilter.IFieldPermissionFilter)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="defaultConnectionString">默认连接字符串，默认取0主库；1从库</param>
+            <param name="log">日志</param>
+            <param name="identity">ID</param>
+            <param name="localize">本地化</param>
+            <param name="dataPermissionFilter">数据权限过滤</param>
+            <param name="fieldPermissionFilter">字段权限过滤</param>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.CreateDbConnection(System.String)">
+            <summary>
+            创建数据库连接
+            </summary>
+            <param name="connectionString">连接字符串</param>
+            <returns>数据库连接</returns>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.GetPartPageSql(System.Int32,System.Int32)">
+            <summary>
+            获取部分的分页SQL语句
+            </summary>
+            <param name="pageIndex">页码</param>
+            <param name="pageSize">每页记录数</param>
+            <returns>部分的分页SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.GetLastInsertIdSql">
+            <summary>
+            获取最后插入ID SQL语句
+            </summary>
+            <returns>最后插入ID SQL语句</returns>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.EqualWhereSql">
+            <summary>
+            匹配条件SQL
+            </summary>
+            <returns>不匹配条件SQL</returns>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.NoEqualWhereSql">
+            <summary>
+            不匹配条件SQL
+            </summary>
+            <returns>不匹配条件SQL</returns>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.IsExceptionPkRepeat(System.Exception)">
+            <summary>
+            判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.StrictnessIsExceptionPkRepeat(System.Exception)">
+            <summary>
+            严格判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.SelectSql(System.SqlPropInfo,Hzdtf.Utility.Model.CommonUseData)">
+            <summary>
+            查询模型列表SQL
+            </summary>
+            <param name="param">参数</param>
+            <param name="comData">通用数据</param>
+            <returns>模型列表SQL</returns>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.IsCommonExceptionPkRepeat(System.Exception)">
+            <summary>
+            判断异常是否主键重复
+            </summary>
+            <param name="ex">异常</param>
+            <returns>异常是否主键重复</returns>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDapperBase`2.OtherIsPkRepeat(MySql.Data.MySqlClient.MySqlException)">
+            <summary>
+            其他判断主键重复，此方法目的是为了异常可能包含其他非主键重复的
+            如果子类没重写，默认为是
+            </summary>
+            <param name="ex">异常</param>
+            <returns>其他判断主键重复</returns>
+        </member>
+        <member name="T:Hzdtf.MySql.MySqlDefault">
+            <summary>
+            MySql默认
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDefault.#ctor(Hzdtf.Persistence.Contract.Basic.IDefaultConnectionString,Hzdtf.Logger.Contract.ILogable)">
+            <summary>
+            构造方法
+            </summary>
+            <param name="defaultConnectionString">默认连接字符串，默认取0主库；1从库</param>
+            <param name="log">日志</param>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDefault.ExecReturnFuncAndConnectionId``1(System.Func{Hzdtf.Utility.Model.Return.ReturnInfo{``0},System.String,``0},Hzdtf.Utility.Model.Return.ReturnInfo{``0},System.String,Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            执行返回函数且带有连接ID
+            </summary>
+            <typeparam name="OutT">输出类型</typeparam>
+            <param name="func">函数</param>
+            <param name="returnInfo">返回信息</param>
+            <param name="connectionId">连接ID</param>
+            <param name="accessMode">访问模式</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDefault.ExecReturnFunc``1(System.Func{Hzdtf.Utility.Model.Return.ReturnInfo{``0},``0},Hzdtf.Utility.Model.Return.ReturnInfo{``0})">
+            <summary>
+            执行返回函数
+            </summary>
+            <typeparam name="OutT">输出类型</typeparam>
+            <param name="func">函数</param>
+            <param name="returnInfo">返回信息</param>
+            <returns>返回信息</returns>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDefault.ExecProcConnectionId(System.Action{System.String},System.String,Hzdtf.Utility.Enums.AccessMode)">
+            <summary>
+            执行连接ID过程
+            如果传过来的连接ID为空，则会创建新的连接ID，结束后会自动注释连接ID，否则不会
+            </summary>
+            <param name="action">动作</param>
+            <param name="connectionId">连接ID</param>
+            <param name="accessMode">访问模式</param>
+        </member>
+        <member name="M:Hzdtf.MySql.MySqlDefault.CreateDbConnection(System.String)">
+            <summary>
+            创建数据库连接
+            </summary>
+            <param name="connectionString">连接字符串</param>
+            <returns>数据库连接</returns>
+        </member>
+    </members>
+</doc>

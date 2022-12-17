@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Hzdtf.Autofac.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:Hzdtf.Autofac.Extensions.AutofacInstance">
+            <summary>
+            Autofac实例
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Autofac.Extensions.AutofacInstance.CreateInstance(System.String)">
+            <summary>
+            创建实例
+            </summary>
+            <param name="classFullPath">类全路径</param>
+            <returns>实例</returns>
+        </member>
+        <member name="M:Hzdtf.Autofac.Extensions.AutofacInstance.CreateInstance``1(System.String)">
+            <summary>
+            创建实例
+            </summary>
+            <typeparam name="T">实例类型</typeparam>
+            <param name="classFullPath">类全路径</param>
+            <returns>实例</returns>
+        </member>
+        <member name="M:Hzdtf.Autofac.Extensions.AutofacInstance.CreateInstanceObj(System.String)">
+            <summary>
+            创建实例对象
+            </summary>
+            <param name="classFullPath">类全路径</param>
+            <returns>实例</returns>
+        </member>
+        <member name="T:Hzdtf.Autofac.Extensions.AutofacTool">
+            <summary>
+            Autofac工具
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Autofac.Extensions.AutofacTool.Container">
+            <summary>
+            容器
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Autofac.Extensions.AutofacTool.LifetimeScope">
+            <summary>
+            生效的容器
+            </summary>
+        </member>
+        <member name="F:Hzdtf.Autofac.Extensions.AutofacTool.ResolveFunc">
+            <summary>
+            获取服务回调
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Autofac.Extensions.AutofacTool.Resolve``1">
+            <summary>
+            获取服务
+            </summary>
+            <typeparam name="TService">服务类型</typeparam>
+            <returns>服务</returns>
+        </member>
+        <member name="M:Hzdtf.Autofac.Extensions.AutofacTool.Resolve(System.Type)">
+            <summary>
+            获取服务
+            </summary>
+            <param name="type">类型</param>
+            <returns>服务</returns>
+        </member>
+        <member name="M:Hzdtf.Autofac.Extensions.AutofacTool.ResolveFromBusinessDispatchProxy``1">
+            <summary>
+            解析来自业务动态代理创建的对象
+            </summary>
+            <typeparam name="T">类型</typeparam>
+            <returns>由业务动态代理创建的对象</returns>
+        </member>
+        <member name="T:Hzdtf.Autofac.Extensions.AutofacUtil">
+            <summary>
+            Autofac辅助类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Hzdtf.Autofac.Extensions.AutofacUtil.CanInject(System.Type)">
+            <summary>
+            是否能注入
+            </summary>
+            <param name="type">类型</param>
+            <returns>是否能注入</returns>
+        </member>
+        <member name="T:Hzdtf.Autofac.Extensions.BuilderParam">
+            <summary>
+            生成参数
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Autofac.Extensions.BuilderParam.AssemblyServices">
+            <summary>
+            程序集服务集合
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Autofac.Extensions.BuilderParam.RegisteringServiceAction">
+            <summary>
+            注册中服务动作
+            </summary>
+        </member>
+        <member name="P:Hzdtf.Autofac.Extensions.BuilderParam.IsLoadAutoMapperConfig">
+            <summary>
+            是否加载自动映射配置
+            </summary>
+        </member>
+        <member name="T:Autofac.ContainerBuilderExtensions">
+            <summary>
+            容器生成器扩展类
+            @ 黄振东
+            </summary>
+        </member>
+        <member name="M:Autofac.ContainerBuilderExtensions.UnifiedRegisterAssemblys(Autofac.ContainerBuilder,Hzdtf.Autofac.Extensions.BuilderParam,System.Boolean)">
+            <summary>
+            统一注册服务程序集
+            </summary>
+            <param name="containerBuilder">容器生成器</param>
+            <param name="param">参数</param>
+            <param name="isExecBuilderContainer">是否执行生成容器，如果为false，则返回值为null</param>
+            <returns>容器</returns>
+        </member>
+        <member name="M:Autofac.ContainerBuilderExtensions.UnifiedRegisterAssemblysForWeb(Autofac.ContainerBuilder,Hzdtf.Autofac.Extensions.BuilderParam)">
+            <summary>
+            统一注册服务程序集,如果是net core 3.1以上，请在StartUp类里增加ConfigureContainer(ContainerBuilder builder)方法，在该方法内执行
+            </summary>
+            <param name="containerBuilder">容器生成器</param>
+            <param name="param">参数</param>
+        </member>
+    </members>
+</doc>
