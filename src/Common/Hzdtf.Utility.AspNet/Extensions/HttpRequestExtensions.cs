@@ -93,7 +93,7 @@ namespace Microsoft.AspNetCore.Http
         /// </summary>
         /// <param name="request">http请求</param>
         /// <returns>客户端请求IP</returns>
-        public static string GetClientRequestIPForFoxUC(this HttpRequest request)
+        public static string GetClientRequestIPForHzdtf(this HttpRequest request)
         {
             if (request.Headers != null && request.Headers.ContainsKey(App.CLIENT_REMOTE_IP_HEAD_KEY))
             {

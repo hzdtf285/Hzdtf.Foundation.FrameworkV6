@@ -26,7 +26,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="service">服务收藏</param>
         /// <returns>服务收藏</returns>
-        public static IServiceCollection AddDefaultFoxUCUtility(this IServiceCollection service)
+        public static IServiceCollection AddDefaultHzdtfUtility(this IServiceCollection service)
         {
             service.AddSingleton<IAsyncReleaseInt, AsyncReleaseInt>();
             service.AddSingleton<IAsyncReleaseLong, AsyncReleaseLong>();

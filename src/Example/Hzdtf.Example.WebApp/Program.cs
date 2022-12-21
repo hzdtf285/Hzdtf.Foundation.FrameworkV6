@@ -18,7 +18,7 @@ builder.Services.AddControllers()
 
 builder.Services.AddSession();
 
-builder.Services.AddFoxUCLog();
+builder.Services.AddHzdtfLog();
 
 builder.Services.AddIdentityAuth<int>(options =>
 {

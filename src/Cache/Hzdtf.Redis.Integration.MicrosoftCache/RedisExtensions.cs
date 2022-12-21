@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="key">键，默认是Master</param>
         /// <param name="instanceName">实例名，默认是Master</param>
         /// <returns>服务收藏</returns>
-        public static IServiceCollection AddFoxUCDistributedRedisCache(this IServiceCollection services, string key = "Master", string instanceName = "Master")
+        public static IServiceCollection AddHzdtfDistributedRedisCache(this IServiceCollection services, string key = "Master", string instanceName = "Master")
         {
             if (string.IsNullOrWhiteSpace(key))
             {

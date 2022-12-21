@@ -95,7 +95,7 @@ namespace Microsoft.AspNetCore.Http
                     commType = GRpcExtensions.IsRequestGRpc(context.Request.ContentType) ? CommunicationMode.GRPC : CommunicationMode.HTTP;
                 }
                
-                var clientRemoteIp = context.Request.GetClientRequestIPForFoxUC();
+                var clientRemoteIp = context.Request.GetClientRequestIPForHzdtf();
                 var token = authToken == null ? context.Request.GetBearerOriginTokenFromHeader() : authToken.GetToken(context);
                 result = new CommonUseData(controller: controller, action: action, path: path,
                     commMode: commType, clientRemoteIp: clientRemoteIp, token: token)

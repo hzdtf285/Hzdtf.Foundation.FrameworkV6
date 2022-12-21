@@ -25,8 +25,8 @@ namespace Hzdtf.CodeGenerator
         static void Main()
         {
             var services = new ServiceCollection();
-            services.AddDefaultFoxUCUtility();
-            services.AddFoxUCLog(protoLogType: typeof(IntegrationNLog));
+            services.AddDefaultHzdtfUtility();
+            services.AddHzdtfLog(protoLogType: typeof(IntegrationNLog));
 
             var assemblyConfigLocalMember = new AssemblyConfigLocalMember();
             assemblyConfigLocalMember.ProtoAssemblyConfigReader = new AssemblyConfigXml();

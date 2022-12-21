@@ -42,14 +42,14 @@ namespace Hzdtf.Logger.Contract
 
             if (string.IsNullOrWhiteSpace(App.CurrConfig["Logging:LogLevel:Default"]))
             {
-                if (string.IsNullOrWhiteSpace(App.CurrConfig["FoxUCLog:LogLevel:Default"]))
+                if (string.IsNullOrWhiteSpace(App.CurrConfig["HzdtfLog:LogLevel:Default"]))
                 {
                     ILogRecordLevel logLevel = new DefaultLogRecordLevel();
                     SetRecordLevel(logLevel.GetRecordLevel());
                 }
                 else
                 {
-                    return App.CurrConfig["FoxUCLog:LogLevel:Default"];
+                    return App.CurrConfig["HzdtfLog:LogLevel:Default"];
                 }
             }
             else

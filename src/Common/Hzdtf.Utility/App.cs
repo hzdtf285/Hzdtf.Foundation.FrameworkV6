@@ -251,7 +251,7 @@ namespace Hzdtf.Utility
         /// <summary>
         /// 客户端远程IP头键
         /// </summary>
-        public const string CLIENT_REMOTE_IP_HEAD_KEY = "FoxUC_ClientRemoteIp";
+        public const string CLIENT_REMOTE_IP_HEAD_KEY = "Hzdtf_ClientRemoteIp";
 
         /// <summary>
         /// 获取token回调

@@ -83,13 +83,13 @@ namespace Hzdtf.Logger.Exceptionless
             {
                 if (string.IsNullOrWhiteSpace(App.CurrConfig["Logging:LogLevel:Default"]))
                 {
-                    if (string.IsNullOrWhiteSpace(App.CurrConfig["FoxUCLog:LogLevel:Default"]))
+                    if (string.IsNullOrWhiteSpace(App.CurrConfig["HzdtfLog:LogLevel:Default"]))
                     {
                         return null;
                     }
                     else
                     {
-                        return App.CurrConfig["FoxUCLog:LogLevel:Default"];
+                        return App.CurrConfig["HzdtfLog:LogLevel:Default"];
                     }
                 }
                 else

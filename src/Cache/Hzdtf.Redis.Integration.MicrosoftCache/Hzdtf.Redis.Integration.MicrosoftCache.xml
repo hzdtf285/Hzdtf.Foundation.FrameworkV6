@@ -10,7 +10,7 @@
             @ 黄振东
             </summary>
         </member>
-        <member name="M:Microsoft.Extensions.DependencyInjection.RedisExtensions.AddFoxUCDistributedRedisCache(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String)">
+        <member name="M:Microsoft.Extensions.DependencyInjection.RedisExtensions.AddHzdtfDistributedRedisCache(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String,System.String)">
             <summary>
             添加分布式Redis缓存
             缓存配置会读取IRedisConfigOptionParse接口的实例，默认是RedisConfigOptionParse

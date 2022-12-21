@@ -261,7 +261,7 @@
             @ 黄振东
             </summary>
         </member>
-        <member name="M:Microsoft.Extensions.DependencyInjection.IntegrationLogExtensions.AddFoxUCLog(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Microsoft.Extensions.Logging.ILoggingBuilder,Microsoft.Extensions.Logging.ILoggerProvider})">
+        <member name="M:Microsoft.Extensions.DependencyInjection.IntegrationLogExtensions.AddHzdtfLog(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Type,System.Action{Microsoft.Extensions.Logging.ILoggingBuilder,Microsoft.Extensions.Logging.ILoggerProvider})">
             <summary>
             添加Hzdtf日志
             默认原生日志为控制台日志（ConsoleLog）

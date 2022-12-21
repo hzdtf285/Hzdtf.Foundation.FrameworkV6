@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="protoLogType">原生日志类型，必须是实现ILogable的接口实现类类型，默认是ConsoleLog实现类</param>
         /// <param name="options">回调选项，如果需要指定原生日志对象，则需要配置；否则使用默认的原生日志</param>
         /// <returns>服务收藏</returns>
-        public static IServiceCollection AddFoxUCLog(this IServiceCollection services, Type protoLogType = null, Action<ILoggingBuilder, ILoggerProvider> options = null)
+        public static IServiceCollection AddHzdtfLog(this IServiceCollection services, Type protoLogType = null, Action<ILoggingBuilder, ILoggerProvider> options = null)
         {
             services.AddSingleton<ILoggerProvider, IntegrationLogProvider>();
             if (protoLogType == null)
