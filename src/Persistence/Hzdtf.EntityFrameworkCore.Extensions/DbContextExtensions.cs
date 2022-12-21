@@ -137,7 +137,7 @@ namespace Microsoft.EntityFrameworkCore
         /// <summary>
         /// 执行SQL并返回第1行第1列的值
         /// </summary>
-        /// <typeparam name="DbContextT"></typeparam>
+        /// <typeparam name="DbContextT">数据库上下文类型</typeparam>
         /// <typeparam name="ReturnT">返回类型</typeparam>
         /// <param name="context">数据库上下文</param>
         /// <param name="sql">SQL语句</param>
