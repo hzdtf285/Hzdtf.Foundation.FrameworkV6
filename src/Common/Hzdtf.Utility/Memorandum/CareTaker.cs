@@ -8,6 +8,7 @@ namespace Hzdtf.Utility.Memorandum
 {
     /// <summary>
     /// 守护者
+    /// @ 黄振东
     /// </summary>
     /// <typeparam name="StateT">状态类型</typeparam>
     public class CareTaker<StateT> : ICareTaker<StateT>

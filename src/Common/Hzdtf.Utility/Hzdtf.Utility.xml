@@ -4071,6 +4071,7 @@
         <member name="T:Hzdtf.Utility.Memorandum.CareTaker`1">
             <summary>
             守护者
+            @ 黄振东
             </summary>
             <typeparam name="StateT">状态类型</typeparam>
         </member>
@@ -4101,6 +4102,7 @@
         <member name="T:Hzdtf.Utility.Memorandum.ICareTaker`1">
             <summary>
             守护者接口
+            @ 黄振东
             </summary>
             <typeparam name="StateT">状态类型</typeparam>
         </member>
