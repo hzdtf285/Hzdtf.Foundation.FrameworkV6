@@ -12,7 +12,7 @@ namespace Hzdtf.BasicFunction.Model
     /// <summary>
     /// TestInfo信息
     /// </summary>
-    public partial class TestInfo : PersonTimeTeantInfo<int>
+    public partial class TestInfo : PersonTimeTenantInfo<int>
     {
 ﻿        /// <summary>
         /// Name_名称

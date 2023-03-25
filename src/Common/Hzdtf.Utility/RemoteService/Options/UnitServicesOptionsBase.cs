@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Sockets;
 
 namespace Hzdtf.Utility.RemoteService.Options
 {
@@ -15,13 +13,21 @@ namespace Hzdtf.Utility.RemoteService.Options
         /// <summary>
         /// 构造方法
         /// </summary>
-        /// <param name="jsonFile">json文件</param>
         /// <param name="isExecWrite">是否执行写入</param>
-        public UnitServicesOptionsBase(string jsonFile = "Config/serviceBuilderConfig.json", bool isExecWrite = true)
+        public UnitServicesOptionsBase(bool isExecWrite = true)
         {
+            string file = null;
+            if (App.CurrConfig == null || string.IsNullOrWhiteSpace(App.CurrConfig["ServiceBuilderFile"]))
+            {
+                file = "Config/serviceBuilderConfig.json";
+            }
+            else
+            {
+                file = App.CurrConfig["ServiceBuilderFile"];
+            }
             if (isExecWrite)
             {
-                InitJsonFile(jsonFile);
+                InitJsonFile(file);
             }
         }
 

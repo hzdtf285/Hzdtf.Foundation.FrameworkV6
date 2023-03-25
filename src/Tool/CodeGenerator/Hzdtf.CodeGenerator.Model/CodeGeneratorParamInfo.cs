@@ -49,7 +49,7 @@ namespace Hzdtf.CodeGenerator.Model
         /// <summary>
         /// 是否租赁
         /// </summary>
-        public bool IsTeant
+        public bool IsTenant
         {
             get;
             set;

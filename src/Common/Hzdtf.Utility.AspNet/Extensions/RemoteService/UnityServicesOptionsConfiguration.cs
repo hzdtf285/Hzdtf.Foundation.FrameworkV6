@@ -30,8 +30,18 @@ namespace Hzdtf.Utility.AspNet.Extensions.RemoteService
         /// </summary>
         /// <param name="beforeConfigurationBuilder">配置生成前回调</param>
         public UnityServicesOptionsConfiguration(Action<IConfigurationBuilder, string, object> beforeConfigurationBuilder = null)
-            : base(AppContext.BaseDirectory + "/Config/serviceBuilderConfig.json", beforeConfigurationBuilder)
+            : base(default(string), beforeConfigurationBuilder)
         {
+            string file = null;
+            if (App.CurrConfig == null || string.IsNullOrWhiteSpace(App.CurrConfig["ServiceBuilderFile"]))
+            {
+                file = "Config/serviceBuilderConfig.json";
+            }
+            else
+            {
+                file = App.CurrConfig["ServiceBuilderFile"];
+            }
+            InitFile(file, true);
         }
 
         /// <summary>

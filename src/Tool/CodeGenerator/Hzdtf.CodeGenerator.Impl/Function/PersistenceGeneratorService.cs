@@ -193,7 +193,7 @@ namespace Hzdtf.CodeGenerator.Impl.Function
 
                     if (!IGNORE_UPDATE_PROPS.Contains(propName))
                     {
-                        if (!(codeParam.IsTeant && "TeantId".Equals(propName)))
+                        if (!(codeParam.IsTenant && "TenantId".Equals(propName)))
                         {
                             updFiled.Append($"            \"{c.Name}\",");
                             if (i < table.Columns.Count - 1)

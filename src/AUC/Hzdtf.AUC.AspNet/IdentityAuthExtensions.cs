@@ -4,8 +4,10 @@ using Hzdtf.AUC.Contract.IdentityAuth;
 using Hzdtf.AUC.Contract.IdentityAuth.Token;
 using Hzdtf.Utility;
 using Hzdtf.Utility.Enums;
+using Hzdtf.Utility.Extensions;
 using Hzdtf.Utility.Factory;
 using Hzdtf.Utility.Model;
+using Grpc.Core;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -146,6 +148,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
                     break;
             }
+
+            services.AddAuthorization();
 
             return services;
         }

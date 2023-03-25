@@ -10,6 +10,7 @@ namespace Hzdtf.Utility.Model
 {
     /// <summary>
     /// JqG网格树信息
+    /// @ 黄振东
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
     public class JqGridTreeInfo<IdT> : SimpleInfo<IdT>

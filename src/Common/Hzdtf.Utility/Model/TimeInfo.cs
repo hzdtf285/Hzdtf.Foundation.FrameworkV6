@@ -1,4 +1,6 @@
-﻿using MessagePack;
+﻿using Hzdtf.Utility.ObjectInnerConvert.Attr;
+using Hzdtf.Utility.ObjectInnerConvert;
+using MessagePack;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -26,6 +28,7 @@ namespace Hzdtf.Utility.Model
         [JsonProperty("createTime")]
         [Display(AutoGenerateField = false)]
         [MessagePack.Key("createTime")]
+        [TypeConvertValue(ConvertType = TypeConvertEnum.LocalTime)]
         public DateTime CreateTime
         {
             get;
@@ -43,6 +46,7 @@ namespace Hzdtf.Utility.Model
         [JsonProperty("modifyTime")]
         [Display(AutoGenerateField = false)]
         [MessagePack.Key("modifyTime")]
+        [TypeConvertValue(ConvertType = TypeConvertEnum.LocalTime)]
         public DateTime ModifyTime
         {
             get;

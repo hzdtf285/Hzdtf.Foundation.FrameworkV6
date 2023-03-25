@@ -51,7 +51,7 @@ namespace Hzdtf.Utility.Safety
         /// <summary>
         /// 解密
         /// </summary>
-        /// <param name="ciphertext ">密文</param>
+        /// <param name="ciphertext">密文</param>
         /// <returns>解密后的字符串</returns>
         public string Decrypt(string ciphertext) => DESUtil.Decrypt(ciphertext, key, iv);
     }

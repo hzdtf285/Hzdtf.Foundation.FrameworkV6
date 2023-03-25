@@ -1,4 +1,6 @@
-﻿using MessagePack;
+﻿using Hzdtf.Utility.Attr;
+using Hzdtf.Utility.Utils;
+using MessagePack;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -94,20 +96,20 @@ namespace Hzdtf.Utility.Model
     /// 简单租赁信息
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
-    public class SimpleTeantInfo<IdT> : SimpleInfo<IdT>
+    public class SimpleTenantInfo<IdT> : SimpleInfo<IdT>
     {
         /// <summary>
         /// 租赁ID_名称
         /// </summary>
-        public const string TeantId_Name = "TeantId";
+        public const string TenantID_Name = "TenantId";
 
         /// <summary>
         /// 租赁ID
         /// </summary>
-        [JsonProperty("teantId")]
+        [JsonProperty("tenantId")]
         [Display(Name = "租赁ID", Order = 10, AutoGenerateField = false)]
-        [MessagePack.Key("teantId")]
-        public IdT TeantId
+        [MessagePack.Key("tenantId")]
+        public IdT TenantId
         {
             get;
             set;

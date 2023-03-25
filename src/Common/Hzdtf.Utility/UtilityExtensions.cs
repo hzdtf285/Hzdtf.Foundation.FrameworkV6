@@ -3,6 +3,7 @@ using Hzdtf.Utility.HostConfig;
 using Hzdtf.Utility.InterfaceImpl;
 using Hzdtf.Utility.Localization;
 using Hzdtf.Utility.Model.Identitys;
+using Hzdtf.Utility.ObjectInnerConvert;
 using Hzdtf.Utility.ProcessCall;
 using Hzdtf.Utility.Proxy;
 using Hzdtf.Utility.RequestResource;
@@ -51,6 +52,7 @@ namespace Microsoft.Extensions.DependencyInjection
             service.AddSingleton<IIdentity<Guid>, GuidId>();
 
             service.AddSingleton<IBusinessDispatchProxy, RpcDispatchProxyClient>();
+            service.AddSingleton<IObjectInnerConvert, ObjectInnerConvert>();
 
             return service;
         }

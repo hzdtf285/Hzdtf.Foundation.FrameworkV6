@@ -51,7 +51,7 @@
             主键类型
             </summary>
         </member>
-        <member name="P:Hzdtf.CodeGenerator.Model.CodeParamInfo.IsTeant">
+        <member name="P:Hzdtf.CodeGenerator.Model.CodeParamInfo.IsTenant">
             <summary>
             是否租赁
             </summary>

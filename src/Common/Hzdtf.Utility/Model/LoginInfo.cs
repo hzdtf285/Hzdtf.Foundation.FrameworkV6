@@ -10,6 +10,7 @@ namespace Hzdtf.Utility.Model
 {
     /// <summary>
     /// 登录信息
+    /// @ 黄振东
     /// </summary>
     [MessagePackObject]
     public class LoginInfo

@@ -19,7 +19,7 @@ namespace Hzdtf.Persistence.Contract.Data
 {
     /// <summary>
     /// 持久化基类
-    /// 如果可实例化的子类包含有TeantId属性（字段），则默认代表中存在租赁ID，本类对外提供所有的增/删/改/查操作都自动加上租赁ID约束，同时取租赁ID时，默认取当前用户的租房ID属性（则执行UserTool.GetCurrUser()方法）
+    /// 如果可实例化的子类包含有TenantId属性（字段），则默认代表中存在租赁ID，本类对外提供所有的增/删/改/查操作都自动加上租赁ID约束，同时取租赁ID时，默认取当前用户的租房ID属性（则执行UserTool.GetCurrUser()方法）
     /// @ 黄振东
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
@@ -939,34 +939,34 @@ namespace Hzdtf.Persistence.Contract.Data
         /// </summary>
         /// <param name="comData">通用数据</param>
         /// <returns>查询时是否需要追加租赁ID为过滤条件</returns>
-        protected virtual bool IsExistsTeantId(CommonUseData comData = null)
+        protected virtual bool IsExistsTenantId(CommonUseData comData = null)
         {
-            return IsExistsTeantId(out _, comData);
+            return IsExistsTenantId(out _, comData);
         }
 
         /// <summary>
         /// 是否存在租赁ID
         /// </summary>
-        /// <param name="currUserTeantId">当前用户租赁ID</param>
+        /// <param name="currUserTenantId">当前用户租赁ID</param>
         /// <param name="comData">通用数据</param>
         /// <returns>是否存在租赁ID</returns>
-        protected virtual bool IsExistsTeantId(out IdT currUserTeantId, CommonUseData comData = null)
+        protected virtual bool IsExistsTenantId(out IdT currUserTenantId, CommonUseData comData = null)
         {
-            currUserTeantId = default(IdT);
+            currUserTenantId = default(IdT);
             return false; // 暂时返回false
 
-            if (ModelContainerTeantId())
+            if (ModelContainerTenantId())
             {
                 var currUser = UserTool<IdT>.GetCurrUser(comData);
                 if (currUser == null)
                 {
                     return false;
                 }
-                if (identity.IsEmpty(currUser.TeantId))
+                if (identity.IsEmpty(currUser.TenantId))
                 {
                     return false;
                 }
-                currUserTeantId = currUser.TeantId;
+                currUserTenantId = currUser.TenantId;
 
                 return true;
             }
@@ -978,47 +978,47 @@ namespace Hzdtf.Persistence.Contract.Data
         /// 模型是否包含租赁ID
         /// </summary>
         /// <returns>模型是否包含租赁ID</returns>
-        protected virtual bool ModelContainerTeantId() => false;
+        protected virtual bool ModelContainerTenantId() => false;
 
         /// <summary>
         /// 模型是否已设置租赁ID
         /// </summary>
         /// <param name="model">模型</param>
         /// <returns>模型是否已设置租赁ID</returns>
-        protected virtual bool ModelIsSetTeantId(ModelT model) => false;
+        protected virtual bool ModelIsSetTenantId(ModelT model) => false;
 
         /// <summary>
         /// 查询是否追加租赁ID，默认为否
         /// </summary>
         /// <returns>查询是否不追加租赁ID</returns>
-        protected virtual bool SelectIsAppendTeantId() => false;
+        protected virtual bool SelectIsAppendTenantId() => false;
 
         /// <summary>
         /// 设置模型的租赁ID
         /// </summary>
         /// <param name="model">模型</param>
-        /// <param name="teantId">租赁ID</param>
-        protected virtual void SetTeantId(ModelT model, IdT teantId)
+        /// <param name="tenantId">租赁ID</param>
+        protected virtual void SetTenantId(ModelT model, IdT tenantId)
         {
             if (model == null)
             {
                 return;
             }
 
-            if (model is PersonTimeTeantInfo<ModelT>)
+            if (model is PersonTimeTenantInfo<ModelT>)
             {
-                var temp = model as PersonTimeTeantInfo<IdT>;
-                temp.TeantId = teantId;
+                var temp = model as PersonTimeTenantInfo<IdT>;
+                temp.TenantId = tenantId;
             }
-            if (model is PersonTimeTeantInfo<IdT>)
+            if (model is PersonTimeTenantInfo<IdT>)
             {
-                var temp = model as PersonTimeTeantInfo<IdT>;
-                temp.TeantId = teantId;
+                var temp = model as PersonTimeTenantInfo<IdT>;
+                temp.TenantId = tenantId;
             }
             else if (model is BasicUserInfo<IdT>)
             {
                 var temp = model as BasicUserInfo<IdT>;
-                temp.TeantId = teantId;
+                temp.TenantId = tenantId;
             }
         }
 

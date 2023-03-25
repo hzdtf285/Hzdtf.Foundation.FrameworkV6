@@ -19,6 +19,19 @@ namespace Hzdtf.Utility.Event
         void Bind(Type eventSourceType, Type eventHandlerType);
 
         /// <summary>
+        /// 绑定事件源与事件处理的关系
+        /// </summary>
+        /// <param name="eventSourceType">事件源类型</param>
+        void Bind<HandlerT>(Type eventSourceType) where HandlerT : IEventHandler;
+
+        /// <summary>
+        /// 绑定事件源与事件处理的关系
+        /// </summary>
+        /// <param name="eventSourceType">事件源类型</param>
+        /// <param name="eventHandler">事件处理</param>
+        void Bind(Type eventSourceType, IEventHandler eventHandler);
+
+        /// <summary>
         /// 解绑事件源与事件处理的关系
         /// </summary>
         /// <param name="eventSourceType">事件源类型</param>

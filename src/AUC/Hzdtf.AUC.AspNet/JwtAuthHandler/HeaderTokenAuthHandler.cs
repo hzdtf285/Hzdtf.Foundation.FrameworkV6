@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Grpc.Core;
 
 namespace Hzdtf.AUC.AspNet.JwtAuthHandler
 {
@@ -23,6 +24,11 @@ namespace Hzdtf.AUC.AspNet.JwtAuthHandler
             {
                 var httpContext = context as HttpContext;
                 return AuthUtil.GetBearerOriginalToken(httpContext.Request.Headers[AuthUtil.AUTH_KEY]);
+            }
+            else if (context is Metadata)
+            {
+                var metadata = context as Metadata;
+                return AuthUtil.GetBearerOriginalToken(metadata.GetValue(AuthUtil.AUTH_KEY));
             }
             else
             {

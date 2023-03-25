@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NPOI.POIFS.Crypt.Dsig;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -15,7 +16,14 @@ namespace Hzdtf.Utility.Data.Config
         /// <summary>
         /// 文件
         /// </summary>
-        protected readonly string file;
+        protected string file;
+
+        /// <summary>
+        /// 构造方法
+        /// </summary>
+        public FileConfigurationBase()
+        {
+        }
 
         /// <summary>
         /// 构造方法
@@ -41,6 +49,20 @@ namespace Hzdtf.Utility.Data.Config
             if (isExecWrite)
             {
                 Write(data);
+            }
+        }
+
+        /// <summary>
+        /// 初始化文件
+        /// </summary>
+        /// <param name="file">文件</param>
+        /// <param name="isExecWrite">是否执行写入</param>
+        protected void InitFile(string file, bool isExecWrite = true)
+        {
+            this.file = file;
+            if (isExecWrite)
+            {
+                InitFile(file);
             }
         }
 

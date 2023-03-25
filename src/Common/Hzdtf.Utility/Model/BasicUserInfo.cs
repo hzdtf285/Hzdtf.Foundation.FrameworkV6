@@ -1,5 +1,7 @@
 ﻿using Hzdtf.Utility.Attr;
 using Hzdtf.Utility.Conversion;
+using Hzdtf.Utility.ObjectInnerConvert.Attr;
+using Hzdtf.Utility.ObjectInnerConvert;
 using MessagePack;
 using Newtonsoft.Json;
 using System;
@@ -41,7 +43,7 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 密码_名称
         /// </summary>
-        public const string Password_Name = "Password";
+        public const string Password_Name = "password";
 
         /// <summary>
         /// 密码
@@ -97,16 +99,17 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 登录时间_名称
         /// </summary>
-        public const string LoginTime_Name = "LoginTime";
+        public const string LoginDateTime_Name = "LoginDateTime";
 
         /// <summary>
         /// 登录时间
         /// </summary>
-        [JsonProperty("loginTime")]
+        [JsonProperty("loginDateTime")]
         [DisplayValueConvert(typeof(DateTimeValueToTextConvert))]
         [Display(Name = "登录时间", Order = 5, AutoGenerateField = false)]
-        [MessagePack.Key("loginTime")]
-        public DateTime? LoginTime
+        [MessagePack.Key("loginDateTime")]
+        [TypeConvertValue(ConvertType = TypeConvertEnum.LocalTime)]
+        public DateTime? LoginDateTime
         {
             get;
             set;
@@ -158,10 +161,11 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 退出登录时间
         /// </summary>
-        [JsonProperty("LogoutTime")]
+        [JsonProperty("logoutTime")]
         [DisplayValueConvert(typeof(DateTimeValueToTextConvert))]
         [Display(Name = "退出登录时间", Order = 8, AutoGenerateField = false)]
-        [MessagePack.Key("LogoutTime")]
+        [MessagePack.Key("logoutTime")]
+        [TypeConvertValue(ConvertType = TypeConvertEnum.LocalTime)]
         public DateTime? LogoutTime
         {
             get;
@@ -172,16 +176,16 @@ namespace Hzdtf.Utility.Model
         /// 租赁ID_名称
         /// 一般情况没有，特殊情况下有用，如SAAS中的租赁
         /// </summary>
-        public const string TeantId_Name = "teantId";
+        public const string TenantId_Name = "tenantId";
 
         /// <summary>
         /// 租赁ID
         /// 一般情况没有，特殊情况下有用，如SAAS中的租赁
         /// </summary>
-        [JsonProperty("teantId")]
+        [JsonProperty("tenantId")]
         [Display(Name = "租赁ID", Order = 999, AutoGenerateField = false)]
-        [MessagePack.Key("teantId")]
-        public IdT TeantId
+        [MessagePack.Key("tenantId")]
+        public IdT TenantId
         {
             get;
             set;
@@ -190,17 +194,17 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 租赁ID字符串_名称
         /// </summary>
-        public const string TeantIdString_Name = "TeantIdString";
+        public const string TenantIdString_Name = "TenantIDString";
 
         /// <summary>
         /// 租赁ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
         /// </summary>
-        [JsonProperty("teantIdString")]
+        [JsonProperty("tenantIdString")]
         [Display(AutoGenerateField = false)]
-        [MessagePack.Key("teantIdString")]
-        public string TeantIdString
+        [MessagePack.Key("tenantIdString")]
+        public string TenantIDString
         {
-            get => TeantId.ToString();
+            get => TenantId.ToString();
         }
     }
 

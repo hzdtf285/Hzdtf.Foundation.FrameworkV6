@@ -11,6 +11,7 @@ namespace Hzdtf.Utility.AspNet.Extensions.Culture
 {
     /// <summary>
     /// 文化中间件
+    /// @ 黄振东
     /// </summary>
     public class CultureMiddleware
     {

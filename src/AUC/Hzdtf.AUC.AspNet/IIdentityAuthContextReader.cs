@@ -1,5 +1,4 @@
-﻿using Hzdtf.Utility.Data;
-using Hzdtf.Utility.Model;
+﻿using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Model.Return;
 using Microsoft.AspNetCore.Http;
 using System;

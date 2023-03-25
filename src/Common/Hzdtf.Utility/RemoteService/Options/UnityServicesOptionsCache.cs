@@ -25,15 +25,28 @@ namespace Hzdtf.Utility.RemoteService.Options
         /// 构造方法
         /// </summary>
         public UnityServicesOptionsCache()
-            : base(AppContext.BaseDirectory + "/Config/serviceBuilderConfig.json")
         {
+            string file = null;
+            if (App.CurrConfig == null || string.IsNullOrWhiteSpace(App.CurrConfig["ServiceBuilderFile"]))
+            {
+                file = "Config/serviceBuilderConfig.json";
+            }
+            else
+            {
+                file = App.CurrConfig["ServiceBuilderFile"];
+            }
+
+            this.InitFile(file);
         }
 
         /// <summary>
         /// 构造方法
         /// </summary>
         /// <param name="jsonFile">json文件</param>
-        public UnityServicesOptionsCache(string jsonFile) : base(jsonFile) { }
+        public UnityServicesOptionsCache(string jsonFile)
+        {
+            this.InitFile(jsonFile);
+        }
 
         /// <summary>
         /// 构造方法

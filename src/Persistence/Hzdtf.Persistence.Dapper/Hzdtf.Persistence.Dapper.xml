@@ -190,7 +190,7 @@
             <param name="comData">通用数据</param>
             <returns>SQL语句</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetTeantIdFilterSql(System.Boolean,System.Boolean,System.String,Hzdtf.Utility.Model.CommonUseData)">
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetTenantIdFilterSql(System.Boolean,System.Boolean,System.String,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             获取租赁ID筛选SQL
             </summary>
@@ -200,7 +200,7 @@
             <param name="comData">通用数据</param>
             <returns>租赁ID筛选SQL</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetTeantIdFilterSql2(System.Boolean,System.Boolean,System.String,Hzdtf.Utility.Model.CommonUseData)">
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.GetTenantIdFilterSql2(System.Boolean,System.Boolean,System.String,Hzdtf.Utility.Model.CommonUseData)">
             <summary>
             获取租赁ID筛选SQL2
             </summary>
@@ -321,13 +321,13 @@
             <param name="comData">通用数据</param>
             <returns>SQL语句</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.ModelContainerTeantId">
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.ModelContainerTenantId">
             <summary>
             模型是否包含租赁ID
             </summary>
             <returns>模型是否包含租赁ID</returns>
         </member>
-        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.ModelIsSetTeantId(`1)">
+        <member name="M:Hzdtf.Persistence.Dapper.CommonUseSqlDapperBase`2.ModelIsSetTenantId(`1)">
             <summary>
             模型是否已设置租赁ID
             </summary>

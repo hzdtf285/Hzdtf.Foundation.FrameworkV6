@@ -41,15 +41,7 @@ namespace Grpc.Net.Client
         /// </summary>
         public static readonly MethodConfig DefaultMethodConfig = new MethodConfig()
         {
-            Names = { MethodName.Default },
-            RetryPolicy = new RetryPolicy()
-            {
-                MaxAttempts = 5,
-                InitialBackoff = TimeSpan.FromSeconds(1),
-                MaxBackoff = TimeSpan.FromSeconds(5),
-                BackoffMultiplier = 1.5,
-                RetryableStatusCodes = { StatusCode.Unavailable, StatusCode.Aborted }
-            }
+            Names = { MethodName.Default }
         };
 
         /// <summary>
@@ -87,6 +79,73 @@ namespace Grpc.Net.Client
 
             var channel = options == null ? GrpcChannel.ForAddress(address) : GrpcChannel.ForAddress(address, options);
             ExecCallBusiness(address, cusOptions, channel, headers, eventId, action, exAction);
+        }
+
+        /// <summary>
+        /// 创建Metadata
+        /// </summary>
+        /// <param name="comData">通用数据</param>
+        /// <returns>Metadata</returns>
+        public static Metadata CreateMetadata(this CommonUseData comData)
+        {
+            var headers = new Metadata();
+            SetMetadata(headers, comData);
+
+            return headers;
+        }
+
+
+        /// <summary>
+        /// 设置Metadata
+        /// </summary>
+        /// <param name="headers">Metadata</param>
+        /// <param name="comData">通用数据</param>
+        public static void SetMetadata(this Metadata headers, CommonUseData comData)
+        {
+            if (comData == null)
+            {
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(comData.ClientRemoteIp))
+            {
+                headers.Add(App.CLIENT_REMOTE_IP_HEAD_KEY, comData.ClientRemoteIp);
+            }
+            var token = comData.GetToken();
+            if (!string.IsNullOrWhiteSpace(token))
+            {
+                headers.Add($"{AuthUtil.AUTH_KEY}", token.AddBearerToken());
+            }
+            var eventId = comData.GetEventId();
+            if (!string.IsNullOrWhiteSpace(eventId))
+            {
+                headers.Add(App.EVENT_ID_KEY, eventId);
+            }
+
+            if (!string.IsNullOrWhiteSpace(comData.Controller))
+            {
+                headers.Add("Controller", comData.Controller);
+            }
+            if (!string.IsNullOrWhiteSpace(comData.Action))
+            {
+                headers.Add("Action", comData.Action);
+            }
+            if (!string.IsNullOrWhiteSpace(comData.Path))
+            {
+                headers.Add("Path", comData.Path);
+            }
+            if (!string.IsNullOrWhiteSpace(comData.MenuCode))
+            {
+                headers.Add("MenuCode", comData.MenuCode);
+            }
+            if (!comData.FunctionCodes.IsNullOrLength0())
+            {
+                headers.Add("FunctionCodes", comData.FunctionCodes.ToJsonString());
+            }
+            if (!string.IsNullOrWhiteSpace(comData.Key))
+            {
+                headers.Add("Key", comData.Key);
+            }
         }
 
         /// <summary>

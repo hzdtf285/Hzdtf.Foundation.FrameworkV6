@@ -10,6 +10,6 @@
   "BuilderItem": {
     "Namespace": "Hzdtf.Example",
     "PkType": "雪花算法",
-    "IsMerchant": false
+    "IsTenant": false
   }
 }

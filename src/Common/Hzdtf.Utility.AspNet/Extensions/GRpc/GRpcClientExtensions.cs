@@ -5,6 +5,14 @@ using Grpc.Net.Client.Balancer;
 using Grpc.Net.ClientFactory;
 using System;
 using Grpc.Net.Client;
+using Hzdtf.Utility.GRpc.Pool.Service;
+using Hzdtf.Utility.GRpc.Pool;
+using Hzdtf.Utility.RemoteService.Builder;
+using Hzdtf.Utility.AspNet.Extensions.GRpc;
+using Hzdtf.Utility.Data;
+using Hzdtf.Utility.Pool;
+using Hzdtf.Utility.RemoteService.Provider;
+using Hzdtf.Utility.RemoteService.Options;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -68,6 +76,71 @@ namespace Microsoft.Extensions.DependencyInjection
             else
             {
                 services.AddGrpcClient<GRpcClientT>(clientName, fun);
+            }
+
+            return services;
+        }
+
+        /// <summary>
+        /// 添加GRpc客户端池
+        /// </summary>
+        /// <param name="services">服务收藏</param>
+        /// <param name="options">grpc客户端池配置</param>
+        /// <returns>服务收藏</returns>
+        public static IServiceCollection AddGRpcClientTool(this IServiceCollection services, Action<GRpcClientPoolOptions> options = null)
+        {
+            var config = new GRpcClientPoolOptions();
+            if (options != null)
+            {
+                options(config);
+            }
+            if (config.PoolConfig != null)
+            {
+                var handle = new PoolConfigHandle<string, GrpcChannelOptions>();
+                handle.Set(config.PoolConfig);
+
+                services.AddSingleton<IGetObject<PoolConfigInfo<string, GrpcChannelOptions>>>(handle);
+                services.AddSingleton<ISetObject<PoolConfigInfo<string, GrpcChannelOptions>>>(handle);
+            }
+            if (config.ServiceBuilderType == null)
+            {
+                services.AddSingleton<IUnityServicesBuilder, UnityServicesBuilder>();
+            }
+            else
+            {
+                services.AddSingleton(typeof(IUnityServicesBuilder), config.ServiceBuilderType);
+            }
+            if (config.PoolType == null)
+            {
+                services.AddSingleton<IGRpcChannelPool, GRpcChannelPool>();
+            }
+            else
+            {
+                services.AddSingleton(typeof(IGRpcChannelPool), config.PoolType);
+            }
+            if (config.ServicePoolType == null)
+            {
+                services.AddSingleton<IGRpcUnityServicePool, GRpcUnityServicePool>();
+            }
+            else
+            {
+                services.AddSingleton(typeof(IGRpcUnityServicePool), config.ServicePoolType);
+            }
+            if (config.ProviderType == null)
+            {
+                services.AddSingleton<IServicesProvider, HostConfigServiceProvider>();
+            }
+            else
+            {
+                services.AddSingleton(typeof(IServicesProvider), config.ProviderType);
+            }
+            if (config.ServicesOptionsType == null)
+            {
+                services.AddSingleton<IUnityServicesOptions, UnityServicesOptionsCache>();
+            }
+            else
+            {
+                services.AddSingleton(typeof(IUnityServicesOptions), config.ServicesOptionsType);
             }
 
             return services;

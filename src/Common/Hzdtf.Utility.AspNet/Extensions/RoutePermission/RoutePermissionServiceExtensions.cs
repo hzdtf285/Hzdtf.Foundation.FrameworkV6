@@ -1,7 +1,7 @@
 ﻿using Hzdtf.Utility.AspNet.Extensions.RoutePermission;
 using Hzdtf.Utility.RoutePermission;
 using Hzdtf.Utility.UserPermission;
-using Hzdtf.Utility.UserPermission.Teant;
+using Hzdtf.Utility.UserPermission.Tenant;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -68,17 +68,17 @@ namespace Microsoft.Extensions.DependencyInjection
         /// 添加租赁用户路由权限服务
         /// </summary>
         /// <typeparam name="IdT">ID类型</typeparam>
-        /// <typeparam name="TeantUserPermissionImplT">租赁用户权限实现类型</typeparam>
+        /// <typeparam name="TenantUserPermissionImplT">租赁用户权限实现类型</typeparam>
         /// <param name="services">服务收藏</param>
         /// <param name="options">路由权限选项配置</param>
         /// <returns>服务收藏</returns>
-        public static IServiceCollection AddTeantUserRoutePermission<IdT, TeantUserPermissionImplT>(this IServiceCollection services, Action<RoutePermissionOptions> options = null)
-            where TeantUserPermissionImplT : class, ITeantUserMenuReader<IdT>
+        public static IServiceCollection AddTenantUserRoutePermission<IdT, TenantUserPermissionImplT>(this IServiceCollection services, Action<RoutePermissionOptions> options = null)
+            where TenantUserPermissionImplT : class, ITenantUserMenuReader<IdT>
         {
             services.AddRoutePermission(options);
 
-            services.AddSingleton<ITeantUserMenuPermission<IdT>, TeantUserMenuLocalCache<IdT>>();
-            services.AddSingleton<ITeantUserMenuReader<IdT>, TeantUserPermissionImplT>();
+            services.AddSingleton<ITenantUserMenuPermission<IdT>, TenantUserMenuLocalCache<IdT>>();
+            services.AddSingleton<ITenantUserMenuReader<IdT>, TenantUserPermissionImplT>();
 
             return services;
         }

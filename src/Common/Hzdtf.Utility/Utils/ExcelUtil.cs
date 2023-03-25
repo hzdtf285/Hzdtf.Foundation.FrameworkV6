@@ -178,7 +178,7 @@ namespace Hzdtf.Utility.Utils
                 ms = new MemoryStream();
 
                 //写入到流
-                workbook.Write(ms, false);
+                workbook.Write(ms, true);
 
                 return ms;
             }

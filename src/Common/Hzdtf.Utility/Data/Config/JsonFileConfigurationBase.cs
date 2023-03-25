@@ -14,6 +14,13 @@ namespace Hzdtf.Utility.Data.Config
         /// <summary>
         /// 构造方法
         /// </summary>
+        public JsonFileConfigurationBase()
+        {
+        }
+
+        /// <summary>
+        /// 构造方法
+        /// </summary>
         /// <param name="file">文件</param>
         /// <param name="isExecWrite">是否执行写入</param>
         public JsonFileConfigurationBase(string file, bool isExecWrite = true)

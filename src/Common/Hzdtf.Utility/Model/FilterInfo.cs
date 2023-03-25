@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Hzdtf.Utility.Utils;
+using Hzdtf.Utility.ObjectInnerConvert.Attr;
+using Hzdtf.Utility.ObjectInnerConvert;
 
 namespace Hzdtf.Utility.Model
 {
@@ -20,6 +22,7 @@ namespace Hzdtf.Utility.Model
         /// </summary>
         [JsonProperty("startCreateTime")]
         [MessagePack.Key("startCreateTime")]
+        [TypeConvertValue(ConvertType = TypeConvertEnum.LocalTime)]
         public DateTime? StartCreateTime
         {
             get;
@@ -31,6 +34,7 @@ namespace Hzdtf.Utility.Model
         /// </summary>
         [JsonProperty("endCreateTime")]
         [MessagePack.Key("endCreateTime")]
+        [TypeConvertValue(ConvertType = TypeConvertEnum.LocalTime)]
         public DateTime? EndCreateTime
         {
             get;

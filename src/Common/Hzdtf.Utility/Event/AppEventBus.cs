@@ -46,24 +46,30 @@ namespace Hzdtf.Utility.Event
             /// <param name="handler">处理</param>
             public HandlerData(Type handler)
             {
-                if (handler.GetInterface(typeof(IEventHandler).Name) == null)
-                {
-                    throw new NotImplementedException("类型[" + handler.FullName + "]未实现IEventHandler接口");
-                }
-
+                this.handlerObj = AppEventUtil.CreateHandler(handler);
                 this.handler = handler;
-                object instance = null;
-                // 优先从容器里获取
-                if (App.Instance != null)
+            }
+
+            /// <summary>
+            /// 构造方法
+            /// </summary>
+            /// <param name="handlerObj">处理对象</param>
+            public HandlerData(object handlerObj)
+            {
+                if (handlerObj == null)
                 {
-                    instance = App.Instance.GetService(handler);
-                }
-                if (instance == null)
-                {
-                    instance = handler.Assembly.CreateInstance(handler.FullName);
+                    throw new ArgumentNullException("处理对象不能为null");
                 }
 
-                handlerObj = instance as IEventHandler;
+                if (handlerObj is IEventHandler)
+                {
+                    this.handler = handlerObj.GetType();
+                    this.handlerObj = handlerObj as IEventHandler;
+                }
+                else
+                {
+                    throw new NotImplementedException("处理对象未实现IEventHandler接口");
+                }
             }
         }
 
@@ -106,26 +112,46 @@ namespace Hzdtf.Utility.Event
         /// <param name="eventHandlerType">事件处理类型</param>
         public void Bind(Type eventSourceType, Type eventHandlerType)
         {
+            var handlerObj = AppEventUtil.CreateHandler(eventHandlerType);
+            Bind(eventSourceType, handlerObj);
+        }
+
+        /// <summary>
+        /// 绑定事件源与事件处理的关系
+        /// </summary>
+        /// <param name="eventSourceType">事件源类型</param>
+        public void Bind<HandlerT>(Type eventSourceType) where HandlerT : IEventHandler
+        {
+            Bind(eventSourceType, typeof(HandlerT));
+        }
+
+        /// <summary>
+        /// 绑定事件源与事件处理的关系
+        /// </summary>
+        /// <param name="eventSourceType">事件源类型</param>
+        /// <param name="eventHandler">事件处理</param>
+        public void Bind(Type eventSourceType, IEventHandler eventHandler)
+        {
             if (dicSourceMapHandler.ContainsKey(eventSourceType))
             {
                 if (dicSourceMapHandler[eventSourceType] == null)
                 {
-                    dicSourceMapHandler[eventSourceType] = new List<HandlerData>() { new HandlerData(eventHandlerType) };
+                    dicSourceMapHandler[eventSourceType] = new List<HandlerData>() { new HandlerData(eventHandler) };
                     return;
                 }
 
-                if (IsExistsHandlerData(dicSourceMapHandler[eventSourceType], eventHandlerType))
+                if (IsExistsHandlerData(dicSourceMapHandler[eventSourceType], eventHandler.GetType()))
                 {
                     return;
                 }
                 else
                 {
-                    dicSourceMapHandler[eventSourceType].Add(new HandlerData(eventHandlerType));
+                    dicSourceMapHandler[eventSourceType].Add(new HandlerData(eventHandler));
                 }
             }
             else
             {
-                dicSourceMapHandler.Add(eventSourceType, new List<HandlerData>() { new HandlerData(eventHandlerType) });
+                dicSourceMapHandler.Add(eventSourceType, new List<HandlerData>() { new HandlerData(eventHandler) });
             }
         }
 
@@ -208,5 +234,38 @@ namespace Hzdtf.Utility.Event
         }
 
         #endregion
+    }
+
+    /// <summary>
+    /// 应用事件辅助类
+    /// @ 黄振东
+    /// </summary>
+    public static class AppEventUtil
+    {
+        /// <summary>
+        /// 创建处理
+        /// </summary>
+        /// <param name="handler">处理</param>
+        /// <returns>处理</returns>
+        public static IEventHandler CreateHandler(Type handler)
+        {
+            if (handler.GetInterface(typeof(IEventHandler).Name) == null)
+            {
+                throw new NotImplementedException("类型[" + handler.FullName + "]未实现IEventHandler接口");
+            }
+
+            object instance = null;
+            // 优先从容器里获取
+            if (App.Instance != null)
+            {
+                instance = App.Instance.GetService(handler);
+            }
+            if (instance == null)
+            {
+                instance = handler.Assembly.CreateInstance(handler.FullName);
+            }
+
+            return instance as IEventHandler;
+        }
     }
 }

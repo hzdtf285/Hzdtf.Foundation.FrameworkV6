@@ -245,7 +245,7 @@ namespace Hzdtf.CodeGenerator
                         break;
                 }
                 param.Type = dgvTable.Tag.ToString();
-                param.IsTeant = cbxTenant.Checked;
+                param.IsTenant = cbxTenant.Checked;
 
                 Cursor.Current = Cursors.WaitCursor;
                 ICodeGeneratorService generatorService = App.GetServiceFromInstance<ICodeGeneratorService>();

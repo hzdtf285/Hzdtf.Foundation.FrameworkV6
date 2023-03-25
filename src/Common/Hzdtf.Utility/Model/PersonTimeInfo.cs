@@ -43,7 +43,7 @@ namespace Hzdtf.Utility.Model
         [JsonProperty("createrIdString")]
         [Display(AutoGenerateField = false)]
         [MessagePack.Key("createrIdString")]
-        public string CreaterIdString
+        public string CreaterIDString
         {
             get => CreaterId.ToString();
         }
@@ -129,20 +129,20 @@ namespace Hzdtf.Utility.Model
     /// 带有人时间租赁信息
     /// </summary>
     /// <typeparam name="IdT">ID类型</typeparam>
-    public class PersonTimeTeantInfo<IdT> : PersonTimeInfo<IdT>
+    public class PersonTimeTenantInfo<IdT> : PersonTimeInfo<IdT>
     {
         /// <summary>
         /// 租赁ID_名称
         /// </summary>
-        public const string TeantId_Name = "TeantId";
+        public const string TenantId_Name = "TenantId";
 
         /// <summary>
         /// 租赁ID
         /// </summary>
-        [JsonProperty("teantId")]
+        [JsonProperty("tenantId")]
         [Display(Name = "租赁ID", Order = 10, AutoGenerateField = false)]
-        [MessagePack.Key("teantId")]
-        public IdT TeantId
+        [MessagePack.Key("tenantId")]
+        public IdT TenantId
         {
             get;
             set;
@@ -151,17 +151,17 @@ namespace Hzdtf.Utility.Model
         /// <summary>
         /// 租赁ID字符串_名称
         /// </summary>
-        public const string TeantIdString_Name = "TeantIdString";
+        public const string TenantIdString_Name = "TenantIdString";
 
         /// <summary>
         /// 租赁ID字符串，如果ID类型为长整型，则在JS前端使用此属性为字符串类型，因为JS中长整型会丢失精度
         /// </summary>
-        [JsonProperty("teantIdString")]
+        [JsonProperty("tenantIdString")]
         [Display(AutoGenerateField = false)]
-        [MessagePack.Key("teantIdString")]
-        public string TeantIdString
+        [MessagePack.Key("tenantIdString")]
+        public string TenantIdString
         {
-            get => TeantId.ToString();
+            get => TenantId.ToString();
         }
     }
 
