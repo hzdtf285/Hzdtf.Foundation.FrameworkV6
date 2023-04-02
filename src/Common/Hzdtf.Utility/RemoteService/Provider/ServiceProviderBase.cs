@@ -18,6 +18,11 @@ namespace Hzdtf.Utility.RemoteService.Provider
         private static readonly IList<Action<string, string, string[]>> actions = new List<Action<string, string, string[]>>();
 
         /// <summary>
+        /// 获取到地址数组后事件
+        /// </summary>
+        public event Action<string, string, string[]> GetAddressesed;
+
+        /// <summary>
         /// 异步根据服务名获取地址数组
         /// </summary>
         /// <param name="serviceName">服务名</param>
@@ -29,6 +34,10 @@ namespace Hzdtf.Utility.RemoteService.Provider
             foreach (var action in actions)
             {
                 action(serviceName, tag, addes);
+            }
+            if (GetAddressesed != null)
+            {
+                GetAddressesed(serviceName, tag, addes);
             }
 
             return addes;

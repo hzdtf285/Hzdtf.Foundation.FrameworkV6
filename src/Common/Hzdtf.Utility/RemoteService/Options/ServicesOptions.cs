@@ -6,6 +6,7 @@ using Hzdtf.Utility.Utils;
 using Hzdtf.Utility.RemoteService.Builder;
 using Newtonsoft.Json;
 using MessagePack;
+using System.Linq;
 
 namespace Hzdtf.Utility.RemoteService.Options
 {
@@ -36,7 +37,7 @@ namespace Hzdtf.Utility.RemoteService.Options
         {
             get;
             set;
-        }
+        } = Uri.UriSchemeHttp;
 
         /// <summary>
         /// 标签
@@ -169,6 +170,28 @@ namespace Hzdtf.Utility.RemoteService.Options
                     throw new KeyNotFoundException($"服务名:{ser.ServiceName},模式:{ser.LoadBalanceMode}.未找到负载均衡");
                 }
             }
+        }
+
+        /// <summary>
+        /// 获取服务方案
+        /// </summary>
+        /// <param name="serviceName">服务名</param>
+        /// <param name="tag">标签</param>
+        /// <returns>服务方案</returns>
+        public string GetServiceSheme(string serviceName, string tag = null)
+        {
+            if (string.IsNullOrWhiteSpace(serviceName) || Services.IsNullOrLength0())
+            {
+                return GlobalConfiguration.Sheme;
+            }
+
+            var options = Services.FirstOrDefault(p => p.ServiceName == serviceName && p.Tag == tag);
+            if (options == null)
+            {
+                return GlobalConfiguration.Sheme;
+            }
+
+            return string.IsNullOrWhiteSpace(options.Sheme) ? GlobalConfiguration.Sheme : options.Sheme;
         }
     }
 }

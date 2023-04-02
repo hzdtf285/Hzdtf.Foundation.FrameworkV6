@@ -10,6 +10,7 @@ namespace Hzdtf.Utility.GRpc.Pool
 {
     /// <summary>
     /// GRpc渠道池接口
+    /// @ 黄振东
     /// </summary>
     public interface IGRpcChannelPool : IResourcePool<string, GrpcChannel, GrpcChannelOptions>
     {

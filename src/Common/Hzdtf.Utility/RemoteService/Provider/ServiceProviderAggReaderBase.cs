@@ -1,5 +1,6 @@
 ﻿using Hzdtf.Utility.Attr;
 using Hzdtf.Utility.Data;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -18,6 +19,11 @@ namespace Hzdtf.Utility.RemoteService.Provider
         /// 原生服务读取字典
         /// </summary>
         private readonly IDictionary<string, IReader<string[]>> dicProtoServicesReader = new ConcurrentDictionary<string, IReader<string[]>>();
+
+        /// <summary>
+        /// 获取到地址数组后事件
+        /// </summary>
+        public event Action<string, string, string[]> GetAddressesed;
 
         /// <summary>
         /// 异步根据服务名获取地址数组
@@ -44,7 +50,13 @@ namespace Hzdtf.Utility.RemoteService.Provider
                 catch (ArgumentException) { }
             }
 
-            return Task<string[]>.FromResult(reader.Reader());
+            var adds = reader.Reader();
+            if (GetAddressesed != null)
+            {
+                GetAddressesed(serviceName, tag, adds);
+            }
+
+            return Task<string[]>.FromResult(adds);
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hzdtf.Utility.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,11 @@ namespace Hzdtf.Utility.Listen
         public class Listen
         {
             /// <summary>
+            /// 主机
+            /// </summary>
+            public string Host { get; set; }
+
+            /// <summary>
             /// 端口
             /// </summary>
             public int Port { get; set; }
@@ -37,6 +43,25 @@ namespace Hzdtf.Utility.Listen
             /// https
             /// </summary>
             public Https Https { get; set; }
+
+            /// <summary>
+            /// 获取方案
+            /// </summary>
+            /// <returns>方案</returns>
+            public string GetSheme()
+            {
+                return Https == null ? Uri.UriSchemeHttp : Uri.UriSchemeHttps;
+            }
+
+            /// <summary>
+            /// 转换为URL
+            /// </summary>
+            /// <returns>URL</returns>
+            public string ToUrl()
+            {
+                var host = Host ?? NetworkUtil.LocalIP;
+                return GetSheme() + "://" + host + ":" + Port;
+            }
         }
 
         /// <summary>

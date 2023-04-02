@@ -2,6 +2,7 @@
 using Hzdtf.Utility.HostConfig;
 using Hzdtf.Utility.Model;
 using Hzdtf.Utility.Utils;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,11 @@ namespace Hzdtf.Utility.RemoteService.Provider
         /// 同步数据字典
         /// </summary>
         private readonly object syncDicData = new object();
+
+        /// <summary>
+        /// 获取到地址数组后事件
+        /// </summary>
+        public event Action<string, string, string[]> GetAddressesed;
 
         /// <summary>
         /// 构造方法
@@ -64,8 +70,13 @@ namespace Hzdtf.Utility.RemoteService.Provider
                         dicData = configReader.Reader();
                     }
                 }
+
                 if (dicData.IsNullOrCount0())
                 {
+                    if (GetAddressesed != null)
+                    {
+                        GetAddressesed(serviceName, tag, null);
+                    }
                     return null;
                 }
             }
@@ -78,7 +89,17 @@ namespace Hzdtf.Utility.RemoteService.Provider
                     urls[i] = $"{values[i].Key}:{values[i].Value}";
                 }
 
+                if (GetAddressesed != null)
+                {
+                    GetAddressesed(serviceName, tag, urls);
+                }
+
                 return urls;
+            }
+
+            if (GetAddressesed != null)
+            {
+                GetAddressesed(serviceName, tag, null);
             }
 
             return null;

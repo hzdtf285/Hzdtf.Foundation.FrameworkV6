@@ -14,6 +14,11 @@ namespace Hzdtf.Utility.RemoteService
     public class UnitServiceBuilderOptions
     {
         /// <summary>
+        /// 实例
+        /// </summary>
+        public static UnitServiceBuilderOptions Instance { get; set; }
+
+        /// <summary>
         /// 服务配置
         /// </summary>
         public UnityServicesOptions ServicesOptions

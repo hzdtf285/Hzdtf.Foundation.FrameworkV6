@@ -12,6 +12,11 @@ namespace Hzdtf.Utility.RemoteService.Provider
     public interface IServicesProvider : IDisposable
     {
         /// <summary>
+        /// 获取到地址数组后事件
+        /// </summary>
+        event Action<string, string, string[]> GetAddressesed;
+
+        /// <summary>
         /// 异步根据服务名获取地址数组
         /// </summary>
         /// <param name="serviceName">服务名</param>

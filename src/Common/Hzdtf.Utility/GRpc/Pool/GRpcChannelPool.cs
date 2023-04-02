@@ -15,6 +15,7 @@ namespace Hzdtf.Utility.GRpc.Pool
 {
     /// <summary>
     /// GRpc渠道池
+    /// @ 黄振东
     /// </summary>
     [Inject]
     public class GRpcChannelPool : ResourcePoolBase<string, GrpcChannel, GrpcChannelOptions>, IGRpcChannelPool

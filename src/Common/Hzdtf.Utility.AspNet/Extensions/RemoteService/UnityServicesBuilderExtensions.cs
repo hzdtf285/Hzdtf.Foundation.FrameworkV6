@@ -72,6 +72,7 @@ namespace Microsoft.Extensions.DependencyInjection
         private static IServiceCollection AddUnityServicesBuilder(this IServiceCollection services, Func<UnitServiceBuilderOptions, IUnityServicesOptions> callbackServiceOptions, Action<UnitServiceBuilderOptions> options = null)
         {
             var builderOptions = new UnitServiceBuilderOptions();
+            UnitServiceBuilderOptions.Instance = builderOptions;
             if (options != null)
             {
                 options(builderOptions);

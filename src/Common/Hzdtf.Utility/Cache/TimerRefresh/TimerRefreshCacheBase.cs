@@ -12,7 +12,7 @@ namespace Hzdtf.Utility.Cache.TimerRefresh
     /// @ 黄振东
     /// </summary>
     /// <typeparam name="ValueT">值类型</typeparam>
-    public abstract class TimerRefreshCacheBase<ValueT> : IReader<ValueT>, IDisposable
+    public abstract class TimerRefreshCacheBase<ValueT> : ITimerRefresh<ValueT>, IDisposable
     {
         /// <summary>
         /// 定时器
@@ -38,6 +38,11 @@ namespace Hzdtf.Utility.Cache.TimerRefresh
         /// 间隔时间，单位：毫秒
         /// </summary>
         private readonly int intervalMillseconds;
+
+        /// <summary>
+        /// 定时刷新后事件
+        /// </summary>
+        public event Action<object, ValueT> TimerRefreshed;
 
         /// <summary>
         /// 构造方法
@@ -87,7 +92,7 @@ namespace Hzdtf.Utility.Cache.TimerRefresh
         /// </summary>
         /// <param name="state">状态</param>
         /// <returns>值</returns>
-        protected abstract ValueT Refresh(object state);
+        public abstract ValueT Refresh(object state);
 
         /// <summary>
         /// 析构方法
@@ -106,7 +111,13 @@ namespace Hzdtf.Utility.Cache.TimerRefresh
             {
                 caches = Refresh(st);
                 isRefreshed = true;
-            }, state, intervalMillseconds, intervalMillseconds);
+                if (TimerRefreshed == null)
+                {
+                    return;
+                }
+
+                TimerRefreshed(st, caches);
+            }, state, 0, intervalMillseconds);
         }
     }
 }

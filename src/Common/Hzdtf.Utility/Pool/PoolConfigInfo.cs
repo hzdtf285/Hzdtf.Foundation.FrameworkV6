@@ -8,6 +8,7 @@ namespace Hzdtf.Utility.Pool
 {
     /// <summary>
     /// 池配置信息
+    /// @ 黄振东
     /// </summary>
     /// <typeparam name="ResourceKeyT">资源键类型</typeparam>
     /// <typeparam name="ConcreateReourseOptionsT">具体资源配置类型</typeparam>

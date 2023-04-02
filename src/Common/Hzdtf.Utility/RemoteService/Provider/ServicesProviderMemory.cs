@@ -2,6 +2,7 @@
 using Hzdtf.Utility.Data;
 using Hzdtf.Utility.SystemV2;
 using Microsoft.Extensions.Caching.Memory;
+using NPOI.SS.Formula.Functions;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;
@@ -35,6 +36,11 @@ namespace Hzdtf.Utility.RemoteService.Provider
         /// 缓存过期时间（单位：秒）
         /// </summary>
         protected int cacheExpire = 5;
+
+        /// <summary>
+        /// 获取到地址数组后事件
+        /// </summary>
+        public event Action<string, string, string[]> GetAddressesed;
 
         /// <summary>
         /// 构造方法
@@ -71,7 +77,7 @@ namespace Hzdtf.Utility.RemoteService.Provider
         /// <returns>地址数组任务</returns>
         public async Task<string[]> GetAddresses(string serviceName, string tag = null)
         {
-            return await cache.GetOrCreateAsync<string[]>(GetCacheKey(serviceName, tag), entry =>
+            var address = await cache.GetOrCreateAsync<string[]>(GetCacheKey(serviceName, tag), entry =>
             {
                 if (cacheExpire != -1)
                 {
@@ -80,6 +86,13 @@ namespace Hzdtf.Utility.RemoteService.Provider
 
                 return ProtoServicesProvider.GetAddresses(serviceName, tag);
             });
+
+            if (GetAddressesed != null)
+            {
+                GetAddressesed(serviceName, tag, address);
+            }
+
+            return address;
         }
 
         /// <summary>
